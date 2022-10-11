@@ -3,8 +3,8 @@ import {createStore} from "redux"
 const signIn = "signIn"
 const signOut = "signOut"
 
-function SignIn(userType) {
-    return{type: signIn, userType: userType}
+function SignIn(userObj) {
+    return{type: signIn, userObj: userObj}
 }
 function SignOut() {
     return{type: signOut}
@@ -13,7 +13,7 @@ function SignOut() {
 const reducer = (state = "", action) => {
     switch(action.type){
         case signIn:
-            return action.userType
+            return action.userObj
         case signOut:
             return ""
         default:

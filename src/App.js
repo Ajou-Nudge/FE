@@ -52,7 +52,7 @@ function App() {
         <Route path="/holder">
           <Route index element={<HolderHome />}></Route>
           <Route path="vcList" element={<HolderVcList />}></Route>
-          <Route path="submit" element={<HolderSubmit />}></Route>
+          <Route path="submit/:postId" element={<HolderSubmit />}></Route>
           <Route path="submitComplete" element={<HolderSubmitComplete />}></Route>
           <Route path="postingList" element={<HolderPostingList />}></Route>
           <Route path="*" element={<NotFound />}></Route>
