@@ -3,12 +3,12 @@ const DummyContextList = [
     {
         "context": "certificate1",
         "credentialSubject": {
-            "title1": "1",
-            "name1": "1",
-            "date1": "1",
-            "major1": "1",
-            "doubleMajor1": "0",
-            "minor1": "0"
+            "title": "1",
+            "name": "1",
+            "date": "1",
+            "major": "1",
+            "doubleMajor": "0",
+            "minor": "0"
         }
     },
     {
