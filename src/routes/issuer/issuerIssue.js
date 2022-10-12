@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { actionCreators } from "../../component/store";
 import { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { message } from "antd";
 import DummyContextList from "../../dummy/dummyContextList";
@@ -14,6 +14,7 @@ function IssuerIssue(userObjInStore) {
     const [ contextList, setContextList ] = useState([])
     const [ theContext, setTheContext ] = useState('')
     const [ theForm, setTheForm ] = useState({})
+    const navigate = useNavigate()
     
 
     // 서버에서 issuer의 context정보 불러오기
@@ -28,7 +29,7 @@ function IssuerIssue(userObjInStore) {
         })
         .catch(() => {
             messageError("자격증 양식 가져오기 실패");
-            Navigate("/issuer")
+            navigate("/issuer")
         });
     })
 

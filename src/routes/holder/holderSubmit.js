@@ -1,8 +1,8 @@
 import { connect } from "react-redux"
-import {useLocation} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { message } from "antd";
 // import DummyVcList from "../../dummy/dummyVcList";
@@ -10,7 +10,7 @@ import { message } from "antd";
 function HolderSubmit( userIdInStore ) {
     const location = useLocation()
     const posting = location.state
-
+    const navigate = useNavigate()
     const [vcList, setVcList] = useState([])
 
     // store.js에서 id 가져와 BE에 요청보내기
@@ -25,7 +25,7 @@ function HolderSubmit( userIdInStore ) {
         })
         .catch(() => {
             messageError("자격증 가져오기 실패");
-            Navigate("/holder")
+            navigate("/holder")
         });
     })
     function messageError(msg) {
@@ -67,7 +67,7 @@ function HolderSubmit( userIdInStore ) {
             })
             .then((res) => {
                 message.success("자격증 제출 성공")
-                Navigate("/holder/postingList")
+                navigate("/holder/postingList")
             })
             .catch(() => {
                 messageError("자격증 제출 실패"); 

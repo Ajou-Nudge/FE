@@ -10,8 +10,9 @@ const HolderSignUp = () => {
   const [issuers, setIssuers] = useState([]);
   const [qrvalue, setQrvalue] = useState("DEFAULT");
   const [myAddress, setMyAddress] = useState("");
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
-  useEffect(() => {});
   useEffect(() => {
     axios({
       url: `${process.env.REACT_APP_ISSUER}/iss/api/v1/issuer/find/all`,
@@ -20,7 +21,9 @@ const HolderSignUp = () => {
       setIssuers([...data.data]);
     });
   }, []);
+
   const navigate = useNavigate();
+
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -28,12 +31,13 @@ const HolderSignUp = () => {
     birth: "",
     IssuerList: [],
   });
-  const [isCorrect, setIsCorrect] = useState(false);
+
+  
   const onchange = (e) => {
     userInfo[e.target.id] = e.target.value;
     setUserInfo(userInfo);
   };
-  const [modalOpen, setModalOpen] = useState(false);
+  
   const validate = () => {
     if (userInfo.email === "") {
       message.error("이메일을 입력해주세요.");

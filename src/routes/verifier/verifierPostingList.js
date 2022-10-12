@@ -1,19 +1,22 @@
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 // import { message } from "antd";
 import { useState, useEffect } from "react";
-import DummyPostingList from "../../dummy/dummyPostingList";
+import DummyVerifierPostingList from "../../dummy/dummyVerifierPostingList";
 
 
-function HolderPostingList() {
-    //const navigate = useNavigate()
+
+function VerifierPostingList(userIdInStore) {
+
+    // const navigate = useNavigate()
     const [postingList, setPostingList] = useState([])
 
-    // // BE에서 posting 가져오기
+    // BE에서 내 posting 가져오기
     // useEffect(() => {
     //     axios({
-    //         url: `/holder/posting-list`,
+    //         url: `/verifier/postList/:${userIdInStore}`,
     //         method: "GET",
     //         withCredentials: true,
     //     })
@@ -21,8 +24,8 @@ function HolderPostingList() {
     //         setPostingList(res)
     //     })
     //     .catch(() => {
-    //         messageError("채용공고 목록 가져오기 실패");
-    //         navigate("/holder")
+    //         messageError("목록 가져오기 실패");
+    //         navigate("/verifier")
     //     });
     // })
     // function messageError(msg) {
@@ -30,7 +33,7 @@ function HolderPostingList() {
     // };
 
     useEffect(() => {
-        setPostingList(DummyPostingList)
+        setPostingList(DummyVerifierPostingList)
     },[])
 
     function makePostingList() {
@@ -40,17 +43,14 @@ function HolderPostingList() {
             List.push(
                 <Link 
                     key={i} 
-                    to={`/holder/submit/:${postingList[i].postId}`}
+                    to={`/verifier/verifiy/:${postingList[i].postId}`}
                     state={{
                         postId: postingList[i].postId,
-                        verifier: postingList[i].verifier,
-                        requirement: postingList[i].requirement,
-                        expired: postingList[i].expired,
-                        url: postingList[i].url
+                        name: postingList[i].name,
                     }}
 
                 >
-                    <li key={i}>{JSON.stringify(postingList[i].verifier)}의 채용공고</li>
+                    <li key={i}>{JSON.stringify(postingList[i].name)}의 지원자 검증</li>
                 </Link>
             )
         }
@@ -60,7 +60,7 @@ function HolderPostingList() {
 
     return(
         <div>
-            <h1>HolderPostingList</h1>
+            <h1>VerifierPostingList</h1>
             <hr />
             <ul>{makePostingList()}</ul>
             <hr />
@@ -71,4 +71,8 @@ function HolderPostingList() {
     )
 }
 
-export default HolderPostingList
+function mapStateToProps(state) {
+    return {userIdInStore: state._id}
+}
+
+export default connect(mapStateToProps, null) (VerifierPostingList)

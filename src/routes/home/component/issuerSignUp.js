@@ -1,5 +1,5 @@
 import { Row, Col, message, Select } from "antd";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import QrCodeModal from "./qrCodeModal";
@@ -11,8 +11,6 @@ const IssuerSignUp = () => {
   const [qrvalue, setQrvalue] = useState("DEFAULT");
   const [myAddress, setMyAddress] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
-  useEffect(() => {});
-  useEffect(() => {}, []);
   const requiredVCList = ["이름", "이메일", "생년월일", "전화번호", "주소"];
   const navigate = useNavigate();
   const [issuerInfo, setIssuerInfo] = useState({

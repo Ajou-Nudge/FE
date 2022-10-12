@@ -25,7 +25,12 @@ import HolderVcList from "./routes/holder/holderVcList";
 import VerifierHome from "./routes/verifier/verifierHome";
 import VerifierVerifiy from "./routes/verifier/verifierVerifiy";
 import VerifierPost from "./routes/verifier/verifierPost";
+import VerifierPostingList from "./routes/verifier/verifierPostingList";
+
+// component
 import NotFound from "./component/notFound";
+import VerifierVerifiyDetail from "./routes/verifier/verifierVerifiyDetail";
+import HolderVcDetail from "./routes/holder/holderVcDetail";
 
 
 
@@ -52,6 +57,7 @@ function App() {
         <Route path="/holder">
           <Route index element={<HolderHome />}></Route>
           <Route path="vcList" element={<HolderVcList />}></Route>
+          <Route path="vcDetail/:vcId" element={<HolderVcDetail />}></Route>
           <Route path="submit/:postId" element={<HolderSubmit />}></Route>
           <Route path="submitComplete" element={<HolderSubmitComplete />}></Route>
           <Route path="postingList" element={<HolderPostingList />}></Route>
@@ -59,8 +65,10 @@ function App() {
         </Route>
         <Route path="/verifier">
           <Route index element={<VerifierHome />}></Route>
-          <Route path="verifiy" element={<VerifierVerifiy />}></Route>
+          <Route path="verifiy/:postId" element={<VerifierVerifiy />}></Route>
+          <Route path="verifiy/detail/:vcId" element={<VerifierVerifiyDetail />}></Route>
           <Route path="post" element={<VerifierPost />}></Route>
+          <Route path="postingList" element={<VerifierPostingList />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Route>
       </Routes>
