@@ -18,8 +18,9 @@ function SignIn ({userObjInStore, SignInToStore}) {
         password: "",
     });
     function onchange(e) {
-        signinObj[e.target.id] = e.target.value;
-        setSigninObj(signinObj);
+        const SignInObj = signinObj
+        SignInObj[e.target.id] = e.target.value;
+        setSigninObj(SignInObj);
     };
     function isEnter(e) {  
         signin();   
