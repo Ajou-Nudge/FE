@@ -2,49 +2,54 @@ import { message } from "antd";
 import { useState } from "react"
 import axios from "axios";
 import { Link } from "react-router-dom";
+import React from "react";
 
 function IssuerCreateContext() {
 
-    const [context, setContext] = useState([])
+    const [context, setContext] = useState("")
     const [inputCount, setInputCount] = useState(3)
+    const [rawContext, setRawContext ] = useState({})
+
     function handleInputCount(e) {
         setInputCount(e.target.value)
     }
-    let rawContext = {}
 
     // 받아온 inputCount만큼 input 생성
     function makeInput() {
-        rawContext = {}
         const inputs = []
         for (let i=0; i < inputCount; i++){
             inputs.push(
                 <div style={{display:"flex"}} key={i} id={i}>
-                    <input value={rawContext[`value${i}`]} onChange={handleValue} key={`value${i}`} type="text"></input>
+                    <input defaultValue={rawContext[`value${i}`]} onChange={handleValue} key={`value${i}`}></input>
                     <div>필수여부</div>
-                    <input value={rawContext[`isEssential${i}`]} onChange={handleCheck} key={`isEssential${i}`} type="checkbox"></input>
+                    <input defaultValue={rawContext[`isEssential${i}`]} onChange={handleCheck} key={`isEssential${i}`} type="checkbox"></input>
                 </div>
             )
-            // rawContext[i]=[]
         }
         return inputs
         
     }
 
-    // input에 받아온 값 각각 rawContext에 넣기
+    // input에 받아온 값 각각 rawContext에 넣기, buffer는 state를 직접 다루는 걸 피하기 위해 현재 state를 가져와 잠시 담아두는 것
     function handleValue(e) {
-        rawContext[`value${e.target.parentElement.id}`] = e.target.value
+        const buffer = rawContext
+        buffer[`value${e.target.parentElement.id}`] = e.target.value
+        setRawContext(buffer)
     }
     function handleCheck(e) {
+        let buffer = rawContext
         const isEssentialNum = e.target.checked ? "1" : "0"
-        rawContext[`isEssential${e.target.parentElement.id}`] = isEssentialNum
+        buffer[`isEssential${e.target.parentElement.id}`] = isEssentialNum
+        setRawContext(buffer)
     }
 
     // rawContext가공하여 Context 생성
     function submit() {
         let credentialSubject = {}
         for (let i=0; i < inputCount; i++){
-            let value = rawContext[`value${i}`]
-            let isEssential = rawContext[`isEssential${i}`]
+            let buffer = rawContext
+            let value = buffer[`value${i}`]
+            let isEssential = buffer[`isEssential${i}`] || "0"
             const aCredentialSubject =   {[value] : isEssential}
             credentialSubject = {...credentialSubject, ...aCredentialSubject}
         }

@@ -71,44 +71,74 @@ function App({SignInToStore}) {
   //     });
   // },[cookie.jwtCookie, SignInToStore])
 
+  // 라우터별로 분리, Main/Issuer/Holder/Verifier
+  function Main() {
+    return(
+      <div>
+        <NaviBar />
+        <Routes>
+          <Route index element={<Home />}></Route>
+          <Route path="signIn" element={<SignIn />}></Route>
+          <Route path="signUp" element={<SignUp />}></Route>
+          <Route path="signUpComplete" element={<SignUpComplete />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
+        </Routes>
+      </div>
+    )
+  }
+  function Issuer(){
+    return(
+      <div>
+        <Routes>
+          <Route index element={<IssuerHome />}></Route>
+          <Route path="createContext" element={<IssuerCreateContext />}></Route>
+          <Route path="issue" element={<IssuerIssue />}></Route>
+          <Route path="issueComplete" element={<IssuerIssueComplete />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
+        </Routes>
+      </div>
+    )
+  }
+  function Holder(){
+    return(
+      <div>
+        <Routes>
+          <Route index element={<HolderHome />}></Route>
+          <Route path="vcList" element={<HolderVcList />}></Route>
+          <Route path="vcDetail/:vcId" element={<HolderVcDetail />}></Route>
+          <Route path="submit/:postId" element={<HolderSubmit />}></Route>
+          <Route path="submitComplete" element={<HolderSubmitComplete />}></Route>
+          <Route path="postingList" element={<HolderPostingList />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
+        </Routes>
+      </div>
+    )
+  }
+  function Verifier(){
+    return(
+      <div>
+        <Routes>
+          <Route index element={<VerifierHome />}></Route>
+          <Route path="verifiy/:postId" element={<VerifierVerifiy />}></Route>
+          <Route path="verifiy/detail/:vcId" element={<VerifierVerifiyDetail />}></Route>
+          <Route path="post" element={<VerifierPost />}></Route>
+          <Route path="postingList" element={<VerifierPostingList />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
+        </Routes>
+      </div>
+    )
+  }
+  
   return (
     <div> 
-      <NaviBar />
       <BrowserRouter>
         <Routes>
-          <Route path="/">
-            <Route index element={<Home />}></Route>
-            <Route path="signIn" element={<SignIn />}></Route>
-            <Route path="signUp" element={<SignUp />}></Route>
-            <Route path="signUpComplete" element={<SignUpComplete />}></Route>
-            <Route path="*" element={<NotFound />}></Route>
-          </Route>
-          <Route path="/issuer">
-            <Route index element={<IssuerHome />}></Route>
-            <Route path="createContext" element={<IssuerCreateContext />}></Route>
-            <Route path="issue" element={<IssuerIssue />}></Route>
-            <Route path="issueComplete" element={<IssuerIssueComplete />}></Route>
-            <Route path="*" element={<NotFound />}></Route>
-          </Route>
-          <Route path="/holder">
-            <Route index element={<HolderHome />}></Route>
-            <Route path="vcList" element={<HolderVcList />}></Route>
-            <Route path="vcDetail/:vcId" element={<HolderVcDetail />}></Route>
-            <Route path="submit/:postId" element={<HolderSubmit />}></Route>
-            <Route path="submitComplete" element={<HolderSubmitComplete />}></Route>
-            <Route path="postingList" element={<HolderPostingList />}></Route>
-            <Route path="*" element={<NotFound />}></Route>
-          </Route>
-          <Route path="/verifier">
-            <Route index element={<VerifierHome />}></Route>
-            <Route path="verifiy/:postId" element={<VerifierVerifiy />}></Route>
-            <Route path="verifiy/detail/:vcId" element={<VerifierVerifiyDetail />}></Route>
-            <Route path="post" element={<VerifierPost />}></Route>
-            <Route path="postingList" element={<VerifierPostingList />}></Route>
-            <Route path="*" element={<NotFound />}></Route>
-          </Route>
+          <Route path="/*" element={<Main />}/>
+          <Route path="/issuer/*" element={<Issuer />}/>
+          <Route path="/holder/*" element={<Holder />}/>
+          <Route path="/verifier/*" element={<Verifier />}/>
         </Routes>
-      </BrowserRouter> 
+      </BrowserRouter>
     </div>
   )
 }
