@@ -1,0 +1,29 @@
+.contentStyle--a {
+    height: 90vh;
+    background-color: #e2f4ff;
+}
+
+.contentStyle--b {
+    height: 90vh;
+    background-color: #f7eeff !important;
+}
+
+.contentStyle--c {
+    height: 90vh;
+    background-color: #effdeb;
+}
+
+.headline {
+    color: rgb(53, 53, 53);
+    font-weight: 900;
+    font-size: xx-large;
+    text-align: center;
+    line-height: 30vh;
+}
+
+.text {
+    color: rgb(99, 99, 99);
+    font-weight: 600;
+    font-size: medium;
+    text-align: center;
+}

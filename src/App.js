@@ -6,6 +6,7 @@ import { actionCreators } from "./component/store.js";
 // import { useCookies } from 'react-cookie'
 // import axios from "axios";
 import { connect } from "react-redux";
+import 'antd/dist/antd.min.css';
 
 // Main
 import Home from "./routes/home/home";
@@ -39,10 +40,7 @@ import HolderVcDetail from "./routes/holder/holderVcDetail";
 import NaviBar from "./component/naviBar";
 
 
-
-
 function App({SignInToStore}) {
-
   // // jwt토큰쿠키로 로그인 관리
   // const [cookie] = useCookies(["jwtCookie"])
   // useEffect(() => {

@@ -93,7 +93,7 @@ const IssuerSignUp = () => {
     <div>
       <h1>IssuerSignUp</h1>
       <Row>
-        <Col>
+        <Col span={6}>
           이메일
         </Col>
         <Col span={18}>

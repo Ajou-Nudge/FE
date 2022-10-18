@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { actionCreators } from "../../component/store";
 import axios from "axios";
 import NavigateToHome from "./component/navigateToHome";
+// import { useCookies } from 'react-cookie'
 
 function SignIn ({userObjInStore, SignInToStore}) {
 
@@ -12,6 +13,10 @@ function SignIn ({userObjInStore, SignInToStore}) {
     // }
     
     // console.log(userTypeInStore)
+
+    // jwt 토큰 쿠키에 저장하는 부분
+    const [cookie, setCookie] = useCookies(["jwtCookie"])
+
 
     const [signinObj, setSigninObj] = useState({
         email: "",
