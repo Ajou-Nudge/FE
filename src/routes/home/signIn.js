@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { actionCreators } from "../../component/store";
 import axios from "axios";
 import NavigateToHome from "./component/navigateToHome";
+import "./css/SignIn.css"
 // import { useCookies } from 'react-cookie'
 
 function SignIn ({userObjInStore, SignInToStore}) {
@@ -15,7 +16,7 @@ function SignIn ({userObjInStore, SignInToStore}) {
     // console.log(userTypeInStore)
 
     // jwt 토큰 쿠키에 저장하는 부분
-    const [cookie, setCookie] = useCookies(["jwtCookie"])
+    //const [cookie, setCookie] = useCookies(["jwtCookie"])
 
 
     const [signinObj, setSigninObj] = useState({
@@ -90,24 +91,38 @@ function SignIn ({userObjInStore, SignInToStore}) {
     
 
     return (
-        <div>
-            <h1>signIn</h1>
-            <input
-                type="text"
-                placeholder="EMAIL"
-                onChange={onchange}
-                id="email"
-            />
-            <input
-                type="password"
-                placeholder="PASSWORD"
-                onChange={onchange}
-                id="password"
-                onKeyDown={isEnter}
-            />
-            <button onClick={signin}>
-                로그인
-            </button>
+        <div className='logIn_bgGray'>
+            <div className='logIn_box'>
+                <h1 className='logIn_headline'>로그인</h1>
+                <dl>
+                    <dt className='logIn_text'>아이디</dt>
+                    <dd>
+                        <input
+                            className="logIn_input"
+                            type="text"
+                            placeholder="EMAIL"
+                            onChange={onchange}
+                            id="email"
+                        />
+                    </dd>
+                </dl>
+                <dl>
+                    <dt className='logIn_text'>비밀번호</dt>
+                    <dd>
+                        <input
+                            className="logIn_input"
+                            type="password"
+                            placeholder="PASSWORD"
+                            onChange={onchange}
+                            id="password"
+                            onKeyDown={isEnter}
+                        />
+                    </dd>
+                </dl>
+                <button className='logIn_button' onClick={signin}>
+                    로그인
+                </button>
+            </div>
         </div>
     )
 

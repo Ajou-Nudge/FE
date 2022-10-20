@@ -21,8 +21,10 @@ function IssuerCreateContext() {
             inputs.push(
                 <div style={{display:"flex"}} key={i} id={i}>
                     <input defaultValue={rawContext[`value${i}`]} onChange={handleValue} key={`value${i}`}></input>
-                    <div>필수여부</div>
-                    <input defaultValue={rawContext[`isEssential${i}`]} onChange={handleCheck} key={`isEssential${i}`} type="checkbox"></input>
+
+                    {/* 원래는 필수 여부도 선택 가능하게 갔으나 기능 뺌 */}
+                    {/* <div>필수여부</div>
+                    <input defaultValue={rawContext[`isEssential${i}`]} onChange={handleCheck} key={`isEssential${i}`} type="checkbox"></input> */}
                 </div>
             )
         }
@@ -36,12 +38,14 @@ function IssuerCreateContext() {
         buffer[`value${e.target.parentElement.id}`] = e.target.value
         setRawContext(buffer)
     }
-    function handleCheck(e) {
-        let buffer = rawContext
-        const isEssentialNum = e.target.checked ? "1" : "0"
-        buffer[`isEssential${e.target.parentElement.id}`] = isEssentialNum
-        setRawContext(buffer)
-    }
+
+    // // 필수 여부 체크 핸들링하는 함수
+    // function handleCheck(e) {
+    //     let buffer = rawContext
+    //     const isEssentialNum = e.target.checked ? "1" : "0"
+    //     buffer[`isEssential${e.target.parentElement.id}`] = isEssentialNum
+    //     setRawContext(buffer)
+    // }
 
     // rawContext가공하여 Context 생성
     function submit() {

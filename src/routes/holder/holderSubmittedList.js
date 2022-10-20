@@ -1,12 +1,13 @@
+
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
-import DummyVcList from "../../dummy/dummyVcList";
 import { Link } from "react-router-dom"
+import DummySubmittedList from "../../dummy/dummySubmittedList";
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 // import { message } from "antd";
 
-function IssuerVcList({userIdInStore}) {
+function HolderSubmittedList({userIdInStore}) {
 
     const [ vcList, setVcList ] = useState([])
     // const navigate = useNavigate()
@@ -14,7 +15,7 @@ function IssuerVcList({userIdInStore}) {
     // useEffect(() => {
     //     // redux에 저장되어있는 issuer 아이디로 발행된 vc 요청
     //     axios({
-    //         url: `/issuer/vc-list/:${userIdInStore}`,
+    //         url: `/holder/submit-list/:${userIdInStore}`,
     //         method: "GET",
     //         withCredentials: true,
     //     })
@@ -24,13 +25,13 @@ function IssuerVcList({userIdInStore}) {
     //     })
     //     // 오류핸들링
     //     .catch(() => {
-    //         message.error("자격증 가져오기 실패");
+    //         message.error("제출 이력 가져오기 실패");
     //         navigate("/issuer")
     //     });
     // }, [navigate, userIdInStore])
 
     useEffect(() => {
-        setVcList(DummyVcList)
+        setVcList(DummySubmittedList)
     }, [])
     
     function makeVcList() {
@@ -38,17 +39,16 @@ function IssuerVcList({userIdInStore}) {
         const List = []
         for (let i=0; i < lengthCounter; i++){
             List.push(
-                <Link
-                    key={i} 
-                    to={`/verifier/verifiy/detail/:${i}`}
-                    state={
-                        vcList[i]
-                    }
-                >
+                // <Link
+                //     key={i} 
+                //     state={
+                //         vcList[i]
+                //     }
+                // >
                     <li key={i}>
-                        발행번호: {i+1}번 {vcList[i].credentialSubject.name} {vcList[i].context}
+                        {vcList[i].title}  제출일: {vcList[i].date}  제출상태: {vcList[i].status}
                     </li>
-                </Link>
+                // </Link>
             )
         }
         return List
@@ -60,6 +60,10 @@ function IssuerVcList({userIdInStore}) {
             <h1>IssuerVcList</h1>
             <hr />
             <ul>{makeVcList()}</ul>
+            <hr />
+            <Link to={'/holder'}>
+                <button>홈으로</button>
+            </Link>
         </div>
     )
 }
@@ -68,4 +72,4 @@ function mapStateToProps(state) {
     return {userIdInStore: state._id}
 }
 
-export default connect(mapStateToProps, null) (IssuerVcList)
+export default connect(mapStateToProps, null) (HolderSubmittedList)

@@ -10,6 +10,9 @@ function IssuerHome() {
             <Link to="/issuer/Issue">
                 <button>자격증 발행</button>
             </Link>
+            <Link to="/issuer/vcList">
+                <button>발행이력 조회</button>
+            </Link>
         </div>
     )
 }
