@@ -1,19 +1,19 @@
-.holderVL_headLineBox {
+.holderSVL_headLineBox {
     max-width: 1540px;
     padding: 0 50px;
     margin: 56px auto 20px;
 }
 
-.holderVL_headLine {
+.holderSVL_headLine {
     font-size: 72px;
     font-weight: 500;
     color: #cccccc;
 }
 
-.holderVL_searchBox {
+.holderSVL_searchBox {
     max-width: 1540px;
     padding: 0 50px 0 50px;
-    margin: 0 auto 0;
+    margin: 0 auto 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,7 +22,7 @@
     color: #666;
 }
 
-.holderVL_search {
+.holderSVL_search {
     width: 300px;
     max-width: 30vw;
     height: 40px;
@@ -32,7 +32,7 @@
     border-color: rgb(204, 204, 204);
     border-style: solid;
 }
-.holderVL_searchBtn {
+.holderSVL_searchBtn {
     padding-bottom: 4px;
     width: 70px;
     height: 40px;
@@ -48,25 +48,26 @@
     font-weight: 500;
 }
 
-.holderVL_vcBox {
+.holderSVL_SVLbox {
     max-width: 1540px;
-    padding: 0 50px 0 50px;
+    padding: 0 50px;
     margin: 0 auto 0;
-    margin-top: 50px;
 }
-.holderVL_btnBox {
-    max-width: 1540px;
-    padding: 0 50px 0 50px;
-    margin: 0 auto 0;
-    justify-content: space-between;
-    align-items: center;
+.holderSVL_SVlist {
+    margin: 50px 0 50px 0;
+    display: flex;
+    padding: 0 10px 0 10px;
 }
-
-.holderVL_btn {
-    width: 150px;
-    height: 40px;
-    background-color: rgb(35, 29, 122);
-    color: #ffff;
-    font-weight: 550;
-    border-radius: 30px;
+.holderSVL_icon {
+    height: 60px;
+    width: 60px;
+    font-size: 60px;
+    color: #0bb38e;
+}
+.holderSVL_verifierAndDate {
+    margin: 0 20px 0 20px;
+    
+}
+.holderSVL_titleAndState {
+    margin: 0 20px 0 20px;
 }

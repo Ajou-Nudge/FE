@@ -1,13 +1,37 @@
-이슈어 vc 발행 페이지/context-list               (완료)
-- 필수 여부 삭제, api 수정 되었음.
 이슈어 발행 vc 목록                              (api 필요)
 /issuer/context-list/:issuerId 
 
 홀더 채용 공고 목록 페이지 => vc 제출 할 수 있도록 (api 필요)
  - 제출 api 구조 수정되었음.
 
-홀더 자기가 제출한 vc 목록 페이지                 (완료)
-/holder/submit-list/:holderId
+
+Main
+회원가입 페이지
+
+holder
+홀더 포스팅 리스트    (완료)
+vc 제출              (완료)
+- 검색기능 미완료     (진행중)
+
+제출된 vc 리스트
+
+
+issuer
+context 생성
+vc 생성
+생성된 vc 조회
+
+verifier
+포스팅 작성
+작성된 포스팅 리스트
+제출된 인증서 검증
+검증 디테일
+
+component
+footbar
+
+
+
 
 ////건의 사항///////
 
@@ -17,3 +41,5 @@ api 업데이트 필요
 
 자격증 불러온 후 뿌려줄 신뢰할 수 있는 필수 기제 값이 필요하다.
 /holder/vc-list/:${userIdInStore}
+
+vone 기업 아이디 필요. issuer verifier 페이지 ui 확인해야함.

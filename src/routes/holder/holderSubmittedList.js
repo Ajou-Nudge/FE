@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"
 import DummySubmittedList from "../../dummy/dummySubmittedList";
+import { Input } from "antd"
+import { CheckCircleOutlined } from '@ant-design/icons';
+import "./css/holderSubmittedList.css"
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 // import { message } from "antd";
@@ -35,32 +38,63 @@ function HolderSubmittedList({userIdInStore}) {
     }, [])
     
     function makeVcList() {
+    //     const lengthCounter = vcList.length
+    //     const List = []
+    //     for (let i=0; i < lengthCounter; i++){
+    //         List.push(
+    //             // <Link
+    //             //     key={i} 
+    //             //     state={
+    //             //         vcList[i]
+    //             //     }
+    //             // >
+    //                 <li key={i}>
+    //                     {vcList[i].title}  제출일: {vcList[i].date}  제출상태: {vcList[i].status}
+    //                 </li>
+    //             // </Link>
+    //         )
+    //     }
+    //     return List
+        
         const lengthCounter = vcList.length
         const List = []
         for (let i=0; i < lengthCounter; i++){
             List.push(
-                // <Link
-                //     key={i} 
-                //     state={
-                //         vcList[i]
-                //     }
-                // >
-                    <li key={i}>
-                        {vcList[i].title}  제출일: {vcList[i].date}  제출상태: {vcList[i].status}
-                    </li>
-                // </Link>
+                <div key={i} className="holderSVL_SVlist">
+                    <div><CheckCircleOutlined className="holderSVL_icon" /></div>
+                    <div className="holderSVL_verifierAndDate">
+                        <p>{vcList[i].verifier}</p>
+                        <p>{vcList[i].date}</p>
+                    </div>
+                    <div className="holderSVL_titleAndState">
+                        <p>{vcList[i].title}</p>
+                        <p>{vcList[i].status}</p>
+                    </div>
+                </div>
             )
         }
         return List
-        
     }
     
     return(
         <div>
-            <h1>IssuerVcList</h1>
+            <div className="holderSVL_headLineBox">
+                <div className="holderSVL_headLine">내지갑{">"} <span style={{color: "#0bb38e"}}>제출이력</span></div>
+            </div>
+            <div className="holderSVL_searchBox">
+                <p style={{maxWidth: '35vw'}}>
+                    여러분의 증명, 인증서 제출이력을 관리할 수 있습니다.
+                </p>
+                <p>
+                    <Input className="holderSVL_search"/>
+                    <button className="holderSVL_searchBtn">검색</button>
+                </p>
+            </div>
+            <div className="holderSVL_SVLbox">
             <hr />
-            <ul>{makeVcList()}</ul>
-            <hr />
+            <div>{makeVcList()}</div>
+            </div>
+            
             <Link to={'/holder'}>
                 <button>홈으로</button>
             </Link>

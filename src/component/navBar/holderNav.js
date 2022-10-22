@@ -4,12 +4,22 @@ import logo from '../../img/didnow.png'
 //import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 function HolderNav() {
 
+  const navStyle = {
+    fontSize: "large",
+    color: "black",
+  }
 
   const items = [
     { label: <img src={logo} alt="icon" style={{ height: "75px" }} />, key: "icon"},
-    { label: <NavLink style={{ fontSize: "large" }} to="/holder/vcList">내지갑</NavLink>, key: "home"},
-    { label: <NavLink style={{ fontSize: "large" }}>커리어로드맵</NavLink>, key: "signIn" },
-    { label: <NavLink style={{ fontSize: "large" }} to="/holder/postingList">입사지원</NavLink>, key: "signUp" },
+    { label: <NavLink style={ navStyle } to="/holder/vcList">내지갑</NavLink>, 
+      children:[
+        { label: <NavLink style={ navStyle } to="/holder/vcList">인증서관리</NavLink>, key: "vcList" },
+        { label: <NavLink style={ navStyle } to="/holder/submittedList">제출이력</NavLink>, key: "submittedVc" }
+      ],
+      key: "vcWallet",
+    },
+    { label: <NavLink style={ navStyle }>커리어로드맵</NavLink>, key: "signIn" },
+    { label: <NavLink style={ navStyle } to="/holder/postingList">입사지원</NavLink>, key: "signUp" },
     // { label: "공지사항",
     //   key: "item3",
     //   children: [{ label: "공지1", key: "item4" }, { label: "공지2", key: "item5" }]

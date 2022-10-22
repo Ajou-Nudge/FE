@@ -1,0 +1,101 @@
+.holderS_headLineBox {
+    max-width: 1540px;
+    padding: 0 50px;
+    margin: 56px auto 20px;
+}
+
+.holderS_headLine {
+    font-size: 72px;
+    font-weight: 500;
+    color: #cccccc;
+}
+
+.holderS_formBox {
+    max-width: 1540px;
+    margin: 0 auto;
+    padding: 0 50px 0 50px;
+}
+
+.holderS_wordBoxTitle {
+    padding: 0 10px 0 10px;
+    font-size: 24px;
+    font-weight: 560;
+}
+.holderS_wordBox {
+    margin: 20px 0 50px 0;
+    padding: 20px;
+    border: 1px none;
+    border-radius: 20px;
+    background-color: #eee;
+    font-weight: 600;
+}
+
+.holderS_formTitle {
+    justify-content: space-between;
+    font-size: 22px;
+    font-weight: 600;
+    display: flex;
+}
+.holderS_formInputBox {
+    padding: 15px 0 30px 0;
+    display: flex;
+    text-align: center;
+    font-weight: 550;
+    border-bottom: 1px solid #e5e5e5;
+}
+.holderS_formInput {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+}
+.holderS_formInputTag {
+    min-width: 30%;
+    text-align: left;
+}
+.holderS_inputStyle {
+    height: 40px;
+    padding: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 30px;
+    max-width: 350px;
+}
+.holderS_fileInputBtn {
+    height: 40px;
+    border: 1px none;
+    border-radius: 30px;
+    background-color: #1d2c5f;
+    width: 150px;
+    color: #ffff;
+    font-weight: 600;
+    padding: 10px 0;
+}
+
+
+.holderS_btnBox {
+    display: flex;
+    height: 200px;
+    max-width: 1540px;
+    padding: 0 50px;
+    margin: 50px auto;
+    justify-content: space-between;
+}
+.holderS_submitBtn {
+    height: 50px;
+    border: 1px none;
+    border-radius: 30px;
+    background-color: #1d2c5f;
+    width: 170px;
+    color: #ffff;
+    font-weight: 600;
+    padding: 10px 0;
+}
+.holderS_homeBtn {
+    height: 50px;
+    border: 1px none;
+    border-radius: 30px;
+    background-color: rgb(209, 209, 209);
+    width: 170px;
+    color: #1d2c5f;
+    font-weight: 600;
+    padding: 10px 0;
+}
