@@ -42,7 +42,7 @@ import HomeNav from "./component/navBar/homeNav.js";
 import IssuerNav from "./component/navBar/issuerNav.js";
 import HolderNav from "./component/navBar/holderNav.js";
 import VerifierNav from "./component/navBar/verifierNav.js";
-//import Footer from "./component/footer.js";
+import Footer from "./component/footer.js";
 
 
 function App({SignInToStore}) {
@@ -86,6 +86,7 @@ function App({SignInToStore}) {
           <Route path="signUpComplete" element={<SignUpComplete />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
+        <Footer />
       </div>
     )
   }
@@ -146,6 +147,7 @@ function App({SignInToStore}) {
           <Route path="/verifier/*" element={<Verifier />}/>
         </Routes>
       </BrowserRouter>
+      <Footer />
     </div>
   )
 }

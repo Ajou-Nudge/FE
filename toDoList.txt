@@ -11,9 +11,10 @@ Main
 holder
 홀더 포스팅 리스트    (완료)
 vc 제출              (완료)
-- 검색기능 미완료     (진행중)
+제출된 vc 리스트      (완료)
+- holder 전역 검색기능 (미완료)
 
-제출된 vc 리스트
+
 
 
 issuer
@@ -28,7 +29,8 @@ verifier
 검증 디테일
 
 component
-footbar
+footbar             (완료)
+-이용약관, 공지사항, FAQ (미완료)
 
 
 

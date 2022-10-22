@@ -1,10 +1,9 @@
 
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom"
 import DummySubmittedList from "../../dummy/dummySubmittedList";
 import { Input } from "antd"
-import { CheckCircleOutlined } from '@ant-design/icons';
+import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined  } from '@ant-design/icons';
 import "./css/holderSubmittedList.css"
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios";
@@ -59,16 +58,30 @@ function HolderSubmittedList({userIdInStore}) {
         const lengthCounter = vcList.length
         const List = []
         for (let i=0; i < lengthCounter; i++){
+            function icon(state) {
+                switch(state) {
+                    case "confirmed" :
+                        return <CheckCircleOutlined className="holderSVL_icon1" />
+                    case "pending" :
+                        return <ClockCircleOutlined className="holderSVL_icon2" />
+                    case "canceled" :
+                        return <CloseCircleOutlined className="holderSVL_icon3" />
+                    default :
+                        return "err"
+                }
+            }
             List.push(
                 <div key={i} className="holderSVL_SVlist">
-                    <div><CheckCircleOutlined className="holderSVL_icon" /></div>
-                    <div className="holderSVL_verifierAndDate">
-                        <p>{vcList[i].verifier}</p>
-                        <p>{vcList[i].date}</p>
-                    </div>
-                    <div className="holderSVL_titleAndState">
-                        <p>{vcList[i].title}</p>
-                        <p>{vcList[i].status}</p>
+                    {icon(vcList[i].status)}
+                    <div className="holderSVL_spaceBetween">
+                        <div className="holderSVL_verifierAndDate">
+                            <p className="holderSVL_verifierAndTitle">{vcList[i].verifier}</p>
+                            <p className="holderSVL_dateAndState">{vcList[i].date}</p>
+                        </div>
+                        <div className="holderSVL_titleAndState">
+                            <p className="holderSVL_verifierAndTitle">{vcList[i].title}</p>
+                            <p className="holderSVL_dateAndState">{vcList[i].status}</p>
+                        </div>
                     </div>
                 </div>
             )
@@ -90,14 +103,13 @@ function HolderSubmittedList({userIdInStore}) {
                     <button className="holderSVL_searchBtn">검색</button>
                 </p>
             </div>
-            <div className="holderSVL_SVLbox">
-            <hr />
-            <div>{makeVcList()}</div>
+            <div style={{backgroundColor: "rgb(250, 250, 250)"}}>
+                <div className="holderSVL_SVL_outerbox">
+                    <div className="holderSVL_SVL_innerbox">
+                        {makeVcList()}
+                    </div>
+                </div>
             </div>
-            
-            <Link to={'/holder'}>
-                <button>홈으로</button>
-            </Link>
         </div>
     )
 }
