@@ -36,28 +36,6 @@ function HolderPostingList() {
 
 
     function makePostingList() {
-        // // 받아온 PostingList 리스트 형태로 출력
-        // const lengthCounter = postingList.length
-        // const List = []
-        // for (let i=0; i < lengthCounter; i++){
-        //     List.push(
-        //         <Link 
-        //             key={i} 
-        //             to={`/holder/submit/:${postingList[i].postId}`}
-        //             state={{
-        //                 postId: postingList[i].postId,
-        //                 verifier: postingList[i].verifier,
-        //                 requirement: postingList[i].requirement,
-        //                 expired: postingList[i].expired,
-        //                 url: postingList[i].url
-        //             }}
-
-        //         >
-        //             <li key={i}>{JSON.stringify(postingList[i].verifier)}의 채용공고</li>
-        //         </Link>
-        //     )
-        // }
-        // return List
         
         const lengthCounter = postingList.length
         const PLdata = []
@@ -122,7 +100,7 @@ function HolderPostingList() {
     }
 
     return(
-        <div>
+        <div className="holderPL_bg">
             <div className="holderPL_headLineBox">
                 <div className="holderPL_headLine"><span style={{color: "#0bb38e"}}>입사지원</span></div>
             </div>

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { message } from "antd";
-//import DummyContextList from "../../dummy/dummyContextList";
+import DummyContextList from "../../dummy/dummyContextList";
 
 
 function IssuerIssue(userIdInStore) {
@@ -18,25 +18,25 @@ function IssuerIssue(userIdInStore) {
     
 
     // 서버에서 issuer의 context정보 불러오기
-    useEffect(() => {
-        axios({
-            url: `/issuer/context-list/:${userIdInStore}`,
-            method: "GET",
-            withCredentials: true,
-        })
-        .then((res) => {
-            setFormList(res)
-        })
-        .catch(() => {
-            message.error("자격증 양식 가져오기 실패");
-            navigate("/issuer")
-        });
-    }, [navigate, userIdInStore])
-
     // useEffect(() => {
-    //     const Dummy = DummyContextList
-    //     setFormList([...Dummy])
-    // },[])
+    //     axios({
+    //         url: `/issuer/context-list/:${userIdInStore}`,
+    //         method: "GET",
+    //         withCredentials: true,
+    //     })
+    //     .then((res) => {
+    //         setFormList(res)
+    //     })
+    //     .catch(() => {
+    //         message.error("자격증 양식 가져오기 실패");
+    //         navigate("/issuer")
+    //     });
+    // }, [navigate, userIdInStore])
+
+    useEffect(() => {
+        const Dummy = DummyContextList
+        setFormList([...Dummy])
+    },[])
 
     // 받아온 List 내부의 form에서 context만 추출
     useEffect(() => {

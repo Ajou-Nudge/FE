@@ -1,23 +1,28 @@
-.holderPL_bg {
+.issuerCL_bg {
     min-height: 85vh;
 }
 
-.holderPL_headLineBox {
+.issuerCL_headLineBox {
     max-width: 1540px;
     padding: 0 50px;
     margin: 56px auto 20px;
 }
 
-.holderPL_headLine {
+.issuerCL_headLine {
     font-size: 72px;
     font-weight: 500;
     color: #cccccc;
 }
+.issuerCL_headLine_minmize {
+    font-size: 38px;
+    font-weight: 700;
+    color: #cccccc;
+}
 
-.holderPL_searchBox {
+.issuerCL_searchBox {
     max-width: 1540px;
     padding: 0 50px 0 50px;
-    margin: 0 auto 0;
+    margin: 0 auto 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -25,19 +30,30 @@
     font-weight: 550;
     color: #666;
 }
+.issuerCL_searchBox_minmize {
+    max-width: 1540px;
+    padding: 0 50px 0 50px;
+    margin: 0 auto 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 550;
+    color: #666;
+}
 
-.holderPL_search {
+.issuerCL_search {
     width: 300px;
     max-width: 30vw;
     height: 40px;
     border-top-left-radius:30px;
     border-bottom-left-radius:30px;
-    padding: 0 20px;
+    padding: 0 20px 0 0;
+    margin: 0;
     border-color: rgb(204, 204, 204);
     border-style: solid;
 }
-.holderPL_searchBtn {
-    padding-bottom: 4px;
+.issuerCL_searchBtn {
     width: 70px;
     height: 40px;
     background-color: #ffff;
@@ -51,19 +67,33 @@
     color: rgb(155, 155, 155);
     font-weight: 500;
 }
-
-.holderPL_PLbox {
-    max-width: 1540px;
-    padding: 0 50px 0 50px;
-    margin: 0 auto 0;
-    margin-top: 50px;
+.issuerCL_addBtn {
+    margin-left: 10px;
+    width: 70px;
+    height: 38px;
+    background-color: rgb(58, 173, 148);;
+    border: 1px solid rgb(58, 173, 148);
+    border-radius:30px;
+    text-align: center;
+    color: #ffff;
+    font-weight: 900;
+    font-size: large;
 }
-.holderPL_PLtext {
+
+.issuerCL_CLbg {
+    background-color: rgb(243, 243, 243);
+}
+.issuerCL_CLmargin {
+    padding: 40px;
+    max-width: 1540px;
+    margin: 0 auto 0;
+}
+
+.issuerCL_CLtext {
     font-size: medium;
     font-weight: 500;
 }
-
-.holderPL_btn {
+.issuerCL_btn {
     width: 110px;
     height: 40px;
     background-color: rgb(58, 173, 148);

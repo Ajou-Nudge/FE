@@ -90,7 +90,7 @@ function HolderSubmittedList({userIdInStore}) {
     }
     
     return(
-        <div>
+        <div className="holderSVL_bg">
             <div className="holderSVL_headLineBox">
                 <div className="holderSVL_headLine">내지갑{">"} <span style={{color: "#0bb38e"}}>제출이력</span></div>
             </div>

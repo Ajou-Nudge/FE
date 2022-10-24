@@ -1,15 +1,27 @@
 import { message } from "antd";
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import axios from "axios";
-import { Link } from "react-router-dom";
 import React from "react";
+import "./css/issuerCreateContext.css"
 
 function IssuerCreateContext() {
 
     const [context, setContext] = useState("")
     const [inputCount, setInputCount] = useState(3)
     const [rawContext, setRawContext ] = useState({})
-
+    
+    // 창 가로크기 측정 코드, inner 850px 기준, className으로 반응
+    const[ widthHandle, setWidthHandle ] = useState("")
+    function handleResize() {
+        if (window.innerWidth > 850) {
+            setWidthHandle("")
+        } else {
+            setWidthHandle("_minmize")
+        }
+    }
+    useEffect(() => {
+        return window.addEventListener("resize", handleResize)
+    })
     function handleInputCount(e) {
         setInputCount(e.target.value)
     }
@@ -19,8 +31,8 @@ function IssuerCreateContext() {
         const inputs = []
         for (let i=0; i < inputCount; i++){
             inputs.push(
-                <div style={{display:"flex"}} key={i} id={i}>
-                    <input defaultValue={rawContext[`value${i}`]} onChange={handleValue} key={`value${i}`}></input>
+                <div className={`issuerCC_row${widthHandle}`} key={i} id={i}>
+                    <input className={`issuerCC_input_minmize`} defaultValue={rawContext[`value${i}`]} onChange={handleValue} key={`value${i}`}></input>
 
                     {/* 원래는 필수 여부도 선택 가능하게 갔으나 기능 뺌 */}
                     {/* <div>필수여부</div>
@@ -92,20 +104,54 @@ function IssuerCreateContext() {
     };
 
     return(
-        <div>
-            <h1>IssuerCreateContext</h1>
-            <div>자격증이름</div>
-            <input value={context} onChange={(event) => { setContext(event.target.value) }}></input>
-            <div>자격증 기재 정보 개수</div>
-            <input type={"number"} value={inputCount} onChange={handleInputCount}></input>
-            <hr />
-            <div>{makeInput()}</div>
-            <hr />
-            <button onClick={submit}>양식 생성하기</button>
-            <Link to="/issuer">
-                <button>홈으로</button>
-            </Link>
-        </div>      
+        <div className="issuerCC_bg">
+            <div className="issuerCC_headLineBox">
+                <div className={`issuerCC_headLine${widthHandle}`}>
+                    인증서양식{">"} 
+                    <span style={{color: "#0bb38e"}}>양식등록</span>
+                </div>
+            </div>
+            <div className={`issuerCC_searchBox${widthHandle}`}>
+                <p style={{maxWidth: '60vw'}}>
+                    발급할 인증서의 양식을 등록할 수 있습니다.
+                    자격증과 발급대상의 정보 기재여부를 결정합니다.
+                </p>
+            </div>
+            <div style={{backgroundColor: "rgb(250, 250, 250)"}}>
+                <div className="issuerCC_outerbox">
+                    <div className="issuerCC_innerbox">
+                        <div>
+                            <div className="issuerCC_title">
+                                <p style={{lineHeight: "60px"}}>인증서 기재정보 입력</p>
+                                <p style={{fontSize: "14px", lineHeight: "60px"}}><span style={{color: "red"}}>*</span>필수 입력항목</p>
+                            </div>
+                            <div className={`issuerCC_row${widthHandle}`}>
+                                <div className={`issuerCC_tag${widthHandle}`}>자격증이름<span style={{color: "red"}}> *</span></div>
+                                <input className={`issuerCC_input${widthHandle}`} value={context} onChange={(event) => { setContext(event.target.value) }}></input>
+                            </div>
+                            <div className={`issuerCC_row${widthHandle}`}>
+                                <div className={`issuerCC_tag${widthHandle}`}>자격증 기재 정보 개수<span style={{color: "red"}}> *</span></div>
+                                <input className={`issuerCC_input${widthHandle}`} type={"number"} min={1} value={inputCount} onChange={handleInputCount}></input>
+                            </div>
+                            <hr />
+                            <div className={`issuerCC_row${widthHandle}`}>
+                                <div className={`issuerCC_tag${widthHandle}`}>
+                                    기재정보
+                                    <p style={{color: "#666"}}>ex{")"} 발급대상 성명, 생년월일</p>
+                                </div>
+                                <div className={`issuerCC_inputs${widthHandle}`}>
+                                    {makeInput()}
+                                </div>
+                            </div>
+                            <hr />
+                            <div className="issuerCC_submitBox">
+                                <button className="issuerCC_submitBtn" onClick={submit}>양식 생성하기</button>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>     
     )
 }
 

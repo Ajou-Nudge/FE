@@ -7,13 +7,26 @@ function IssuerNav() {
 
   const items = [
     { label: <img src={logo} alt="icon" style={{ height: "75px" }} />, key: "icon"},
-    { label: <NavLink style={{ fontSize: "large" }} to="/">홈</NavLink>, key: "home"},
-    { label: <NavLink style={{ fontSize: "large" }} to="/signIn">로그인</NavLink>, key: "signIn" },
-    { label: <NavLink style={{ fontSize: "large" }} to="/signUp">회원가입</NavLink>, key: "signUp" },
-    // { label: "공지사항",
-    //   key: "item3",
-    //   children: [{ label: "공지1", key: "item4" }, { label: "공지2", key: "item5" }]
-    // },
+    { label: "발급관리",
+      key: "vc",
+      style: { fontSize: "large" },
+      children: [
+        { label: <NavLink style={{ fontSize: "large" }} to="/issuer/issue">증명서발급</NavLink>, key: "issue" },
+        { label: <NavLink style={{ fontSize: "large" }} to="/issuer/vcList">발급이력</NavLink>, key: "issuedList" },
+      ]
+    },
+    { label: "인증서양식",
+      key: "context",
+      style: { fontSize: "large" },
+      children: [
+        { label: <NavLink style={{ fontSize: "large" }} to="/issuer/contextList">양식관리</NavLink>, key: "contextList" },
+        { label: <NavLink style={{ fontSize: "large" }} to="/issuer/createContext">양식등록</NavLink>, key: "createContext" },
+      ]
+    },
+    { label: <NavLink style={{ fontSize: "large" }} to="/issuer/issue">채용공고</NavLink>,
+      key: "posting",
+      style: { fontSize: "large" },
+    }
   ]
 
   return(

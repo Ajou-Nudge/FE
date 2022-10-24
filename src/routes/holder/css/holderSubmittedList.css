@@ -1,3 +1,7 @@
+.holderSVL_bg {
+    min-height: 85vh;
+}
+
 .holderSVL_headLineBox {
     max-width: 1540px;
     padding: 0 50px;
@@ -55,7 +59,7 @@
 }
 .holderSVL_SVL_innerbox {
     padding: 40px;
-    margin: 0 auto;
+    margin: 0 auto 70px;
     border-radius: 10px;
     background-color: #ffff;
     box-shadow: 2px 1px 10px 1px rgb(0 0 0 / 10%);

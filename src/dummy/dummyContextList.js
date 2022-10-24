@@ -1,36 +1,34 @@
 
 const DummyContextList = [
     {
-        "context": "certificate1",
+        "context": "졸업증명서",
         "credentialSubject": {
-            "title": "1",
-            "name": "1",
-            "date": "1",
-            "major": "1",
-            "doubleMajor": "0",
-            "minor": "0"
+            "성명": "1",
+            "전공": "1",
+            "복수전공": "0",
+            "부전공": "0",
+            "취득일자": "1",
         }
     },
     {
-        "context": "certificate2",
+        "context": "학점증명서",
         "credentialSubject": {
-            "title2": "1",
-            "name2": "1",
-            "date2": "1",
-            "major2": "1",
-            "doubleMajor2": "0",
-            "minor2": "0"
+            "성명": "1",
+            "생년월일": "0",
+            "전공": "1",
+            "학번": "1",
+            "학기": "1",
         }
     },
     {
-        "context": "certificate3",
+        "context": "재학증명서",
         "credentialSubject": {
-            "title3": "1",
-            "name3": "1",
-            "date3": "1",
-            "major3": "1",
-            "doubleMajor3": "0",
-            "minor3": "0"
+            "성명": "1",
+            "생년월일": "1",
+            "전공": "1",
+            "복수전공": "1",
+            "과정구분": "0",
+            "재학학기": "0"
         }
     }
 ]

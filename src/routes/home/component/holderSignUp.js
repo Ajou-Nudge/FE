@@ -1,5 +1,6 @@
-import { Row, Col, message, DatePicker, Select } from "antd";
-import { useState, useEffect } from "react";
+import { message, DatePicker, Select } from "antd";
+import { useState } from "react";
+// import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import QrCodeModal from "./qrCodeModal";
@@ -7,20 +8,20 @@ import * as KlipAPI from "../component/UseKlip";
 const { Option } = Select;
 
 const HolderSignUp = () => {
-  const [issuers, setIssuers] = useState([]);
+  const [issuers] = useState([]);
   const [qrvalue, setQrvalue] = useState("DEFAULT");
   const [myAddress, setMyAddress] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
-  useEffect(() => {
-    axios({
-      url: `${process.env.REACT_APP_ISSUER}/iss/api/v1/issuer/find/all`,
-      method: "GET",
-    }).then((data) => {
-      setIssuers([...data.data]);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios({
+  //     url: `${process.env.REACT_APP_ISSUER}/iss/api/v1/issuer/find/all`,
+  //     method: "GET",
+  //   }).then((data) => {
+  //     setIssuers([...data.data]);
+  //   });
+  // }, []);
 
   const navigate = useNavigate();
 
@@ -126,129 +127,127 @@ const HolderSignUp = () => {
 
   return (
     <div>
-      <h1>HolderSignUp</h1>
-      <Row>
-        <Col span={6} style={{ display: "flex" }}>
-          <span>이메일</span>
-        </Col>
-        <Col span={18}>
-          <input
-            type="text"
-            onChange={onchange}
-            id="email"
-          />
-        </Col>
-      </Row>
+      <div className="signUpForm_row">
+        <p className="signUpForm_tag">
+          이메일
+        </p>
+        <input
+          className="signUpForm_input"
+          type="text"
+          onChange={onchange}
+          id="email"
+        />
+      </div>
 
-      <Row>
-        <Col span={6} style={{ display: "flex" }}>
-          <span>비밀번호</span>
-        </Col>
-        <Col span={18}>
-          <input
-            type="password"
-            onChange={onchange}
-            id="password"
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col span={6}>
-          <span>비밀번호확인</span>
-        </Col>
-        <Col span={18}>
-          <input
-            type="password"
-            onChange={(e) => {
-              return e.target.value === userInfo.password
-                ? setIsCorrect(true)
-                : setIsCorrect(false);
-            }}
-          />
-        </Col>
-      </Row>
+      <div className="signUpForm_row">
+        <p className="signUpForm_tag">
+          비밀번호
+        </p>
+        <input
+          className="signUpForm_input"
+          type="password"
+          onChange={onchange}
+          id="password"
+        />
+      </div>
 
-      <Row>
-        <Col span={6} style={{ display: "flex" }}>
-          <span>이름</span>
-        </Col>
-        <Col span={18}>
-          <input
-            type="text"
-            onChange={onchange}
-            id="username"
-          />
-        </Col>
-      </Row>
+      <div className="signUpForm_row">
+        <p className="signUpForm_tag">
+          비밀번호확인
+        </p>
+        <input
+          className="signUpForm_input"
+          type="password"
+          onChange={(e) => {
+            return e.target.value === userInfo.password
+              ? setIsCorrect(true)
+              : setIsCorrect(false);
+          }}
+        />
+      </div>
 
-      <Row>
-        <Col span={6} style={{ display: "flex" }}>
-          <span>생년월일</span>
-        </Col>
-        <Col span={18}>
-          <DatePicker
-            placeholder=""
-            onChange={changeDate}
-          />
-        </Col>
-      </Row>
+      <div className="signUpForm_row">
+        <p className="signUpForm_tag">
+          이름
+        </p>
+        <input
+          className="signUpForm_input"
+          type="text"
+          onChange={onchange}
+          id="username"
+        />
+      </div>
 
-      <Row>
-        <Col span={6} style={{ display: "flex" }}>
-          <span>소속기관</span>
-        </Col>
-        <Col span={18}>
-          <Select
-            mode="tags"
-            onChange={changeIssuerList}
-          >
-            {issuers.map((e, idx) => {
-              return <Option key={e.title}>{e.title}</Option>;
-            })}
-          </Select>
-        </Col>
-      </Row>
-      <Row>
-        <Col span={6}>
-          <span>KLIP연결</span>
-        </Col>
-        <Col span={18}>
-          <button
-            onClick={() => {
-              qrModalOpen();
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              KLIP
-            </div>
-          </button>
-          <QrCodeModal
-            modalOpen={modalOpen}
-            setModalOpen={setModalOpen}
-            qrvalue={qrvalue}
-            setQrvalue={setQrvalue}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col span={6} style={{ display: "flex" }}>
-          <span>지갑주소</span>
-        </Col>
-        <Col span={18}>
-          <div>{myAddress}</div>
-        </Col>
-      </Row>
-      <Row>
-        <button onClick={validate}>
+      <div className="signUpForm_row">
+        <p className="signUpForm_tag">
+          생년월일
+        </p>
+        <DatePicker
+          className="signUpForm_selectInput"
+          placeholder=""
+          onChange={changeDate}
+        />
+      </div>
+
+      <div className="signUpForm_row">
+        <p className="signUpForm_tag">
+          소속기관
+        </p>
+        <Select
+          className="signUpForm_selectInput"
+          mode="tags"
+          onChange={changeIssuerList}
+        >
+          {issuers.map((e, idx) => {
+            return <Option key={e.title}>{e.title}</Option>;
+          })}
+        </Select>
+      </div>
+
+      <div className="signUpForm_row">
+        <p className="signUpForm_tag">
+          KLIP연결
+        </p>
+        <button
+          className="signUpForm_klipBtn"
+          onClick={() => {
+            qrModalOpen();
+          }}
+        >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          KLIP
+        </div>
+        </button>
+        <QrCodeModal
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+          qrvalue={qrvalue}
+          setQrvalue={setQrvalue}
+        />
+      </div>
+
+      <div className="signUpForm_row">
+        <p className="signUpForm_tag">
+          지갑주소
+        </p>
+        <div>
+          {myAddress}
+        </div>
+      </div>
+      <div className="signUpForm_submitBox">
+        <button 
+          className="signUpForm_submitBtn"
+          onClick={validate}
+        >
           회원가입 완료
         </button>
-      </Row>
+      </div>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function IssuerHome() {
     return(
-        <div>
+        <div style={{height: "75vh"}}>
             <h1>IssuerHome</h1>
             <Link to="/issuer/createContext">
                 <button>자격증 양식 등록</button>

@@ -12,13 +12,12 @@ import 'antd/dist/antd.min.css';
 import Home from "./routes/home/home";
 import SignIn from "./routes/home/signIn";
 import SignUp from "./routes/home/signUp";
-import SignUpComplete from "./routes/home/signUpComplete";
 
 // issuer
 import IssuerCreateContext from "./routes/issuer/issuerCreateContext";
+import IssuerContextList from "./routes/issuer/issuerContextList.js";
 import IssuerHome from "./routes/issuer/issuerHome";
 import IssuerIssue from "./routes/issuer/issuerIssue";
-import IssuerIssueComplete from "./routes/issuer/issuerIssueComplete";
 import IssuerVcList from "./routes/issuer/issuerVcList.js";
 
 // Holder
@@ -83,10 +82,8 @@ function App({SignInToStore}) {
           <Route index element={<Home />}></Route>
           <Route path="signIn" element={<SignIn />}></Route>
           <Route path="signUp" element={<SignUp />}></Route>
-          <Route path="signUpComplete" element={<SignUpComplete />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
-        <Footer />
       </div>
     )
   }
@@ -97,9 +94,9 @@ function App({SignInToStore}) {
         <Routes>
           <Route index element={<IssuerHome />}></Route>
           <Route path="createContext" element={<IssuerCreateContext />}></Route>
+          <Route path="contextList" element={<IssuerContextList />}></Route>
           <Route path="issue" element={<IssuerIssue />}></Route>
           <Route path="vcList" element={<IssuerVcList />}></Route>
-          <Route path="issueComplete" element={<IssuerIssueComplete />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>

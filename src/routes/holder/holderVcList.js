@@ -102,7 +102,7 @@ function HolderVcList(userIdInStore) {
     }
 
     return(
-        <div>
+        <div className="holderVL_bg">
             <div className="holderVL_headLineBox">
                 <div className="holderVL_headLine">내지갑{">"} <span style={{color: "#0bb38e"}}>인증서 관리</span></div>
             </div>
