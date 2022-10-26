@@ -1,10 +1,11 @@
 import { connect } from "react-redux";
 import { actionCreators } from "../../component/store";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { message } from "antd";
+import { Empty, message } from "antd";
 import DummyContextList from "../../dummy/dummyContextList";
+import "./css/issuerIssue.css"
 
 
 function IssuerIssue(userIdInStore) {
@@ -12,10 +13,29 @@ function IssuerIssue(userIdInStore) {
     // contextList는 받아온 formList에서 context만 추출한 것
     const [ formList, setFormList ] = useState([])
     const [ contextList, setContextList ] = useState([])
-    const [ theForm, setTheForm ] = useState({})
-    const [ issueVcs, setIssueVcs ] = useState([])
+    const [ theForm, setTheForm ] = useState(undefined)
+    const [ issueVcs, setIssueVcs ] = useState([{
+        holderId: "1",
+        vc: {
+            context: "",
+            issuer: "",
+            CredentialSubject:{}
+        }
+    }])
     const navigate = useNavigate()
-    
+
+    // 창 가로크기 측정 코드, inner 850px 기준, className으로 반응
+    const[ widthHandle, setWidthHandle ] = useState("")
+    function handleResize() {
+        if (window.innerWidth > 850) {
+            setWidthHandle("")
+        } else {
+            setWidthHandle("_minmize")
+        }
+    }
+    useEffect(() => {
+        return window.addEventListener("resize", handleResize)
+    })
 
     // 서버에서 issuer의 context정보 불러오기
     // useEffect(() => {
@@ -40,7 +60,6 @@ function IssuerIssue(userIdInStore) {
 
     // 받아온 List 내부의 form에서 context만 추출
     useEffect(() => {
-        
         let contexts = []
         formList.map((form) => {
             contexts=[...contexts, form.context]
@@ -51,41 +70,46 @@ function IssuerIssue(userIdInStore) {
     }, [formList])
     
 
+    // 유저가 선택한 자격증 종류 핸들링
     function contextSelect (e) { 
+
+        
+        // 필터링하여 theForm에 넣어주기
         const theContext = e.target.value
         const form = formList.filter((form) => {
             return theContext === form.context
         })
         setTheForm(...form)
         
+        // context 이름 넣어주기
+        const issueVc = issueVcs
+        issueVc[0].vc.context = e.target.value
+        setIssueVcs(issueVc)
     }
-
+    
+    // 선택한 자격증에 따라 input 생성
     function makeInput() {
+
+        // 선택된 값이 없으면 작동 정지, 빈값 반환
+        if (theForm === undefined) {
+            return <Empty />
+        } 
+        // 디폴트값 아니면 input뿌려주기
         const formSubject = theForm.credentialSubject
         const inputs = []
         for (let i in formSubject){
             inputs.push(
-                <div key={i}>
-                    <div>{i}{(formSubject[i] === "1") ? "(필수)" : ""}</div>
-                    <input id={i} onChange={inPutChange}></input>
+                <div className={`issuerI_row${widthHandle}`} key={i}>
+                    <div className={`issuerI_tag${widthHandle}`}>{i}{(formSubject[i] === "1") ? <span style={{color: "red"}}> *</span> : ""}</div>
+                    <input className={`issuerI_input${widthHandle}`} id={i} onChange={inPutChange}></input>
                 </div>
             )
         }
         return inputs   
-    }
 
-    // BE에 요청보낼 body 초기값 생성
-    useEffect(() => {
-        const issueVc = [{
-            holderId: "1",
-            vc: {
-                context: theForm.context,
-                issuer: userIdInStore,
-                CredentialSubject:{}
-            }
-        }]
-        setIssueVcs(issueVc)
-    },[ theForm.context, userIdInStore ])
+
+
+    }
     
     // 사용자 입력값따라 body 작성
     function inPutChange(e) {
@@ -112,21 +136,46 @@ function IssuerIssue(userIdInStore) {
     }
 
     return(
-        <div>
-            <h1>IssuerIssue</h1>
-            <select
-            style={{ width: "50%", height: "100%" }}
-            onChange={contextSelect}
-            >   
-                <option>인증서를 선택해주세요.</option>
-                {contextList.map((context) => {
-                    return <option key={context}>{context}</option>;
-                })}
-            </select>
-            <hr />
-            <div>{makeInput()}</div>
-            <hr />
-            <button onClick={submit}>증명서생성</button>
+        <div className="issuerI_bg">
+            <div className="issuerI_headLineBox">
+                <div className={`issuerI_headLine${widthHandle}`}>
+                    발급관리{">"} 
+                    <span style={{color: "#0bb38e"}}>인증서발급</span>
+                </div>
+            </div>
+            <div className={`issuerI_searchBox${widthHandle}`}>
+                <p style={{maxWidth: '60vw'}}>
+                    발급 대상자에게 인증서를 발급할 수 있습니다.
+                </p>
+            </div>
+            <div className="issuerI_form_bg">
+                <div className="issuerI_form_outterBox">
+                    <div className="issuerI_form_innerBox">
+                        <div className="issuerI_title">
+                            <p style={{lineHeight: "60px"}}>인증서 기재정보 입력</p>
+                            <p style={{fontSize: "14px", lineHeight: "60px"}}><span style={{color: "red"}}>*</span>필수 입력항목</p>
+                        </div>
+                        <div className={`issuerI_row${widthHandle}`}>
+                            <div className={`issuerI_tag${widthHandle}`}>자격증이름<span style={{color: "red"}}> *</span></div>
+                            <select
+                            onChange={contextSelect}
+                            className={`issuerI_input${widthHandle}`}
+                            >   
+                                <option>인증서를 선택해주세요.</option>
+                                {contextList.map((context) => {
+                                    return <option key={context}>{context}</option>;
+                                })}
+                            </select>
+                        </div>
+                        <hr />
+                        <div>{makeInput()}</div>
+                        <hr />
+                        <div className="issuerI_submitBox">
+                            <button className="issuerI_submitBtn" onClick={submit}>인증서 생성하기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

@@ -1,0 +1,121 @@
+.issuerPL_bg {
+    min-height: 85vh;
+}
+
+.issuerPL_headLineBox {
+    max-width: 1540px;
+    padding: 0 50px;
+    margin: 56px auto 20px;
+}
+
+.issuerPL_headLine {
+    font-size: 72px;
+    font-weight: 500;
+    color: #cccccc;
+}
+.issuerPL_headLine_minmize {
+    font-size: 38px;
+    font-weight: 700;
+    color: #cccccc;
+}
+
+.issuerPL_searchBox {
+    max-width: 1540px;
+    padding: 0 50px 0 50px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 550;
+    color: #666;
+}
+.issuerPL_searchBox_minmize {
+    max-width: 1540px;
+    padding: 0 50px 0 50px;
+    margin: 0 auto 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 550;
+    color: #666;
+}
+
+.issuerPL_search {
+    width: 300px;
+    max-width: 30vw;
+    height: 40px;
+    border-top-left-radius:30px;
+    border-bottom-left-radius:30px;
+    padding: 0 20px 0 0;
+    margin: 0;
+    border-color: rgb(204, 204, 204);
+    border-style: solid;
+}
+.issuerPL_searchBtn {
+    width: 70px;
+    height: 40px;
+    background-color: #ffff;
+    border-width: 1px;
+    border-top-right-radius:30px;
+    border-bottom-right-radius:30px;
+    border-color: rgb(204, 204, 204);
+    border-left-color: #ffff;
+    border-style: solid;
+    text-align: center;
+    color: rgb(155, 155, 155);
+    font-weight: 500;
+}
+.issuerPL_vcButtonBar_bg {
+    padding: 0 50px 0 50px;
+    margin: 0 auto 0;
+    max-width: 1540px;
+    display: flex;
+}
+.issuerPL_vcButtonBar_btn {
+    width: 110px;
+    height: 40px;
+    background-color: rgb(58, 173, 148);
+    color: #ffff;
+    font-size: 18px;
+    font-weight: 550;
+    border-radius: 30px;
+    text-align: center;
+    padding: 0px;
+}
+.issuerPL_vcButtonBar_text {
+    padding: 5px 0 5px 0;
+    margin: 0;
+}
+.issuerPL_vcButtonBar_post {
+    font-size: 20px;
+    font-weight: 900;
+    margin: 0;
+    padding-bottom: 5px;
+}
+
+.issuerPL_PLbg {
+    background-color: rgb(255, 255, 255);
+}
+.issuerPL_PLmargin {
+    padding: 40px;
+    max-width: 1540px;
+    margin: 0 auto 0;
+}
+
+.issuerPL_PLtext {
+    font-size: medium;
+    font-weight: 500;
+    border: 1px solid #ffff;
+    border-radius: 30px;
+    overflow: hidden;
+}
+.issuerPL_btn {
+    width: 110px;
+    height: 40px;
+    background-color: rgb(58, 173, 148);
+    color: #ffff;
+    font-weight: 550;
+    border-radius: 30px;
+}

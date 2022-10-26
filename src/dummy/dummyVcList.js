@@ -35,6 +35,102 @@ const DummyVcList = [
       "doubleMajor": "3",
       "minor": "3"
     }
+  },
+  {
+    "context": "theOther-certificate",
+    "issuer": "0003",
+    "credentialSubject": {
+      "title": "아주대학원 재학증명서",
+      "name": "홍길동",
+      "date": "2023-03-13",
+      "major": "소프트웨어학3",
+      "doubleMajor": "3",
+      "minor": "3"
+    }
+  },
+  {
+    "context": "theOther-certificate",
+    "issuer": "0003",
+    "credentialSubject": {
+      "title": "아주대학원 재학증명서",
+      "name": "홍길동",
+      "date": "2023-03-13",
+      "major": "소프트웨어학3",
+      "doubleMajor": "3",
+      "minor": "3"
+    }
+  },
+  {
+    "context": "theOther-certificate",
+    "issuer": "0003",
+    "credentialSubject": {
+      "title": "아주대학원 재학증명서",
+      "name": "홍길동",
+      "date": "2023-03-13",
+      "major": "소프트웨어학3",
+      "doubleMajor": "3",
+      "minor": "3"
+    }
+  },
+  {
+    "context": "theOther-certificate",
+    "issuer": "0003",
+    "credentialSubject": {
+      "title": "아주대학원 재학증명서",
+      "name": "홍길동",
+      "date": "2023-03-13",
+      "major": "소프트웨어학3",
+      "doubleMajor": "3",
+      "minor": "3"
+    }
+  },
+  {
+    "context": "theOther-certificate",
+    "issuer": "0003",
+    "credentialSubject": {
+      "title": "아주대학원 재학증명서",
+      "name": "홍길동",
+      "date": "2023-03-13",
+      "major": "소프트웨어학3",
+      "doubleMajor": "3",
+      "minor": "3"
+    }
+  },
+  {
+    "context": "theOther-certificate",
+    "issuer": "0003",
+    "credentialSubject": {
+      "title": "아주대학원 재학증명서",
+      "name": "홍길동",
+      "date": "2023-03-13",
+      "major": "소프트웨어학3",
+      "doubleMajor": "3",
+      "minor": "3"
+    }
+  },
+  {
+    "context": "theOther-certificate",
+    "issuer": "0003",
+    "credentialSubject": {
+      "title": "아주대학원 재학증명서",
+      "name": "홍길동",
+      "date": "2023-03-13",
+      "major": "소프트웨어학3",
+      "doubleMajor": "3",
+      "minor": "3"
+    }
+  },
+  {
+    "context": "theOther-certificate",
+    "issuer": "0003",
+    "credentialSubject": {
+      "title": "아주대학원 재학증명서",
+      "name": "홍길동",
+      "date": "2023-03-13",
+      "major": "소프트웨어학3",
+      "doubleMajor": "3",
+      "minor": "3"
+    }
   }
 ]
 

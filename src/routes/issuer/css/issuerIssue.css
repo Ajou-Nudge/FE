@@ -1,0 +1,130 @@
+.issuerI_bg {
+    min-height: 85vh;
+}
+
+.issuerI_headLineBox {
+    max-width: 1540px;
+    padding: 0 50px;
+    margin: 56px auto 20px;
+}
+
+.issuerI_headLine {
+    font-size: 72px;
+    font-weight: 500;
+    color: #cccccc;
+}
+.issuerI_headLine_minmize {
+    font-size: 32px;
+    font-weight: 700;
+    color: #cccccc;
+}
+
+.issuerI_searchBox {
+    max-width: 1540px;
+    padding: 0 50px 0 50px;
+    margin: 0 auto 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 550;
+    color: #666;
+}
+.issuerI_searchBox_minmize {
+    max-width: 1540px;
+    padding: 0 50px 0 50px;
+    margin: 0 auto 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 550;
+    color: #666;
+}
+
+.issuerI_form_bg {
+    background-color: #f9f9f9;
+}
+.issuerI_form_outterBox {
+    padding: 50px;
+    max-width: 1540px;
+    margin: 0 auto 70px;
+}
+.issuerI_form_innerBox {
+    padding: 50px;
+    max-width: 1540px;
+    border-radius: 10px;
+    background-color: #ffff;
+    box-shadow: 2px 1px 10px 1px rgb(0 0 0 / 10%);
+}
+
+.issuerI_title {
+    font-size: 18px;
+    height: 60px;
+    justify-content: space-between;
+    display: flex;
+    font-weight: 700;
+    border-bottom: 2px solid black;
+}
+
+.issuerI_row {
+    padding: 10px 0 10px 0;
+    display: flex;
+    height: 60px;
+}
+.issuerI_row_minmize {
+    padding: 10px 0 10px 0;
+}
+.issuerI_tag {
+    width: 35%; 
+    font-size: 16px;   
+    font-weight: 600;
+    padding-top: 8px;
+    padding-left: 35px;
+}
+.issuerI_tag_minmize {
+    width: 100%; 
+    font-size: 16px;   
+    font-weight: 600;
+    padding-top: 8px;
+}
+.issuerI_input {
+    width: 65%;
+    height: 40px;
+    border: 1px solid #cccccc;
+    border-radius: 30px;
+    padding: 0 15px;
+    background-color: #ffff;
+    
+}
+.issuerI_input_minmize {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #cccccc;
+    border-radius: 30px;
+    padding: 0 15px;
+    background-color: #ffff;
+    
+}
+.issuerI_inputs {
+    width: 65%;
+}
+.issuerI_inputs_minmize {
+    width: 100%;
+}
+
+.issuerI_submitBox {
+    padding-top: 30px;
+    margin: 0 auto 0;
+    max-width: 250px;
+}
+.issuerI_submitBtn {
+    color: #ffff;
+    background: linear-gradient(to left,#1ed8a6,#1e79df);
+    height: 50px;
+    width: 250px;
+    border: 1px none;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: medium;
+}

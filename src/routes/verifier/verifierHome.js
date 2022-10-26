@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function VerifierHome() {
     return(
         <div>
-            <h1>IssuerHome</h1>
+            <h1>VerifierHome</h1>
             <Link to="/verifier/post">
                 <button>채용공고 등록</button>
             </Link>

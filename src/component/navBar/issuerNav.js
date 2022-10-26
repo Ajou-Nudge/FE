@@ -23,7 +23,7 @@ function IssuerNav() {
         { label: <NavLink style={{ fontSize: "large" }} to="/issuer/createContext">양식등록</NavLink>, key: "createContext" },
       ]
     },
-    { label: <NavLink style={{ fontSize: "large" }} to="/issuer/issue">채용공고</NavLink>,
+    { label: <NavLink style={{ fontSize: "large" }} to="/issuer/postingList">채용공고</NavLink>,
       key: "posting",
       style: { fontSize: "large" },
     }

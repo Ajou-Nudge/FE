@@ -1,0 +1,114 @@
+.issuerVL_bg {
+    min-height: 85vh;
+}
+
+.issuerVL_headLineBox {
+    max-width: 1540px;
+    padding: 0 50px;
+    margin: 56px auto 20px;
+}
+
+.issuerVL_headLine {
+    font-size: 72px;
+    font-weight: 500;
+    color: #cccccc;
+}
+.issuerVL_headLine_minmize {
+    font-size: 38px;
+    font-weight: 700;
+    color: #cccccc;
+}
+
+.issuerVL_searchBox {
+    max-width: 1540px;
+    padding: 0 50px 0 50px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 550;
+    color: #666;
+}
+.issuerVL_searchBox_minmize {
+    max-width: 1540px;
+    padding: 0 50px 0 50px;
+    margin: 0 auto 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 550;
+    color: #666;
+}
+
+.issuerVL_search {
+    width: 300px;
+    max-width: 30vw;
+    height: 40px;
+    border-top-left-radius:30px;
+    border-bottom-left-radius:30px;
+    padding: 0 20px 0 0;
+    margin: 0;
+    border-color: rgb(204, 204, 204);
+    border-style: solid;
+}
+.issuerVL_searchBtn {
+    width: 70px;
+    height: 40px;
+    background-color: #ffff;
+    border-width: 1px;
+    border-top-right-radius:30px;
+    border-bottom-right-radius:30px;
+    border-color: rgb(204, 204, 204);
+    border-left-color: #ffff;
+    border-style: solid;
+    text-align: center;
+    color: rgb(155, 155, 155);
+    font-weight: 500;
+}
+.issuerVL_vcCounter_bg {
+    padding-left: 50px;
+    margin: 0 auto 0;
+    max-width: 1540px;
+}
+.issuerVL_vcCounter_margin {
+    width: 110px;
+    height: 40px;
+    background-color: rgb(58, 173, 148);
+    color: #ffff;
+    font-size: 18px;
+    font-weight: 550;
+    border-radius: 30px;
+    text-align: center;
+
+}
+.issuerVL_vcCounter_text {
+    padding: 5px 0 5px 0;
+    margin: 0;
+}
+
+.issuerVL_VLbg {
+    background-color: rgb(255, 255, 255);
+}
+.issuerVL_VLmargin {
+    padding: 40px;
+    max-width: 1540px;
+    margin: 0 auto 0;
+}
+
+.issuerVL_VLtext {
+    font-size: medium;
+    font-weight: 500;
+    border: 1px solid #ffff;
+    border-radius: 30px;
+    overflow: hidden;
+}
+.issuerVL_btn {
+    width: 110px;
+    height: 40px;
+    background-color: rgb(58, 173, 148);
+    color: #ffff;
+    font-weight: 550;
+    border-radius: 30px;
+}

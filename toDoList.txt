@@ -12,23 +12,24 @@ holder
 홀더 포스팅 리스트    (완료)
 vc 제출              (완료)
 제출된 vc 리스트      (완료)
-- holder 전역 검색기능 (미완료)
+- holder 전역 검색기능 
 
 issuer
 생성된 context 조회    (완료)
 context 생성          (완료)
-생성된 vc 조회
-vc 생성
+vc 생성               (완료)
+생성된 vc 조회         (완료) 
+- excel 단체등록기능    
 
 verifier
 포스팅 작성
-작성된 포스팅 리스트
+작성된 포스팅 리스트    (완료)
 제출된 인증서 검증
 검증 디테일
 
 component
 footbar             (완료)
--이용약관, 공지사항, FAQ (미완료)
+-이용약관, 공지사항, FAQ
 
 
 
@@ -39,7 +40,5 @@ api 업데이트 필요
     1. /issuer/context-list/:issuerId 
     2. /holder/submit
 
-자격증 불러온 후 뿌려줄 신뢰할 수 있는 필수 기제 값이 필요하다.
+vc 불러온 후 뿌려줄 필수 기제 값이 필요하다.
 /holder/vc-list/:${userIdInStore}
-
-vone 기업 아이디 필요. issuer verifier 페이지 ui 확인해야함.

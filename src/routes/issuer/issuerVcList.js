@@ -1,7 +1,8 @@
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
 import DummyVcList from "../../dummy/dummyVcList";
-import { Link } from "react-router-dom"
+import { Button, Table, Input } from "antd";
+import "./css/issuerVcList.css"
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 // import { message } from "antd";
@@ -9,6 +10,20 @@ import { Link } from "react-router-dom"
 function IssuerVcList({userIdInStore}) {
 
     const [ vcList, setVcList ] = useState([])
+    const[ widthHandle, setWidthHandle ] = useState("")
+
+    // 창 가로크기 측정 코드, inner 850px 기준, className으로 반응
+    function handleResize() {
+        if (window.innerWidth > 850) {
+            setWidthHandle("")
+        } else {
+            setWidthHandle("_minmize")
+        }
+    }
+    useEffect(() => {
+        return window.addEventListener("resize", handleResize)
+    })
+
     // const navigate = useNavigate()
 
     // useEffect(() => {
@@ -33,33 +48,74 @@ function IssuerVcList({userIdInStore}) {
         setVcList(DummyVcList)
     }, [])
     
-    function makeVcList() {
-        const lengthCounter = vcList.length
-        const List = []
-        for (let i=0; i < lengthCounter; i++){
-            List.push(
-                <Link
-                    key={i} 
-                    to={`/verifier/verifiy/detail/:${i}`}
-                    state={
-                        vcList[i]
-                    }
-                >
-                    <li key={i}>
-                        발행번호: {i+1}번 {vcList[i].credentialSubject.name} {vcList[i].context}
-                    </li>
-                </Link>
-            )
-        }
-        return List
+    function makeVCList() {
         
+        const lengthCounter = vcList.length
+        const VLdata = []
+        for (let i=0; i < lengthCounter; i++) {
+            VLdata.push({
+                key: i,
+                num: i+1,
+                date: vcList[i].credentialSubject["date"],
+                title: vcList[i].credentialSubject["title"],
+                name: vcList[i].credentialSubject["name"],
+            })
+        }
+
+        function columns() {
+                return ([
+                {
+                    title: "번호",
+                    dataIndex: "num",
+                    key: "num",
+                },
+                {
+                    title: "발급일자",
+                    dataIndex: "date",
+                    key: "date",
+                },
+                {
+                    title: "인증서종류",
+                    dataIndex: "title",
+                    key: "title",
+                },
+                {
+                    title: "이름",
+                    dataIndex: "name",
+                    key: "name",
+                }
+            ])
+        }
+        return <Table scroll={{x:420}} pagination={{position: ["bottomCenter"]}} className="issuerVL_VLtext" columns={columns()} dataSource={VLdata} />
     }
     
     return(
-        <div>
-            <h1>IssuerVcList</h1>
-            <hr />
-            <ul>{makeVcList()}</ul>
+        <div className="issuerVL_bg">
+            <div className="issuerVL_headLineBox">
+                <div className={`issuerVL_headLine${widthHandle}`}>
+                    발급관리{">"} 
+                    <span style={{color: "#0bb38e"}}>발급이력</span>
+                </div>
+            </div>
+            <div className={`issuerVL_searchBox${widthHandle}`}>
+                <p style={{maxWidth: '60vw'}}>
+                    등록한 인증서양식을 확인할 수 있습니다.
+                </p>
+                <div style={(widthHandle === "") ? {} : {display:"none"}}>
+                    <Input className="issuerVL_search"/>
+                    <Button className="issuerVL_searchBtn">검색</Button>
+                </div>
+            </div>
+            <div className="issuerVL_vcCounter_bg">
+                <div className="issuerVL_vcCounter_margin">
+                    <p className="issuerVL_vcCounter_text">총 {vcList.length}건</p>
+                </div>
+            </div>
+            <div className="issuerVL_VLbg">
+                <div className="issuerVL_VLmargin">
+                    <div>{makeVCList()}</div>
+                </div>
+            </div>
         </div>
     )
 }

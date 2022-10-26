@@ -14,11 +14,14 @@ import SignIn from "./routes/home/signIn";
 import SignUp from "./routes/home/signUp";
 
 // issuer
+import IssuerHome from "./routes/issuer/issuerHome";
 import IssuerCreateContext from "./routes/issuer/issuerCreateContext";
 import IssuerContextList from "./routes/issuer/issuerContextList.js";
-import IssuerHome from "./routes/issuer/issuerHome";
 import IssuerIssue from "./routes/issuer/issuerIssue";
 import IssuerVcList from "./routes/issuer/issuerVcList.js";
+
+import IssuerPostingList from "./routes/issuer/issuerPostingList.js";
+import IssuerPost from "./routes/issuer/issuerPost.js";
 
 // Holder
 import HolderHome from "./routes/holder/holderHome";
@@ -97,6 +100,8 @@ function App({SignInToStore}) {
           <Route path="contextList" element={<IssuerContextList />}></Route>
           <Route path="issue" element={<IssuerIssue />}></Route>
           <Route path="vcList" element={<IssuerVcList />}></Route>
+          <Route path="postingList" element={<IssuerPostingList />}></Route>
+          <Route path="post" element={<IssuerPost />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>

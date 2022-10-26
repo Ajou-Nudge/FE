@@ -1,0 +1,145 @@
+.issuerP_bg {
+    min-height: 85vh;
+}
+
+.issuerP_headLineBox {
+    max-width: 1540px;
+    padding: 0 50px;
+    margin: 56px auto 20px;
+}
+
+.issuerP_headLine {
+    font-size: 72px;
+    font-weight: 500;
+    color: #cccccc;
+}
+.issuerP_headLine_minmize {
+    font-size: 38px;
+    font-weight: 700;
+    color: #cccccc;
+}
+
+.issuerP_searchBox {
+    max-width: 1540px;
+    padding: 0 50px 0 50px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 550;
+    color: #666;
+}
+.issuerP_searchBox_minmize {
+    max-width: 1540px;
+    padding: 0 50px 0 50px;
+    margin: 0 auto 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 550;
+    color: #666;
+}
+
+.IssuerP_formBox {
+    max-width: 1540px;
+    margin: 0 auto;
+    padding: 0 50px 0 50px;
+}
+.IssuerP_formTitle {
+    justify-content: space-between;
+    font-size: 22px;
+    font-weight: 600;
+    display: flex;
+}
+
+.IssuerP_form_infoBold {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+}
+.IssuerP_form_info {
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+}
+.IssuerP_form_dummyLogo {
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 20px;
+    height: 100px;
+    width: 100px;
+}
+
+.IssuerP_form_row {
+    padding: 15px 0 30px 0;
+    display: flex;
+    text-align: center;
+    font-weight: 550;
+    border-bottom: 1px solid #e5e5e5;
+}
+.IssuerP_form_tag {
+    width: 30%;
+    font-weight: 550;
+    font-size: 18px;
+    margin: 7px 0;
+}
+.IssuerP_form_inputBox {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 10%;
+    font-size: 10px;
+}
+.IssuerP_form_inputStyle {
+    width: 100%;
+    height: 40px;
+    padding: 20px;
+    border: 1px solid #cccccc;
+    border-radius: 30px;
+}
+.IssuerP_form_checkBoxList {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.IssuerP_form_checkBox_warp {
+    display: flex;
+    margin: 0 20px 10px 0;
+    min-width: 20%;
+    align-items: center;
+}
+.IssuerP_form_checkBox {
+    height: 16px;
+    width: 16px;
+    margin-right: 5px;
+}
+
+
+.IssuerP_fileInputBtn {
+    height: 40px;
+    border: 1px none;
+    border-radius: 30px;
+    background-color: #1d2c5f;
+    width: 150px;
+    color: #ffff;
+    font-weight: 600;
+    padding: 10px 0;
+}
+
+.issuerI_submitBox {
+    padding: 30px 0 100px 0;
+    margin: 0 auto 0;
+    max-width: 250px;
+}
+.issuerI_submitBtn {
+    color: #ffff;
+    background: linear-gradient(to left,#1ed8a6,#1e79df);
+    height: 50px;
+    width: 250px;
+    border: 1px none;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: medium;
+}

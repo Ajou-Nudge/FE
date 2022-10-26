@@ -42,26 +42,7 @@ function HolderVcList(userIdInStore) {
 
     // 받아온 vc 개수만큼 화면에 뿌려주기
     function makeVcList() {
-        // 받아온 vc들 리스트로 뿌려주는 코드
-        // const lengthCounter = vcList.length
-        // const List = []
-        // for (let i=0; i < lengthCounter; i++){
-        //     List.push(
-        //         <Link
-        //             key={i} 
-        //             to={`/holder/vcDetail/:${i}`}
-        //             state={
-        //                 vcList[i]
-        //             }
-        //         >
-        //             <li key={i}>
-        //                 {vcList[i].context}, {vcList[i].credentialSubject.title}
-        //             </li>
-        //         </Link>
-        //     )
-        // }
-        // return List
-
+        
         const lengthCounter = vcList.length
         const data = []
         for (let i=0; i < lengthCounter; i++) {
