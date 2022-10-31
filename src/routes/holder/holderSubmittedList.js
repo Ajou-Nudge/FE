@@ -2,8 +2,9 @@
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
 import DummySubmittedList from "../../dummy/dummySubmittedList";
-import { Input } from "antd"
 import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined  } from '@ant-design/icons';
+import holderSVL_headLine from "../../img/headline/holderSVL_headline.png"
+import Headline from "../../component/headline";
 import "./css/holderSubmittedList.css"
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios";
@@ -12,6 +13,7 @@ import "./css/holderSubmittedList.css"
 function HolderSubmittedList({userIdInStore}) {
 
     const [ vcList, setVcList ] = useState([])
+
     // const navigate = useNavigate()
 
     // useEffect(() => {
@@ -88,21 +90,12 @@ function HolderSubmittedList({userIdInStore}) {
         }
         return List
     }
+
+    const subtitle = "여러분의 증명, 인증서 제출이력을 관리할 수 있습니다."
     
     return(
         <div className="holderSVL_bg">
-            <div className="holderSVL_headLineBox">
-                <div className="holderSVL_headLine">내지갑{">"} <span style={{color: "#0bb38e"}}>제출이력</span></div>
-            </div>
-            <div className="holderSVL_searchBox">
-                <p style={{maxWidth: '35vw'}}>
-                    여러분의 증명, 인증서 제출이력을 관리할 수 있습니다.
-                </p>
-                <p>
-                    <Input className="holderSVL_search"/>
-                    <button className="holderSVL_searchBtn">검색</button>
-                </p>
-            </div>
+            {Headline( holderSVL_headLine, 600, subtitle, 870 )}
             <div style={{backgroundColor: "rgb(250, 250, 250)"}}>
                 <div className="holderSVL_SVL_outerbox">
                     <div className="holderSVL_SVL_innerbox">

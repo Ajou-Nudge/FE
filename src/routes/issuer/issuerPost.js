@@ -3,13 +3,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { message, Input } from "antd"
+import Headline from "../../component/headline";
+import issuerP_headline from "../../img/headline/issuerP_headline.png"
 import "./css/issuerPost.css"
 
 function IssuerPost(userObjInStore) {
 
     const navigate = useNavigate();
     const[ posting, setPosting ] = useState({})
-    const[ widthHandle, setWidthHandle ] = useState("")
     const[ category, setCategory] = useState({
         basicInfo: true,
         personalInfo: false,
@@ -18,19 +19,6 @@ function IssuerPost(userObjInStore) {
         otherVc: false,
         selfIntroduction: false,
     })
-
-    // 창 가로크기 측정 코드, inner 850px 기준, className으로 반응
-    function handleResize() {
-        if (window.innerWidth > 850) {
-            setWidthHandle("")
-        } else {
-            setWidthHandle("_minmize")
-        }
-    }
-    useEffect(() => {
-        return window.addEventListener("resize", handleResize)
-    })
-    
     
     
     const userId = userObjInStore
@@ -103,19 +91,11 @@ function IssuerPost(userObjInStore) {
         });
     }
 
+    const subtitle = "등록한 채용공고를 확인할 수 있습니다."
+
     return(
         <div className="issuerP_bg">
-            <div className="issuerP_headLineBox">
-                <div className={`issuerP_headLine${widthHandle}`}>
-                    채용공고{">"} 
-                    <span style={{color: "#0bb38e"}}>공고등록</span>
-                </div>
-            </div>
-            <div className={`issuerP_searchBox${widthHandle}`}>
-                <p style={{maxWidth: '60vw'}}>
-                    채용공고를 등록할 수 있습니다.
-                </p>
-            </div>
+            {Headline(issuerP_headline, 650, subtitle, 870)}
             <div className="IssuerP_formBox">
                 <form>
                     <div className="IssuerP_formTitle">

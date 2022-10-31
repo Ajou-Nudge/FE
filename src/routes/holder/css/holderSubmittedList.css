@@ -2,56 +2,6 @@
     min-height: 85vh;
 }
 
-.holderSVL_headLineBox {
-    max-width: 1540px;
-    padding: 0 50px;
-    margin: 56px auto 20px;
-}
-
-.holderSVL_headLine {
-    font-size: 72px;
-    font-weight: 500;
-    color: #cccccc;
-}
-
-.holderSVL_searchBox {
-    max-width: 1540px;
-    padding: 0 50px 0 50px;
-    margin: 0 auto 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 18px;
-    font-weight: 550;
-    color: #666;
-}
-
-.holderSVL_search {
-    width: 300px;
-    max-width: 30vw;
-    height: 40px;
-    border-top-left-radius:30px;
-    border-bottom-left-radius:30px;
-    padding: 0 20px;
-    border-color: rgb(204, 204, 204);
-    border-style: solid;
-}
-.holderSVL_searchBtn {
-    padding-bottom: 4px;
-    width: 70px;
-    height: 40px;
-    background-color: #ffff;
-    border-width: 1px;
-    border-top-right-radius:30px;
-    border-bottom-right-radius:30px;
-    border-color: rgb(204, 204, 204);
-    border-left-color: #ffff;
-    border-style: solid;
-    text-align: center;
-    color: rgb(155, 155, 155);
-    font-weight: 500;
-}
-
 .holderSVL_SVL_outerbox {
     max-width: 1540px;
     padding: 50px;

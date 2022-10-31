@@ -2,46 +2,6 @@
     min-height: 85vh;
 }
 
-.issuerI_headLineBox {
-    max-width: 1540px;
-    padding: 0 50px;
-    margin: 56px auto 20px;
-}
-
-.issuerI_headLine {
-    font-size: 72px;
-    font-weight: 500;
-    color: #cccccc;
-}
-.issuerI_headLine_minmize {
-    font-size: 32px;
-    font-weight: 700;
-    color: #cccccc;
-}
-
-.issuerI_searchBox {
-    max-width: 1540px;
-    padding: 0 50px 0 50px;
-    margin: 0 auto 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 18px;
-    font-weight: 550;
-    color: #666;
-}
-.issuerI_searchBox_minmize {
-    max-width: 1540px;
-    padding: 0 50px 0 50px;
-    margin: 0 auto 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 16px;
-    font-weight: 550;
-    color: #666;
-}
-
 .issuerI_form_bg {
     background-color: #f9f9f9;
 }

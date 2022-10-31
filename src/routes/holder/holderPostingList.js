@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
-import { Button, Input, Table } from "antd";
+import { Button, Table } from "antd";
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 // import { message } from "antd";
 import { useState, useEffect } from "react";
+import Headline from "../../component/headline";
 import DummyPostingList from "../../dummy/dummyPostingList";
+import holderPL_headline from "../../img/headline/holderPL_headline.png"
 import "./css/holderPostingList.css"
 
 
@@ -99,21 +101,11 @@ function HolderPostingList() {
         return <Table pagination={{position: ["bottomCenter"]}} className="holderPL_PLtext" columns={columns} dataSource={PLdata} />
     }
 
+    const subtitle = "여러분의 증명, 인증서를 제출 할 수 있습니다. 키워드를 입력하여 검색해보세요."
+
     return(
         <div className="holderPL_bg">
-            <div className="holderPL_headLineBox">
-                <div className="holderPL_headLine"><span style={{color: "#0bb38e"}}>입사지원</span></div>
-            </div>
-            <div className="holderPL_searchBox">
-                <p style={{maxWidth: '35vw'}}>
-                    여러분의 증명, 인증서를 제출 할 수 있습니다.
-                    키워드를 입력하여 검색해보세요.
-                </p>
-                <p>
-                    <Input className="holderPL_search"/>
-                    <button className="holderPL_searchBtn">검색</button>
-                </p>
-            </div>
+            {Headline( holderPL_headline, 300, subtitle, 870 )}
             <div className="holderPL_PLbox">
                 {makePostingList()}
             </div>

@@ -2,46 +2,6 @@
     min-height: 85vh;
 }
 
-.issuerCC_headLineBox {
-    max-width: 1540px;
-    padding: 0 50px;
-    margin: 56px auto 20px;
-}
-
-.issuerCC_headLine {
-    font-size: 72px;
-    font-weight: 500;
-    color: #cccccc;
-}
-.issuerCC_headLine_minmize {
-    font-size: 32px;
-    font-weight: 700;
-    color: #cccccc;
-}
-
-.issuerCC_searchBox {
-    max-width: 1540px;
-    padding: 0 50px 0 50px;
-    margin: 0 auto 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 18px;
-    font-weight: 550;
-    color: #666;
-}
-.issuerCC_searchBox_minmize {
-    max-width: 1540px;
-    padding: 0 50px 0 50px;
-    margin: 0 auto 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 16px;
-    font-weight: 550;
-    color: #666;
-}
-
 .issuerCC_outerbox {
     max-width: 1540px;
     padding: 50px;

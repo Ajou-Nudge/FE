@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Empty, message } from "antd";
+import Headline from "../../component/headline";
+import issuerI_headline from "../../img/headline/issuerI_headline.png"
 import DummyContextList from "../../dummy/dummyContextList";
 import "./css/issuerIssue.css"
 
@@ -135,19 +137,11 @@ function IssuerIssue(userIdInStore) {
         });
     }
 
+    const subtitle = "발급 대상자에게 인증서를 발급할 수 있습니다."
+
     return(
         <div className="issuerI_bg">
-            <div className="issuerI_headLineBox">
-                <div className={`issuerI_headLine${widthHandle}`}>
-                    발급관리{">"} 
-                    <span style={{color: "#0bb38e"}}>인증서발급</span>
-                </div>
-            </div>
-            <div className={`issuerI_searchBox${widthHandle}`}>
-                <p style={{maxWidth: '60vw'}}>
-                    발급 대상자에게 인증서를 발급할 수 있습니다.
-                </p>
-            </div>
+            {Headline(issuerI_headline, 700, subtitle, 9999)}
             <div className="issuerI_form_bg">
                 <div className="issuerI_form_outterBox">
                     <div className="issuerI_form_innerBox">

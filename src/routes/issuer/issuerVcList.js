@@ -1,8 +1,11 @@
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
 import DummyVcList from "../../dummy/dummyVcList";
-import { Button, Table, Input } from "antd";
+import { Table } from "antd";
 import "./css/issuerVcList.css"
+import Headline from "../../component/headline";
+import issuerVL_headline from "../../img/headline/issuerVL_headline.png"
+
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 // import { message } from "antd";
@@ -10,19 +13,6 @@ import "./css/issuerVcList.css"
 function IssuerVcList({userIdInStore}) {
 
     const [ vcList, setVcList ] = useState([])
-    const[ widthHandle, setWidthHandle ] = useState("")
-
-    // 창 가로크기 측정 코드, inner 850px 기준, className으로 반응
-    function handleResize() {
-        if (window.innerWidth > 850) {
-            setWidthHandle("")
-        } else {
-            setWidthHandle("_minmize")
-        }
-    }
-    useEffect(() => {
-        return window.addEventListener("resize", handleResize)
-    })
 
     // const navigate = useNavigate()
 
@@ -88,24 +78,12 @@ function IssuerVcList({userIdInStore}) {
         }
         return <Table scroll={{x:420}} pagination={{position: ["bottomCenter"]}} className="issuerVL_VLtext" columns={columns()} dataSource={VLdata} />
     }
+
+    const subtitle = "등록한 인증서양식을 확인할 수 있습니다."
     
     return(
         <div className="issuerVL_bg">
-            <div className="issuerVL_headLineBox">
-                <div className={`issuerVL_headLine${widthHandle}`}>
-                    발급관리{">"} 
-                    <span style={{color: "#0bb38e"}}>발급이력</span>
-                </div>
-            </div>
-            <div className={`issuerVL_searchBox${widthHandle}`}>
-                <p style={{maxWidth: '60vw'}}>
-                    등록한 인증서양식을 확인할 수 있습니다.
-                </p>
-                <div style={(widthHandle === "") ? {} : {display:"none"}}>
-                    <Input className="issuerVL_search"/>
-                    <Button className="issuerVL_searchBtn">검색</Button>
-                </div>
-            </div>
+            {Headline(issuerVL_headline, 650, subtitle, 870)}
             <div className="issuerVL_vcCounter_bg">
                 <div className="issuerVL_vcCounter_margin">
                     <p className="issuerVL_vcCounter_text">총 {vcList.length}건</p>

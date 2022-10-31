@@ -17,8 +17,8 @@ const DummyVerifierPostingList = [
     },
     {
       "postId": "0002",
-      "name": "GS 홈쇼핑 채용연계 인턴쉽",
-      "people": "43"
+      "name": "채용연계 연구협약지원 사업",
+      "people": "3"
     },
     {
       "postId": "0002",

@@ -5,8 +5,12 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { message, Form, Input, Radio } from "antd";
-import DummyVcList from "../../dummy/dummyVcList";
 import "./css/holderSubmit.css"
+import Headline from "../../component/headline"
+import holderS_headline from "../../img/headline/holderS_headline.png"
+
+
+import DummyVcList from "../../dummy/dummyVcList";
 
 function HolderSubmit( userIdInStore ) {
     const location = useLocation()
@@ -71,9 +75,7 @@ function HolderSubmit( userIdInStore ) {
 
     return (
         <div>
-            <div className="holderS_headLineBox">
-                <div className="holderS_headLine">입사지원{">"}<span style={{color: "#0bb38e"}}>작성하기</span></div>
-            </div>
+            {Headline( holderS_headline, 600, "", 9999)}
             <div style={{ width: "100%"}}>
                 <div className="holderS_formBox">
                     <Form>

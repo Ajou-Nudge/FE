@@ -14,7 +14,7 @@ import SignIn from "./routes/home/signIn";
 import SignUp from "./routes/home/signUp";
 
 // issuer
-import IssuerHome from "./routes/issuer/issuerHome";
+// import IssuerHome from "./routes/issuer/issuerHome";
 import IssuerCreateContext from "./routes/issuer/issuerCreateContext";
 import IssuerContextList from "./routes/issuer/issuerContextList.js";
 import IssuerIssue from "./routes/issuer/issuerIssue";
@@ -22,9 +22,10 @@ import IssuerVcList from "./routes/issuer/issuerVcList.js";
 
 import IssuerPostingList from "./routes/issuer/issuerPostingList.js";
 import IssuerPost from "./routes/issuer/issuerPost.js";
+import IssuerVerifiy from "./routes/issuer/issuerVerifiy.js";
 
 // Holder
-import HolderHome from "./routes/holder/holderHome";
+// import HolderHome from "./routes/holder/holderHome";
 import HolderPostingList from "./routes/holder/holderPostingList";
 import HolderSubmit from "./routes/holder/holderSubmit";
 import HolderSubmittedList from "./routes/holder/holderSubmittedList.js";
@@ -95,13 +96,14 @@ function App({SignInToStore}) {
       <div>
         <IssuerNav />
         <Routes>
-          <Route index element={<IssuerHome />}></Route>
+          <Route index element={<IssuerIssue />}></Route>
           <Route path="createContext" element={<IssuerCreateContext />}></Route>
           <Route path="contextList" element={<IssuerContextList />}></Route>
           <Route path="issue" element={<IssuerIssue />}></Route>
           <Route path="vcList" element={<IssuerVcList />}></Route>
           <Route path="postingList" element={<IssuerPostingList />}></Route>
           <Route path="post" element={<IssuerPost />}></Route>
+          <Route path="verifiy/*" element={<IssuerVerifiy />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>
@@ -112,7 +114,7 @@ function App({SignInToStore}) {
       <div>
         <HolderNav />
         <Routes>
-          <Route index element={<HolderHome />}></Route>
+          <Route index element={<HolderSubmittedList />}></Route>
           <Route path="vcList" element={<HolderVcList />}></Route>
           <Route path="vcDetail/:vcId" element={<HolderVcDetail />}></Route>
           <Route path="submit/:postId" element={<HolderSubmit />}></Route>

@@ -2,6 +2,8 @@ import { message } from "antd";
 import { useState, useEffect } from "react"
 import axios from "axios";
 import React from "react";
+import headline from "../../component/headline"
+import issuerCC_headline from "../../img/headline/issuerCC_headline.png"
 import "./css/issuerCreateContext.css"
 
 function IssuerCreateContext() {
@@ -103,20 +105,11 @@ function IssuerCreateContext() {
         message.error(msg);
     };
 
+    const subtitle = "발급할 인증서의 양식을 등록할 수 있습니다. 자격증과 발급대상의 정보 기재여부를 결정합니다."
+
     return(
         <div className="issuerCC_bg">
-            <div className="issuerCC_headLineBox">
-                <div className={`issuerCC_headLine${widthHandle}`}>
-                    인증서양식{">"} 
-                    <span style={{color: "#0bb38e"}}>양식등록</span>
-                </div>
-            </div>
-            <div className={`issuerCC_searchBox${widthHandle}`}>
-                <p style={{maxWidth: '60vw'}}>
-                    발급할 인증서의 양식을 등록할 수 있습니다.
-                    자격증과 발급대상의 정보 기재여부를 결정합니다.
-                </p>
-            </div>
+            {headline(issuerCC_headline, 700, subtitle, 9999 )}
             <div style={{backgroundColor: "rgb(250, 250, 250)"}}>
                 <div className="issuerCC_outerbox">
                     <div className="issuerCC_innerbox">

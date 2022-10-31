@@ -1,7 +1,9 @@
 import { connect } from "react-redux"
 import { useState, useEffect } from "react";
 import DummyVcList from "../../dummy/dummyVcList";
-import { Button, Table, Input } from "antd";
+import { Button, Table } from "antd";
+import Headline from "../../component/headline";
+import holderVL_headline from "../../img/headline/holderVL_headline.png";
 
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios";
@@ -12,12 +14,11 @@ import "./css/holderVcList.css"
 function HolderVcList(userIdInStore) {
 
     //const navigate = useNavigate()
-    const [vcList, setVcList] = useState([])
+    const [ vcList, setVcList ] = useState([])
+    
     useEffect( () => {
         setVcList(DummyVcList)
     }, [] )
-
-
 
     // store.js에서 id 가져와 BE에 요청보내기
     // useEffect(() => {
@@ -82,21 +83,11 @@ function HolderVcList(userIdInStore) {
         
     }
 
+    const subtitle = "여러분의 인증서를 확인 및 다운로드 할 수 있습니다. 키워드를 입력하여 검색해보세요."
+
     return(
         <div className="holderVL_bg">
-            <div className="holderVL_headLineBox">
-                <div className="holderVL_headLine">내지갑{">"} <span style={{color: "#0bb38e"}}>인증서 관리</span></div>
-            </div>
-            <div className="holderVL_searchBox">
-                <p style={{maxWidth: '35vw'}}>
-                    여러분의 증명, 인증서를 확인 및 다운로드 할 수 있습니다.
-                    키워드를 입력하여 검색해보세요.
-                </p>
-                <p>
-                    <Input className="holderVL_search"/>
-                    <button className="holderVL_searchBtn">검색</button>
-                </p>
-            </div>
+            {Headline( holderVL_headline, 600, subtitle, 870 )}
             <div className="holderVL_vcBox">
                 {makeVcList()}
             </div>
