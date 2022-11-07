@@ -28,7 +28,10 @@ function Headline( headline, maxWidth, subtitle, inputSize )  {
         }
     }
     useEffect(() => {
-        return window.addEventListener("resize", handleResize)
+        window.addEventListener("resize", handleResize)
+
+        // // 사용 끝난 eventListener 제거
+        // return () => window.removeEventListener("resize", handleResize)
     })
 
     // searchBox 스타일 코드는 subtitle이 없을경우 해당 박스의 margin 자체 삭제 기능

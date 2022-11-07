@@ -1,29 +1,75 @@
 .contentStyle--a {
     height: 90vh;
     background-color: #e2f4ff;
+    background-image: url(../../../img/main/bg_main_person1.png);
+    background-repeat: no-repeat;
+    background-position: 95% bottom;
+    background-size: auto 65%;
 }
 
 .contentStyle--b {
     height: 90vh;
-    background-color: #f7eeff !important;
+    background: #eef8eb;
+    background-image: url(../../../img/main/bg_main_person2.png);
+    background-repeat: no-repeat;
+    background-position: 80% top;
+    background-size: auto 65%;
 }
 
 .contentStyle--c {
     height: 90vh;
-    background-color: #effdeb;
+    background: #f6f4f8;
+    background-image: url(../../../img/main/bg_main_person3.png);
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: auto 65%;
 }
 
 .headline {
     color: rgb(53, 53, 53);
     font-weight: 900;
-    font-size: xx-large;
-    text-align: center;
-    line-height: 30vh;
+    font-size: 60px;
+    text-align: left;
+    line-height: 1;
 }
 
-.text {
+.text--a {
     color: rgb(99, 99, 99);
-    font-weight: 600;
-    font-size: medium;
-    text-align: center;
+    font-weight: 510;
+    font-size: 24px;
+    text-align: left;
+    padding: 30vh 150px 0 110px;
+    margin: 0 auto 0;
+    max-width: 1240px;
+}
+.text--b {
+    color: rgb(99, 99, 99);
+    font-weight: 510;
+    font-size: 24px;
+    text-align: left;
+    padding: 30vh 150px 0 210px;
+    margin: 0 auto 0;
+    max-width: 1240px;
+}
+.text--c {
+    color: rgb(99, 99, 99);
+    font-weight: 510;
+    font-size: 24px;
+    text-align: left;
+    padding: 25vh 150px 0 190px;
+    margin: 0 auto 0;
+    max-width: 1240px;
+}
+
+.FAQ {
+    height: 70px;
+    width: 70px;
+    background-color: rgb(51, 136, 206);
+    color: white;
+    position: fixed;
+    top: 125px;
+    right: 3.3854vw;
+    z-index: 100;
+    border: 1px none ;
+    border-radius: 50px;
 }

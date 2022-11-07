@@ -6,6 +6,7 @@ import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined  } from '
 import holderSVL_headLine from "../../img/headline/holderSVL_headline.png"
 import Headline from "../../component/headline";
 import "./css/holderSubmittedList.css"
+import useResize from "../../component/useResize";
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 // import { message } from "antd";
@@ -13,6 +14,7 @@ import "./css/holderSubmittedList.css"
 function HolderSubmittedList({userIdInStore}) {
 
     const [ vcList, setVcList ] = useState([])
+    const [ width ] = useResize()
 
     // const navigate = useNavigate()
 
@@ -39,24 +41,7 @@ function HolderSubmittedList({userIdInStore}) {
     }, [])
     
     function makeVcList() {
-    //     const lengthCounter = vcList.length
-    //     const List = []
-    //     for (let i=0; i < lengthCounter; i++){
-    //         List.push(
-    //             // <Link
-    //             //     key={i} 
-    //             //     state={
-    //             //         vcList[i]
-    //             //     }
-    //             // >
-    //                 <li key={i}>
-    //                     {vcList[i].title}  제출일: {vcList[i].date}  제출상태: {vcList[i].status}
-    //                 </li>
-    //             // </Link>
-    //         )
-    //     }
-    //     return List
-        
+
         const lengthCounter = vcList.length
         const List = []
         for (let i=0; i < lengthCounter; i++){
@@ -91,7 +76,46 @@ function HolderSubmittedList({userIdInStore}) {
         return List
     }
 
-    const subtitle = "여러분의 증명, 인증서 제출이력을 관리할 수 있습니다."
+    function makeVcList_min() {
+
+        const lengthCounter = vcList.length
+        const List = []
+        for (let i=0; i < lengthCounter; i++){
+            function icon(state) {
+                switch(state) {
+                    case "confirmed" :
+                        return <p className="holderSVL_icon1">●</p>
+                    case "pending" :
+                        return <p className="holderSVL_icon2">●</p>
+                    case "canceled" :
+                        return <p className="holderSVL_icon3">●</p>
+                    default :
+                        return "err"
+                }
+            }
+            List.push(
+                <div key={i} className="holderSVL_SVlist">
+                    {icon(vcList[i].status)}
+                    <div className="holderSVL_spaceBetween_min">
+                        <div className="holderSVL_verifierAndDate">
+                            <p className="holderSVL_verifierAndTitle_min">{vcList[i].verifier}</p>
+                            <p className="holderSVL_verifierAndTitle_min" style={{fontSize:"large", marginBottom:"20px"}}>{vcList[i].title}</p>
+                            
+                            <div className="holderSVL_titleAndState_min">
+                                <p className="holderSVL_dateAndState">{vcList[i].date}</p>
+                                <p className="holderSVL_dateAndState">{vcList[i].status}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            )
+        }
+        return List
+    }
+
+
+
+    const subtitle = "여러분의 증명, 인증서 제출이력을 확인할 수 있습니다."
     
     return(
         <div className="holderSVL_bg">
@@ -99,7 +123,7 @@ function HolderSubmittedList({userIdInStore}) {
             <div style={{backgroundColor: "rgb(250, 250, 250)"}}>
                 <div className="holderSVL_SVL_outerbox">
                     <div className="holderSVL_SVL_innerbox">
-                        {makeVcList()}
+                        {700 < width ? makeVcList() : makeVcList_min()}
                     </div>
                 </div>
             </div>
