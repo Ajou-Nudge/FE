@@ -12,6 +12,9 @@ import 'antd/dist/antd.min.css';
 import Home from "./routes/home/home";
 import SignIn from "./routes/home/signIn";
 import SignUp from "./routes/home/signUp";
+import Terms from "./routes/home/terms.js";
+import Privacy from "./routes/home/privacy.js";
+import FAQ from "./routes/home/FAQ.js";
 
 // issuer
 // import IssuerHome from "./routes/issuer/issuerHome";
@@ -86,6 +89,9 @@ function App({SignInToStore}) {
           <Route index element={<Home />}></Route>
           <Route path="signIn" element={<SignIn />}></Route>
           <Route path="signUp" element={<SignUp />}></Route>
+          <Route path="terms" element={<Terms />}></Route>
+          <Route path="privacy" element={<Privacy />}></Route>
+          <Route path="FAQ" element={<FAQ />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>

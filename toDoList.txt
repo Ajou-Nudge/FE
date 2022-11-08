@@ -16,10 +16,10 @@ holder
 -인증서 관리 페이지 개선
 
 issuer
-- excel 단체등록기능    
+- excel 단체등록기능    (완료)
 
 footbar             
--이용약관, 공지사항, FAQ
+-이용약관, 공지사항, FAQ (완료)
 
 
 

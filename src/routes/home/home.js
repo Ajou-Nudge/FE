@@ -24,8 +24,8 @@ function Home() {
 
     return (
         <div>
-            <button className='FAQ'>FAQ</button>
-            <Carousel infinite={false} ref={ref => {carousel.current = ref}} dotPosition='left'>
+            <a href='/FAQ' className='FAQ'>FAQ</a>
+            <Carousel ref={ref => {carousel.current = ref}} dotPosition='left'>
                 <div>
                     <div className='contentStyle--a'>
                         <div className='text--a'>

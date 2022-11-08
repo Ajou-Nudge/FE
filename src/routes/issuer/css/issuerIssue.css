@@ -66,6 +66,36 @@
     background-color: #ffff;
     
 }
+
+.issuerI_excelBtn {
+    width: 35%;
+    height: 40px;
+    border: 1px none #cccccc;
+    border-radius: 30px;
+    padding: 0 15px;
+    background-color: rgb(62, 71, 196);
+    display: flex;
+    justify-content: center;
+}
+.issuerI_excelBtn_minmize {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #cccccc;
+    border-radius: 30px;
+    padding: 0 15px;
+    background-color: rgb(62, 71, 196);
+    display: flex;
+    justify-content: center;
+    
+}
+.issuerI_label {
+    font-weight: 500;
+    font-size: medium;
+    color: #ffff;
+    overflow: hidden;
+    padding: 7px 0 7px 0;
+}
+
 .issuerI_inputs {
     width: 65%;
 }

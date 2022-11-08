@@ -19,10 +19,10 @@ function Footer() {
                 <div style={{display: "flex", paddingTop: "25px"}}>
                     <div>
                         <p className="footer_subtitle">COMPANY</p>
-                        <p className="footer_info">이용약관</p>
-                        <p className="footer_info">개인정보처리방침</p>
+                        <a href="/terms" className="footer_info">이용약관<br /></a>
+                        <a href="/privacy" className="footer_info">개인정보처리방침</a>
                         <p className="footer_info">공지사항</p>
-                        <p className="footer_info">FAQ</p>
+                        <a href="/FAQ" className="footer_info">FAQ</a>
                     </div>
                     <div style={{paddingLeft: "40px"}}>
                         <p className="footer_subtitle">CONTACT</p>
