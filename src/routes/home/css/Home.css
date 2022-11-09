@@ -1,12 +1,11 @@
 .contentStyle--a {
     height: 90vh;
-    background-color: #e2f4ff;
+    background-color: #ebf5fb;
     background-image: url(../../../img/main/bg_main_person1.png);
     background-repeat: no-repeat;
     background-position: 95% bottom;
     background-size: auto 65%;
 }
-
 .contentStyle--b {
     height: 90vh;
     background: #eef8eb;
@@ -15,7 +14,6 @@
     background-position: 80% top;
     background-size: auto 65%;
 }
-
 .contentStyle--c {
     height: 90vh;
     background: #f6f4f8;
@@ -25,16 +23,49 @@
     background-size: auto 65%;
 }
 
+.contentStyle--d {
+    height: 90vh;
+    background-color: #fafafa;
+    background-image: url(../../../img/main/bg_main_business1.png);
+    background-repeat: no-repeat;
+    background-position: 75% 45%;
+}
+.contentStyle--e {
+    height: 90vh;
+    background: #f8f8f8;
+    background-image: url(../../../img/main/bg_main_business2.png);
+    background-repeat: no-repeat;
+    background-position: 80% center;
+}
+.contentStyle--f {
+    height: 90vh;
+    background: #f6f4f8;
+    background-image: url(../../../img/main/bg_main_business3.png);
+    background-repeat: no-repeat;
+    background-position: 80% center;
+}
+
 .headline {
-    color: rgb(53, 53, 53);
+    color: rgb(34, 34, 34);
     font-weight: 900;
     font-size: 60px;
     text-align: left;
     line-height: 1;
 }
+.headline_Btn {
+    padding: 7px 61px 7px 21px;
+    font-weight: 700;
+    font-size: 16px;
+    color: #ffff;
+    background-color: #1fdcb2;
+    border-radius: 30px;
+    background-image: url(../../../img/main/arrow.png);
+    background-repeat: no-repeat;
+    background-position: 85% center;
+}
 
 .text--a {
-    color: rgb(99, 99, 99);
+    color: rgb(56, 56, 56);
     font-weight: 510;
     font-size: 24px;
     text-align: left;
@@ -43,7 +74,7 @@
     max-width: 1240px;
 }
 .text--b {
-    color: rgb(99, 99, 99);
+    color: rgb(56, 56, 56);
     font-weight: 510;
     font-size: 24px;
     text-align: left;
@@ -52,7 +83,7 @@
     max-width: 1240px;
 }
 .text--c {
-    color: rgb(99, 99, 99);
+    color: rgb(56, 56, 56);
     font-weight: 510;
     font-size: 24px;
     text-align: left;
@@ -62,9 +93,6 @@
 }
 
 .FAQ {
-    height: 70px;
-    width: 70px;
-    background-color: rgb(51, 136, 206);
     color: white;
     position: fixed;
     top: 125px;
@@ -73,5 +101,44 @@
     border: 1px none ;
     border-radius: 50px;
     text-align: center;
-    padding: 20px;
+}
+
+.mod_warp {
+    position: fixed;
+    top: 50%;
+    right: 4vw;
+    z-index: 100;
+}
+.mod_person_btn {
+    padding: 4px 21px 4px 42px;
+    border: 3px solid #fff;
+    border-radius: 30px;
+    background-color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
+.mod_company_btn {
+    padding: 4px 21px 4px 42px;
+    border: 3px solid #fff;
+    border-radius: 30px;
+    background-color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.mod_warp ul button.mod_person_btn:before {
+    background: #1fdcb2;
+    top: 15px;
+}
+.mod_warp ul button.mod_company_btn:before {
+    background: #1361f0;
+    top: 65px;
+}
+.mod_warp ul button:before {
+    content: '';
+    position: absolute;
+    left: 55px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
 }
