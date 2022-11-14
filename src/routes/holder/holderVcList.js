@@ -15,6 +15,7 @@ function HolderVcList(userIdInStore) {
 
     //const navigate = useNavigate()
     const [ vcList, setVcList ] = useState([])
+    //const [ checked, setChecked ] = useState([])
     
     useEffect( () => {
         setVcList(DummyVcList)
@@ -43,16 +44,15 @@ function HolderVcList(userIdInStore) {
 
     // 받아온 vc 개수만큼 화면에 뿌려주기
     function makeVcList() {
-        
-        const lengthCounter = vcList.length
         const data = []
-        for (let i=0; i < lengthCounter; i++) {
+        for (let i=0; i < vcList.length; i++) {
             data.push({
                 key: i,
                 num: i+1,
                 title: vcList[i].credentialSubject.title,
                 date: vcList[i].credentialSubject.date,
                 issuer: vcList[i].issuer,
+                check: <input on disabled={(vcList[i].issuer === userIdInStore) ? "false" : "true"} type={"checkbox"} />
             })
         }
 
@@ -76,11 +76,20 @@ function HolderVcList(userIdInStore) {
                 title: "발급자",
                 dataIndex: "issuer",
                 key: "issuer",
+            },
+            {
+                title: "선택",
+                dataIndex: "check",
+                key: "check",
             }
         ]
 
-        return <Table columns={columns} dataSource={data} />
+        return <Table pagination={{position: ["bottomCenter"]}} columns={columns} dataSource={data} />
         
+    }
+
+    function onDelete() {
+
     }
 
     const subtitle = "여러분의 인증서를 확인 및 다운로드 할 수 있습니다. 키워드를 입력하여 검색해보세요."
@@ -92,9 +101,9 @@ function HolderVcList(userIdInStore) {
                 {makeVcList()}
             </div>
             <div className="holderVL_btnBox">                
-                <div style={{float: 'left'}}><Button className="holderVL_btn">삭제하기</Button></div>
+                <div style={{float: 'left'}}><Button className="holderVL_btn">등록하기</Button></div>             
                 <div style={{float: 'left'}} />
-                <div style={{float: 'right'}}><Button className="holderVL_btn">등록하기</Button></div>             
+                <div style={{float: 'right'}}><Button onClick={onDelete} className="holderVL_btn">선택인증서 삭제</Button></div>
             </div>
         </div>
     )

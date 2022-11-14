@@ -34,3 +34,7 @@ api 업데이트 필요
 
 vc 불러온 후 뿌려줄 필수 기제 값이 필요하다.
 /holder/vc-list/:${userIdInStore}
+
+각 vc를 특정할 수 있는 고유한 값이 매겨져야한다.
+
+vc의 context와 title의 쓰임세가 곂친다. 

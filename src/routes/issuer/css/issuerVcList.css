@@ -3,12 +3,15 @@
 }
 
 .issuerVL_vcCounter_bg {
-    padding-left: 50px;
+    padding: 0 50px 0 50px;
     margin: 0 auto 0;
     max-width: 1540px;
+    display: flex;
+    justify-content: space-between;
 }
-.issuerVL_vcCounter_margin {
-    width: 110px;
+.issuerVL_vcCounter_Counter {
+    padding: 0 10px 0 10px;
+    min-width: 110px;
     height: 40px;
     background-color: rgb(58, 173, 148);
     color: #ffff;
@@ -21,6 +24,15 @@
 .issuerVL_vcCounter_text {
     padding: 5px 0 5px 0;
     margin: 0;
+}
+.issuerVL_switch {
+    width: 65%;
+    max-width: 400px;
+    height: 40px;
+    border: 1px solid #cccccc;
+    border-radius: 30px;
+    padding: 0 15px;
+    background-color: #ffff;
 }
 
 .issuerVL_VLbg {

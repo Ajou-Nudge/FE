@@ -1,7 +1,7 @@
 
 const DummyContextList = [
     {
-        "context": "졸업증명서",
+        "context": "아주대학교 졸업증명서",
         "credentialSubject": {
             "holderId": "1",
             "성명": "1",
@@ -12,7 +12,7 @@ const DummyContextList = [
         }
     },
     {
-        "context": "학점증명서",
+        "context": "아주대학교 학점증명서",
         "credentialSubject": {
             "holderId": "1",
             "성명": "1",
@@ -23,7 +23,7 @@ const DummyContextList = [
         }
     },
     {
-        "context": "재학증명서",
+        "context": "아주대학원 재학증명서",
         "credentialSubject": {
             "holderId": "1",
             "성명": "1",
