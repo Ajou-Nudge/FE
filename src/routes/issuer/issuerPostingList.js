@@ -19,13 +19,13 @@ function IssuerPostingList({userIdInStore}) {
     // const navigate = useNavigate()
 
     // useEffect(() => {
-    //     // redux에 저장되어있는 issuer 아이디로 발행된 vc 요청
+    //     // 채용공고 목록 불러오기
     //     axios({
-    //         url: `/verifier/postList/:${userIdInStore}`,
+    //         url: `http://localhost:8080/verifier/post-list/:${userIdInStore}`,
     //         method: "GET",
     //         withCredentials: true,
     //     })
-    //     // setVcList에 저장
+    //     // setPostingList에 저장
     //     .then((res) => {
     //         setPostingList(res)
     //     })
@@ -49,7 +49,7 @@ function IssuerPostingList({userIdInStore}) {
             PLdata.push({
                 key: i,
                 num: i+1,
-                title: postingList[i].name,
+                title: postingList[i].title,
                 applicant: `${postingList[i].people} 명`,
                 verifiy: 
                     <Link
@@ -57,7 +57,7 @@ function IssuerPostingList({userIdInStore}) {
                         to={`/issuer/verifiy/:${postingList[i].postId}`}
                         state={{
                             postId: postingList[i].postId,
-                            name: postingList[i].name,
+                            title: postingList[i].title,
                         }}
                     >
                         <Button className="issuerPL_btn">상세보기</Button>

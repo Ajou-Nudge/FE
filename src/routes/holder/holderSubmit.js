@@ -42,23 +42,29 @@ function HolderSubmit( userIdInStore ) {
         setVcList(DummyVcList)
     }, [] )
 
-    // 사용자의 vcList에서 요구 vc 추출
+    // 사용자의 vcList에서 요구 vcId 추출
     function onClick(){
         let targetVc = []
-        const requirement = posting.requirement
+        const vcIds = []
+        // post에서 요구하는 vc만 추출
         targetVc = vcList.filter((vc) => {
-            return vc.context === `${requirement}`
+            return vc.context === `${posting.requirement}`
         })
 
+        // vc에서 id 추출
+        targetVc.map((vc) => {
+            return vcIds.push(vc.id)
+        })
 
-    // if 구문으로 추출된 vc 있는지 확인, 이후 제출
-        if (targetVc.length === 0) {
+        // if 구문으로 추출된 vc 있는지 확인, 이후 제출
+        if (targetVc.length !== 0) {
             axios({
                 url: `/holder/submit`,
                 method: "POST",
                 data: {
                     postId: posting["postId"],
-                    vc: targetVc
+                    holder: `${userIdInStore}`,
+                    vcIds: vcIds
                 },
                 withCredentials: true,
             })

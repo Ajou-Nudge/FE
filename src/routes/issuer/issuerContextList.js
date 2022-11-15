@@ -29,17 +29,17 @@ function IssuerContextList({userIdInStore}) {
     // useEffect(() => {
     //     // redux에 저장되어있는 issuer 아이디로 발행된 vc 요청
     //     axios({
-    //         url: `/issuer/vc-list/:${userIdInStore}`,
+    //         url: `http://localhost:8080/issuer/context-list/:${userIdInStore}`,
     //         method: "GET",
     //         withCredentials: true,
     //     })
     //     // setVcList에 저장
     //     .then((res) => {
-    //         setVcList(res)
+    //         setContextList(res)
     //     })
     //     // 오류핸들링
     //     .catch(() => {
-    //         message.error("자격증 가져오기 실패");
+    //         message.error("양식 가져오기 실패");
     //         navigate("/issuer")
     //     });
     // }, [navigate, userIdInStore])

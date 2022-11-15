@@ -1,12 +1,15 @@
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
-import DummyVcList from "../../dummy/dummyVcList";
-import DummyContextList from "../../dummy/dummyContextList";
 import { Table } from "antd";
 import "./css/issuerVcList.css"
 import Headline from "../../component/headline";
 import issuerVL_headline from "../../img/headline/issuerVL_headline.png"
 
+// 더미
+import DummyVcList from "../../dummy/dummyVcList";
+import DummyContextList from "../../dummy/dummyContextList";
+
+// // 백엔드
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 // import { message } from "antd";
@@ -17,12 +20,13 @@ function IssuerVcList({userIdInStore}) {
     const [ contextList, setContextList ] = useState([])
     const [ selectedContext, setSelectedContext ] = useState("인증서를 선택해주세요.")
 
-    // const navigate = useNavigate()
 
+    // // 백엔드 연결
+    // const navigate = useNavigate()
     // useEffect(() => {
-    //     // redux에 저장되어있는 issuer 아이디로 발행된 vc 요청
+    //     // redux에 저장되어있는 issuer 아이디로 발행된 모든vc 요청
     //     axios({
-    //         url: `/issuer/vc-list/:${userIdInStore}`,
+    //         url: `http://localhost:8080/issuer/vc-list/:${userIdInStore}`,
     //         method: "GET",
     //         withCredentials: true,
     //     })
@@ -37,15 +41,15 @@ function IssuerVcList({userIdInStore}) {
     //     });
     // }, [navigate, userIdInStore])
     
-    // 서버에서 issuer의 context정보 불러오기
+    // // 서버에서 issuer의 context정보 불러오기
     // useEffect(() => {
     //     axios({
-    //         url: `/issuer/context-list/:${userIdInStore}`,
+    //         url: `http://localhost:8080/issuer/context-list/:${userIdInStore}`,
     //         method: "GET",
     //         withCredentials: true,
     //     })
     //     .then((res) => {
-    //         setFormList(res)
+    //         setContextList(res)
     //     })
     //     .catch(() => {
     //         message.error("자격증 양식 가져오기 실패");
@@ -53,6 +57,7 @@ function IssuerVcList({userIdInStore}) {
     //     });
     // }, [navigate, userIdInStore])
 
+    // 더미 연결
     useEffect(() => {
         setVcList(DummyVcList)
         setContextList([...DummyContextList])

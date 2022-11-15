@@ -27,7 +27,7 @@ function IssuerPost(userObjInStore) {
         setPosting(
             {
                 verifierId: userId,
-                name: "",
+                title: "",
                 expired: "",
                 required: [],
                 url: ""
@@ -50,7 +50,6 @@ function IssuerPost(userObjInStore) {
         setCategory(modified)      
     }
 
-    console.log("작동")
     function theCategory() {
         
         const form = []
@@ -77,7 +76,7 @@ function IssuerPost(userObjInStore) {
 
     function onSubmit() {
         axios({
-            url: "/verifier/post",
+            url: "http://localhost:8080/verifier/post",
             method: "POST",
             data: posting,
             withCredentials: true,
@@ -129,7 +128,7 @@ function IssuerPost(userObjInStore) {
                     <dl className="IssuerP_form_row">
                         <dt className="IssuerP_form_tag">공고제목</dt>
                         <dd className="IssuerP_form_inputBox">
-                            <Input className="IssuerP_form_inputStyle" id="name" onChange={onChange}/>
+                            <Input className="IssuerP_form_inputStyle" id="title" onChange={onChange}/>
                         </dd>
                     </dl>
                     <dl className="IssuerP_form_row">

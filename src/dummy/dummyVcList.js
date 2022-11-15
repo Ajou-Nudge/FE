@@ -1,6 +1,7 @@
 
 const DummyVcList = [
-  {
+  { 
+    "id": "001",
     "context": "graduate-certificate",
     "issuer": "0001",
     "credentialSubject": {
@@ -13,6 +14,7 @@ const DummyVcList = [
     }
   },
   {
+    "id": "002",
     "context": "another-certificate",
     "issuer": "0002",
     "credentialSubject": {
@@ -25,6 +27,7 @@ const DummyVcList = [
     }
   },
   {
+    "id": "003",
     "context": "theOther-certificate",
     "issuer": "0003",
     "credentialSubject": {
@@ -37,6 +40,7 @@ const DummyVcList = [
     }
   },
   {
+    "id": "004",
     "context": "theOther-certificate",
     "issuer": "0003",
     "credentialSubject": {
@@ -49,6 +53,7 @@ const DummyVcList = [
     }
   },
   {
+    "id": "005",
     "context": "theOther-certificate",
     "issuer": "0003",
     "credentialSubject": {
@@ -61,6 +66,7 @@ const DummyVcList = [
     }
   },
   {
+    "id": "006",
     "context": "theOther-certificate",
     "issuer": "0003",
     "credentialSubject": {
@@ -73,6 +79,7 @@ const DummyVcList = [
     }
   },
   {
+    "id": "007",
     "context": "theOther-certificate",
     "issuer": "0003",
     "credentialSubject": {
@@ -85,6 +92,7 @@ const DummyVcList = [
     }
   },
   {
+    "id": "008",
     "context": "theOther-certificate",
     "issuer": "0003",
     "credentialSubject": {
@@ -97,6 +105,7 @@ const DummyVcList = [
     }
   },
   {
+    "id": "009",
     "context": "theOther-certificate",
     "issuer": "0003",
     "credentialSubject": {
@@ -109,6 +118,7 @@ const DummyVcList = [
     }
   },
   {
+    "id": "010",
     "context": "theOther-certificate",
     "issuer": "0003",
     "credentialSubject": {
@@ -121,6 +131,7 @@ const DummyVcList = [
     }
   },
   {
+    "id": "011",
     "context": "theOther-certificate",
     "issuer": "0003",
     "credentialSubject": {

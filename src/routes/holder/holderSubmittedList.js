@@ -21,7 +21,7 @@ function HolderSubmittedList({userIdInStore}) {
     // useEffect(() => {
     //     // redux에 저장되어있는 issuer 아이디로 발행된 vc 요청
     //     axios({
-    //         url: `/holder/submit-list/:${userIdInStore}`,
+    //         url: `/holder/submitted-vc-list/:${userIdInStore}`,
     //         method: "GET",
     //         withCredentials: true,
     //     })

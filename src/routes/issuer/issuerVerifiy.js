@@ -22,7 +22,7 @@ function IssuerVerifiy(userIdInStore) {
     // // BE에서 제출된 vc 리스트 가져오기
     // useEffect(() => {
     //     axios({
-    //         url: `/verifier/submit-list//:${userIdInStore}/:${posting.postId}`,
+    //         url: `http://localhost:8080/verifier/submitted-vclist/:${userIdInStore}/:${posting.postId}`,
     //         method: "GET",
     //         withCredentials: true,
     //     })

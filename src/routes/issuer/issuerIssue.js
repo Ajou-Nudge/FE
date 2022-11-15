@@ -1,9 +1,6 @@
 import { connect } from "react-redux";
 import { actionCreators } from "../../component/store";
 import React, { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import { message } from "antd"
 import * as XLSX from "xlsx"
 import { Empty, Switch } from "antd";
 import Headline from "../../component/headline";
@@ -11,9 +8,13 @@ import issuerI_headline from "../../img/headline/issuerI_headline.png"
 import DummyContextList from "../../dummy/dummyContextList";
 import "./css/issuerIssue.css"
 
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import { message } from "antd"
+
 
 function IssuerIssue(userIdInStore) {
-
+    
     // contextList는 받아온 formList에서 context만 추출한 것
     const [ uploadMod, setUploadMod ] = useState("handWrite")
     const [ fileName, setFileName ] = useState("")
@@ -25,9 +26,10 @@ function IssuerIssue(userIdInStore) {
         vc: {
             context: "",
             issuer: "",
-            CredentialSubject:{}
+            credentialSubject:{}
         }
     }])
+    
     // const navigate = useNavigate()
 
     // 창 가로크기 측정 코드, inner 850px 기준, className으로 반응
@@ -46,7 +48,7 @@ function IssuerIssue(userIdInStore) {
     // 서버에서 issuer의 context정보 불러오기
     // useEffect(() => {
     //     axios({
-    //         url: `/issuer/context-list/:${userIdInStore}`,
+    //         url: `http://localhost:8080/issuer/context-list/:${userIdInStore}`,
     //         method: "GET",
     //         withCredentials: true,
     //     })
@@ -146,7 +148,7 @@ function IssuerIssue(userIdInStore) {
                             vc: {
                                 context: currentContext,
                                 issuer: "",
-                                CredentialSubject: row,
+                                credentialSubject: row,
                             }
                         }
                         return buffer.push(issueVc)
@@ -211,7 +213,7 @@ function IssuerIssue(userIdInStore) {
     function inPutChange(e) {
         const issueVc = issueVcs
         const id = e.target.id
-        issueVc[0].vc.CredentialSubject[`${id}`] = e.target.value
+        issueVc[0].vc.credentialSubject[`${id}`] = e.target.value
         setIssueVcs(issueVc)
     }
 
@@ -219,7 +221,7 @@ function IssuerIssue(userIdInStore) {
     function submit() {
         console.log(issueVcs)
         // axios({
-        //     url: `/issuer/issue`,
+        //     url: `http://localhost:8080/issuer/vc`,
         //     method: "POST",
         //     data: issueVcs,
         // })

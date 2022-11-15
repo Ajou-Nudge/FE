@@ -20,7 +20,7 @@ function HolderPostingList() {
     // // BE에서 posting 가져오기
     // useEffect(() => {
     //     axios({
-    //         url: `/holder/posting-list`,
+    //         url: `/holder/post-list`,
     //         method: "GET",
     //         withCredentials: true,
     //     })
@@ -43,23 +43,25 @@ function HolderPostingList() {
         const PLdata = []
         for (let i=0; i < lengthCounter; i++) {
             PLdata.push({
-                key: postingList[i].postId,
+                key: postingList[i].id,
                 num: i+1,
-                verifier: postingList[i].verifier,
+                verifierId: postingList[i].verifierId,
                 detail: 
                     <div>
-                        요구사항: {postingList[i].requirement}<br />
+                        제목: {postingList[i].title}<br />
+                        요구사항: {postingList[i].required}<br />
                         모집기간: {postingList[i].expired}<br />
                         세부사항: <Link to={postingList[i].url}>{postingList[i].url}</Link>
                     </div>,
                 link: 
                     <Link 
                         key={i} 
-                        to={`/holder/submit/:${postingList[i].postId}`}
+                        to={`/holder/submit/:${postingList[i].id}`}
                         state={{
-                            postId: postingList[i].postId,
-                            verifier: postingList[i].verifier,
-                            requirement: postingList[i].requirement,
+                            title: postingList[i].title,
+                            id: postingList[i].id,
+                            verifierId: postingList[i].verifierId,
+                            required: postingList[i].required,
                             expired: postingList[i].expired,
                             url: postingList[i].url
                         }}
@@ -78,8 +80,8 @@ function HolderPostingList() {
             },
             {
                 title: "채용기관",
-                dataIndex: "verifier",
-                key: "verifier",
+                dataIndex: "verifierId",
+                key: "verifierId",
             },
             {
                 title: "채용정보",

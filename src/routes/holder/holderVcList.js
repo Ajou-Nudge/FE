@@ -45,6 +45,7 @@ function HolderVcList(userIdInStore) {
     // 받아온 vc 개수만큼 화면에 뿌려주기
     function makeVcList() {
         const data = []
+        // title, date는 필수적으로 있을 것이라 가정하고 진행
         for (let i=0; i < vcList.length; i++) {
             data.push({
                 key: i,
