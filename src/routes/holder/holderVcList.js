@@ -1,9 +1,11 @@
 import { connect } from "react-redux"
 import { useState, useEffect } from "react";
 import DummyVcList from "../../dummy/dummyVcList";
-import { Button, Table } from "antd";
+import { Button, Table, Switch } from "antd";
 import Headline from "../../component/headline";
 import holderVL_headline from "../../img/headline/holderVL_headline.png";
+import logo1 from "../../img/상공회의소.png"
+import logo2 from "../../img/ajou_log.png"
 
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios";
@@ -15,6 +17,7 @@ function HolderVcList(userIdInStore) {
 
     //const navigate = useNavigate()
     const [ vcList, setVcList ] = useState([])
+    const [ displayMod, setDisplayMod ] = useState("list")
     //const [ checked, setChecked ] = useState([])
     
     useEffect( () => {
@@ -53,7 +56,7 @@ function HolderVcList(userIdInStore) {
                 title: vcList[i].credentialSubject.title,
                 date: vcList[i].credentialSubject.date,
                 issuer: vcList[i].issuer,
-                check: <input on disabled={(vcList[i].issuer === userIdInStore) ? "false" : "true"} type={"checkbox"} />
+                check: <input disabled={(vcList[i].issuer === userIdInStore) ? false : true } type={"checkbox"} />
             })
         }
 
@@ -89,6 +92,32 @@ function HolderVcList(userIdInStore) {
         
     }
 
+    function makeVcCard() {
+        return (
+            <div className="holderVL_vcBox_cards">
+                {vcList.map((vc) => {
+                    return (
+                        <div key={vc.id} className="holderVL_vcBox_card">
+                            <img className="holderVL_vcBox_card_img" alt="logo" src={vc.issuer === "대한상공회의소" ? logo1 : logo2}></img>
+                            <p className="holderVL_vcBox_card_text">{vc.credentialSubject.title}</p>
+                        </div>
+                    )
+                })}
+            </div>
+        )
+    }
+
+    // 인증서 생성 방식 핸들링
+    function onSwitch(e) {
+        if (e === true) {
+            setDisplayMod("pdf")
+        } else if (e === false) {
+            setDisplayMod("list")
+        } else {
+            console.log("switch err")
+        }
+    }
+    
     function onDelete() {
 
     }
@@ -98,8 +127,16 @@ function HolderVcList(userIdInStore) {
     return(
         <div className="holderVL_bg">
             {Headline( holderVL_headline, 600, subtitle, 870 )}
-            <div className="holderVL_vcBox">
-                {makeVcList()}
+            <div className="holderVL_vcBox_bg">
+                <div className="holderVL_vcBox">
+                    <Switch 
+                        style={{ marginBottom:"30px", marginTop:"30px" }}
+                        unCheckedChildren="리스트" 
+                        checkedChildren="카드"
+                        onChange={onSwitch}
+                    ></Switch>           
+                    {(displayMod === "pdf") ? makeVcCard() : makeVcList()}
+                </div>
             </div>
             <div className="holderVL_btnBox">                
                 <div style={{float: 'left'}}><Button className="holderVL_btn">등록하기</Button></div>             
