@@ -2,7 +2,7 @@
 const DummyVcList = [
   { 
     "id": "001",
-    "context": "graduate-certificate",
+    "context": "아주대학교 졸업증명서",
     "issuer": "아주대학교",
     "credentialSubject": {
       "title": "아주대학교 졸업증명서",
@@ -15,7 +15,7 @@ const DummyVcList = [
   },
   {
     "id": "002",
-    "context": "another-certificate",
+    "context": "아주대학교 학점증명서",
     "issuer": "아주대학교",
     "credentialSubject": {
       "title": "아주대학교 학점증명서",
@@ -28,7 +28,7 @@ const DummyVcList = [
   },
   {
     "id": "003",
-    "context": "theOther-certificate",
+    "context": "워드프로세서 2급",
     "issuer": "대한상공회의소",
     "credentialSubject": {
       "title": "워드프로세서 2급",
