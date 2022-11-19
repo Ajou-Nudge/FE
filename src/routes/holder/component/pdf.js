@@ -1,7 +1,6 @@
 import "./css/pdf.css";
-import logo from "../../../img/ajou_log.png";
 
-const Pdf = ({ title, content, type, getDate, user, organization }) => {
+const Pdf = ({ title, content, type, getDate, user, organization, logo }) => {
   const changeFormat = (date) => {
     try {
       const yyyy = date.slice(0, 4);

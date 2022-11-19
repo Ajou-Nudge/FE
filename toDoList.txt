@@ -6,8 +6,9 @@ Main
 - 메인페이지 footer, slider에 병합
 
 holder
+-인증서 등록페이지 제작
 -입사지원페이지 표 ui 수정
--인증서 관리 페이지 pdf제작기능
+-인증서 관리 페이지 pdf제작기능 (완료)
 
 company
 -커리어핏

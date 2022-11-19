@@ -12,6 +12,10 @@
     margin: 0 auto 0;
     margin-top: 50px;
 }
+.holderVL_vcBox_print {
+    font-size: 24px;
+    color: rgb(180, 180, 180);
+}
 .holderVL_vcBox_cards {
     min-height: 40vh;
     max-width: 800px;
@@ -50,7 +54,6 @@
     margin: 0 auto 0px;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(245, 245, 248);
 }
 
 .holderVL_btn {

@@ -2,8 +2,8 @@ import { connect } from "react-redux"
 import { useState, useEffect, useRef } from "react";
 import DummyVcList from "../../dummy/dummyVcList";
 import { Button, Table, Switch } from "antd";
+import { FilePdfOutlined } from "@ant-design/icons"
 import { useReactToPrint } from "react-to-print";
-import VcCard from "./component/vcCard";
 import Pdf from "./component/pdf";
 import Headline from "../../component/headline";
 import holderVL_headline from "../../img/headline/holderVL_headline.png";
@@ -26,6 +26,7 @@ function HolderVcList(userIdInStore) {
     const [ cursor, setCursor ] = useState(1)
     //const [ checked, setChecked ] = useState([])
     
+    // 더미데이터 주입
     useEffect( () => {
         setVcList(DummyVcList)
     }, [] )
@@ -49,14 +50,15 @@ function HolderVcList(userIdInStore) {
     //     message.error(msg);
     // };
 
-    // 더미데이터 주입
 
-    // 받아온 vc 개수만큼 화면에 뿌려주기
+    // 해당 hook은 반드시 onClick에 위치하며 선택대상의 id 따오는 것이 불가능 -> onMouse 이벤트리스너로 cursor에 선택대상 id 따오기
     const handlePrint = useReactToPrint({
+        // content : pdf로 뿌려줄 대상의 위치를 ref로 요구
         content: () => componentRef.current[cursor]
     })
-
-
+    
+    
+    // 받아온 vc 개수만큼 화면에 뿌려주기
     function makeVcList() {
         const data = []
         // title, date는 필수적으로 있을 것이라 가정하고 진행
@@ -67,11 +69,14 @@ function HolderVcList(userIdInStore) {
                 title: vcList[i].credentialSubject.title,
                 date: vcList[i].credentialSubject.date,
                 issuer: vcList[i].issuer,
+                // pdf 인쇄버튼 란 추가, component로 분리하려했으나, useRef 훅 사용 제약으로 통합하여 진행함.
                 pdf: 
-                    <div>
-                        <button id={i} onMouseEnter={(e) =>  {setCursor(e.target.id)}} onClick={handlePrint}>PDF</button>
+                    <div className="holderVL_vcBox_print">
+                        <label htmlFor={`${i}`}><FilePdfOutlined /></label>
                         <div style={{ display:"none" }}>
                             <div ref={ rf => (componentRef.current[i] = rf)}>
+                                {/* // pdf 모듈이 반드시 onclick에 위치해야하는 hook 사용, event 사용 불가능함으로 마우스가 위치한 곳의 id 추출하는 로직 추가 */}
+                                <button id={i} onMouseEnter={(e) => {setCursor(e.target.id)}} onClick={handlePrint} />
                                 <Pdf
                                     title={vcList[i].context}
                                     content={"content"}
@@ -79,6 +84,7 @@ function HolderVcList(userIdInStore) {
                                     getDate={vcList[i].credentialSubject.date}
                                     user={vcList[i].credentialSubject.name}
                                     organization={vcList[i].issuer}
+                                    logo={(vcList[i].issuer === "대한상공회의소") ? logo1 : logo2}
                                 />
                             </div>
                         </div>
@@ -124,14 +130,31 @@ function HolderVcList(userIdInStore) {
         
     }
 
+
+    // vc 리스트 카드 형식으로 뿌려주기
     function makeVcCard() {
         return (
             <div className="holderVL_vcBox_cards">
-                {vcList.map((vc) => {
-                    const Logo = (vc.issuer === "대한상공회의소") ? logo1 : logo2
+                {/* // i는 리스트 안 요소의 순번의미 */}
+                {vcList.map((vc, i) => {
                     return (
-                        <div key={vc.id}>
-                            {VcCard(vc, Logo, componentRef)}
+                        // pdf 모듈이 반드시 onclick에 위치해야하는 hook 사용, event 사용 불가능함으로 마우스가 위치한 곳의 id 추출하는 로직 추가
+                        <div onClick={handlePrint} onMouseEnter={(e) => {setCursor(e.target.id)}} id={vcList.length + 1 + i} key={vc.id} className="holderVL_vcBox_card">
+                            <img className="holderVL_vcBox_card_img" alt="logo" src={(vc.issuer === "대한상공회의소") ? logo1 : logo2}></img>
+                            <p className="holderVL_vcBox_card_text">{vc.credentialSubject.title}</p>
+                            <div style={{ display:"none" }}>
+                                <div ref={ rf => (componentRef.current[vcList.length + 1 + i]) = rf}>
+                                    <Pdf
+                                        title={vc.context}
+                                        content={"content"}
+                                        type={"type"}
+                                        getDate={vc.credentialSubject.date}
+                                        user={vc.credentialSubject.name}
+                                        organization={vc.issuer}
+                                        logo={(vc.issuer === "대한상공회의소") ? logo1 : logo2}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     )
                 })}
@@ -144,7 +167,7 @@ function HolderVcList(userIdInStore) {
     // 인증서 생성 방식 핸들링
     function onSwitch(e) {
         if (e === true) {
-            setDisplayMod("pdf")
+            setDisplayMod("card")
         } else if (e === false) {
             setDisplayMod("list")
         } else {
@@ -169,13 +192,13 @@ function HolderVcList(userIdInStore) {
                         checkedChildren="카드"
                         onChange={onSwitch}
                     ></Switch>           
-                    {(displayMod === "pdf") ? makeVcCard() : makeVcList()}
+                    {(displayMod === "card") ? makeVcCard() : makeVcList()}
                 </div>
-            </div>
-            <div className="holderVL_btnBox">                
-                <div style={{float: 'left'}}><Button className="holderVL_btn">등록하기</Button></div>             
-                <div style={{float: 'left'}} />
-                <div style={{float: 'right'}}><Button onClick={onDelete} className="holderVL_btn">선택인증서 삭제</Button></div>
+                <div className="holderVL_btnBox">                
+                    <div style={{float: 'left'}}><Button className="holderVL_btn">등록하기</Button></div>             
+                    <div style={{float: 'left'}} />
+                    <div style={{float: 'right'}}><Button onClick={onDelete} className="holderVL_btn">선택인증서 삭제</Button></div>
+                </div>
             </div>
         </div>
     )
