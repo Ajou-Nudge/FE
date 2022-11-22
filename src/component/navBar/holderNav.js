@@ -14,6 +14,7 @@ function HolderNav() {
     { label: <NavLink style={ navStyle } to="/holder/vcList">내지갑</NavLink>, 
       children:[
         { label: <NavLink style={ navStyle } to="/holder/vcList">인증서관리</NavLink>, key: "vcList" },
+        { label: <NavLink style={ navStyle } to="/holder/issue">인증서등록</NavLink>, key: "issue" },
         { label: <NavLink style={ navStyle } to="/holder/submittedList">제출이력</NavLink>, key: "submittedVc" }
       ],
       key: "vcWallet",

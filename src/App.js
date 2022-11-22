@@ -34,6 +34,7 @@ import HolderSubmit from "./routes/holder/holderSubmit";
 import HolderSubmittedList from "./routes/holder/holderSubmittedList.js";
 import HolderVcList from "./routes/holder/holderVcList";
 import HolderVcDetail from "./routes/holder/holderVcDetail";
+import HolderIssue from "./routes/holder/holderIssue.js";
 
 // Verifier
 import VerifierHome from "./routes/verifier/verifierHome";
@@ -126,6 +127,7 @@ function App({SignInToStore}) {
           <Route path="submit/:postId" element={<HolderSubmit />}></Route>
           <Route path="submittedList" element={<HolderSubmittedList />}></Route>
           <Route path="postingList" element={<HolderPostingList />}></Route>
+          <Route path="issue" element={<HolderIssue />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>

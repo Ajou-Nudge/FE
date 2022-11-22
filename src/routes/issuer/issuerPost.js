@@ -11,7 +11,7 @@ function IssuerPost(userObjInStore) {
 
     const navigate = useNavigate();
     const[ posting, setPosting ] = useState({})
-    const[ category, setCategory] = useState({
+    const[ category, setCategory ] = useState({
         basicInfo: true,
         personalInfo: false,
         educationalHistory: false,
@@ -40,11 +40,11 @@ function IssuerPost(userObjInStore) {
     }
 
     function onChecked(e) {
-        const modified = category
-        const key = e.target.id
-        modified[key] = e.target.checked
-        console.log(e)
-        setCategory(modified)      
+        const { id, checked } = e.target
+        setCategory({
+            ...category,
+            [id]: checked
+        })      
     }
 
     function theCategory() {

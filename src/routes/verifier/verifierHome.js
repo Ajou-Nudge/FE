@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-// import connectCaver from "./component/connectCaver";
+import connectCaver from "./component/connectCaver";
 
 function VerifierHome() {
 
@@ -39,7 +39,7 @@ function VerifierHome() {
         );
     }
     function onCaver() {
-        // return connectCaver()
+        return connectCaver()
     }
 
     return(

@@ -10,45 +10,45 @@ import logo1 from "../../img/상공회의소.png"
 import logo2 from "../../img/ajou_log.png"
 import "./css/holderVcList.css"
 
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { message } from "antd";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import { message } from "antd";
 
-// import DummyVcList from "../../dummy/dummyVcList";
+import DummyVcList from "../../dummy/dummyVcList";
 
 function HolderVcList(userIdInStore) {
 
     
     const componentRef = useRef([])
-    const navigate = useNavigate()
     const [ vcList, setVcList ] = useState([])
     const [ displayMod, setDisplayMod ] = useState("list")
     const [ cursor, setCursor ] = useState(1)
     //const [ checked, setChecked ] = useState([])
     
     // 더미데이터 주입
-    // useEffect( () => {
-    //     setVcList(DummyVcList)
-    // }, [] )
-
-    // store.js에서 id 가져와 BE에 요청보내기
-    useEffect(() => {
-        axios({
-            url: `http://localhost:8080/holder/vc-list/:sjh3922@naver.com`,
-            method: "GET",
-            // withCredentials: true,
-        })
-        .then((res) => {
-            setVcList(res)
-        })
-        .catch(() => {
-            messageError("자격증 가져오기 실패");
-            navigate("/holder")
-        });
-    })
-    function messageError(msg) {
-        message.error(msg);
-    };
+    useEffect( () => {
+        setVcList(DummyVcList)
+    }, [] )
+    
+    // const navigate = useNavigate()
+    // // store.js에서 id 가져와 BE에 요청보내기
+    // useEffect(() => {
+    //     axios({
+    //         url: `http://localhost:8080/holder/vc-list/:sjh3922@naver.com`,
+    //         method: "GET",
+    //         // withCredentials: true,
+    //     })
+    //     .then((res) => {
+    //         setVcList(res)
+    //     })
+    //     .catch(() => {
+    //         messageError("자격증 가져오기 실패");
+    //         navigate("/holder")
+    //     });
+    // })
+    // function messageError(msg) {
+    //     message.error(msg);
+    // };
 
 
     // 해당 hook은 반드시 onClick에 위치하며 선택대상의 id 따오는 것이 불가능 -> onMouse 이벤트리스너로 cursor에 선택대상 id 따오기
@@ -195,7 +195,7 @@ function HolderVcList(userIdInStore) {
                     {(displayMod === "card") ? makeVcCard() : makeVcList()}
                 </div>
                 <div className="holderVL_btnBox">                
-                    <div style={{float: 'left'}}><Button className="holderVL_btn">등록하기</Button></div>             
+                    <div style={{float: 'left'}}><a href="/holder/issue"><Button className="holderVL_btn">등록하기</Button></a></div>             
                     <div style={{float: 'left'}} />
                     <div style={{float: 'right'}}><Button onClick={onDelete} className="holderVL_btn">선택인증서 삭제</Button></div>
                 </div>
