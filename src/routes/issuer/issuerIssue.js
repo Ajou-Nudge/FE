@@ -8,9 +8,9 @@ import issuerI_headline from "../../img/headline/issuerI_headline.png"
 import DummyContextList from "../../dummy/dummyContextList";
 import "./css/issuerIssue.css"
 
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import { message } from "antd"
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { message } from "antd"
 
 
 function IssuerIssue(userIdInStore) {
@@ -30,7 +30,7 @@ function IssuerIssue(userIdInStore) {
         }
     }])
     
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
     // 창 가로크기 측정 코드, inner 850px 기준, className으로 반응
     const[ widthHandle, setWidthHandle ] = useState("")
@@ -48,12 +48,12 @@ function IssuerIssue(userIdInStore) {
     // 서버에서 issuer의 context정보 불러오기
     // useEffect(() => {
     //     axios({
-    //         url: `http://localhost:8080/issuer/context-list/:${userIdInStore}`,
+    //         url: `http://localhost:8080/issuer/context-list/:sjh3922@naver.com`,
     //         method: "GET",
-    //         withCredentials: true,
+    //         // withCredentials: true,
     //     })
     //     .then((res) => {
-    //         setFormList(res)
+    //         setFormList(res.data)
     //     })
     //     .catch(() => {
     //         message.error("자격증 양식 가져오기 실패");
@@ -220,18 +220,18 @@ function IssuerIssue(userIdInStore) {
     // BE 제출
     function submit() {
         console.log(issueVcs)
-        // axios({
-        //     url: `http://localhost:8080/issuer/vc`,
-        //     method: "POST",
-        //     data: issueVcs,
-        // })
-        // .then((res) => {
-        //     message.success("양식생성 성공");
-        //     navigate("/issuer")
-        // })
-        // .catch(() => {
-        //     message.error("양식생성 실패");
-        // });
+        axios({
+            url: `http://localhost:8080/issuer/vc`,
+            method: "POST",
+            data: issueVcs,
+        })
+        .then((res) => {
+            message.success("양식생성 성공");
+            navigate("/issuer")
+        })
+        .catch(() => {
+            message.error("양식생성 실패");
+        });
     }
 
     const subtitle = "발급 대상자에게 인증서를 발급할 수 있습니다."

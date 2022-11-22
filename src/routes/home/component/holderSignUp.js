@@ -59,32 +59,33 @@ const HolderSignUp = () => {
     } else if (!isCorrect) {
       message.error("비밀번호 확인이 일치하지 않습니다");
     } else if (!/^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/.test(userInfo.username)) {
-      message.error("이름을 정확히 입력해주세요.");
-    } else if (userInfo.birth === "" || userInfo.birth === null) {
-      message.error("생년월일을 선택해주세요.");
-    } else if (userInfo.IssuerList.length < 1) {
-      message.error("1개 이상의 기관을 선택해주세요.");
-    } else if (myAddress === "") {
-      message.error("KLIP 지갑을 연동해주세요.");
+    //   message.error("이름을 정확히 입력해주세요.");
+    // } else if (userInfo.birth === "" || userInfo.birth === null) {
+    //   message.error("생년월일을 선택해주세요.");
+    // } else if (userInfo.IssuerList.length < 1) {
+    //   message.error("1개 이상의 기관을 선택해주세요.");
+    // } else if (myAddress === "") {
+    //   message.error("KLIP 지갑을 연동해주세요.");
     } else {
       axios({
-        url: `${process.env.REACT_APP_AUTH}/aut/api/v1/register-holder`,
+        url: `http://localhost:8080/user/join`,
         method: "POST",
         data: {
-          email: userInfo.email,
+          memberId: userInfo.email,
           password: userInfo.password,
-          username: userInfo.username,
-          birthDay: userInfo.birth,
-          IssuerList: userInfo.IssuerList,
+          status: "signUpTest",
+          // username: userInfo.username,
+          // birthDay: userInfo.birth,
+          // IssuerList: userInfo.IssuerList,
         },
-        withCredentials: true,
+        // withCredentials: true,
       })
         .then((data) => {
           message.success("회원 가입 완료.");
-          navigate("/home");
+          navigate("/");
         })
         .catch((error) => {
-          if (error.response.status) {
+          if (error) {
             message.error("이미 가입된 회원입니다.");
           } else {
             message.error("회원 가입 실패.");

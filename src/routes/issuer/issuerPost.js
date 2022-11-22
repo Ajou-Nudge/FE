@@ -19,21 +19,18 @@ function IssuerPost(userObjInStore) {
         otherVc: false,
         selfIntroduction: false,
     })
-    
-    
-    const userId = userObjInStore
 
     useEffect( () => {
         setPosting(
             {
-                verifierId: userId,
+                verifierId: "sjh2389@ajou.ac.kr",
                 title: "",
                 expired: "",
-                required: [],
+                required: "",
                 url: ""
             }
         )}
-    , [userId])
+    , [userObjInStore.userId])
 
     function onChange(e) {
         const modified = posting
@@ -75,15 +72,16 @@ function IssuerPost(userObjInStore) {
 
 
     function onSubmit() {
+        console.log(posting)
         axios({
             url: "http://localhost:8080/verifier/post",
             method: "POST",
             data: posting,
-            withCredentials: true,
+            // withCredentials: true,
         })
         .then((res) => {
             message.success("공고 업로드 성공")
-            navigate("/verifier")
+            navigate("/issuer")
         })
         .catch(() => {
             message.error("업로드 실패");
@@ -186,7 +184,7 @@ function IssuerPost(userObjInStore) {
                     <dl className="IssuerP_form_row">
                         <dt className="IssuerP_form_tag">완료링크</dt>
                         <dd className="IssuerP_form_inputBox">
-                            <Input id="required" placeholder="채용관련 자사 홈페이지 링크주소" onChange={onChange} className="IssuerP_form_inputStyle" />
+                            <Input id="url" placeholder="채용관련 자사 홈페이지 링크주소" onChange={onChange} className="IssuerP_form_inputStyle" />
                         </dd>
                     </dl>
                 </form>

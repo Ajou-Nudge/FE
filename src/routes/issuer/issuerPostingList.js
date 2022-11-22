@@ -6,39 +6,40 @@ import { Link } from "react-router-dom";
 import Headline from "../../component/headline"
 import issuerPL_headline from "../../img/headline/issuerPL_headline.png"
 
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import { message } from "antd";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { message } from "antd";
 
-import DummyVerifierPostingList from "../../dummy/dummyVerifierPostingList";
+// import DummyVerifierPostingList from "../../dummy/dummyVerifierPostingList";
 
 function IssuerPostingList({userIdInStore}) {
 
     const [ postingList, setPostingList ] = useState([])
     
-    // const navigate = useNavigate()
-
-    // useEffect(() => {
-    //     // 채용공고 목록 불러오기
-    //     axios({
-    //         url: `http://localhost:8080/verifier/post-list/:${userIdInStore}`,
-    //         method: "GET",
-    //         withCredentials: true,
-    //     })
-    //     // setPostingList에 저장
-    //     .then((res) => {
-    //         setPostingList(res)
-    //     })
-    //     // 오류핸들링
-    //     .catch(() => {
-    //         message.error("채용공고 가져오기 실패");
-    //         navigate("/issuer/issue")
-    //     });
-    // }, [navigate, userIdInStore])
+    const navigate = useNavigate()
 
     useEffect(() => {
-        setPostingList(DummyVerifierPostingList)
-    },[])
+        // 채용공고 목록 불러오기
+        axios({
+            url: `http://localhost:8080/verifier/post-list/:sjh2389@ajou.ac.kr`,
+            method: "GET",
+            // withCredentials: true,
+        })
+        // setPostingList에 저장
+        .then((res) => {
+            console.log(res)
+            setPostingList(res.data)
+        })
+        // 오류핸들링
+        .catch(() => {
+            message.error("채용공고 가져오기 실패");
+            navigate("/issuer/issue")
+        });
+    }, [navigate, userIdInStore])
+
+    // useEffect(() => {
+    //     setPostingList(DummyVerifierPostingList)
+    // },[])
     
 
     function makePostingList() {

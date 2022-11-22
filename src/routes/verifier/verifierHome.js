@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+// import connectCaver from "./component/connectCaver";
 
 function VerifierHome() {
 
@@ -37,6 +38,9 @@ function VerifierHome() {
             }
         );
     }
+    function onCaver() {
+        // return connectCaver()
+    }
 
     return(
         <div>
@@ -49,6 +53,7 @@ function VerifierHome() {
             </Link>
             <button onClick={onKaikas}>카이카스 로그인</button>
             <button onClick={onSend}>1 클레이튼 코인 전송</button>
+            <button onClick={onCaver}>caver</button>
         </div>
     )
 }

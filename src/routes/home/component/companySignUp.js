@@ -30,50 +30,59 @@ const CompanySignUp = () => {
   };
   const validate = async () => {
     if (issuerInfo.email === "") {
-      message.error("이메일을 입력해주세요.");
+      messageError("이메일을 입력해주세요.");
     } else if (
       !/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/.test(
         issuerInfo.email
       )
     ) {
-      message.error("이메일을 주소 형식을 확인해주세요.");
+      messageError("이메일을 주소 형식을 확인해주세요.");
     } else if (issuerInfo.password === "") {
-      message.error("비밀번호를 입력해주세요.");
+      messageError("비밀번호를 입력해주세요.");
     } else if (
       !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/.test(
         issuerInfo.password
       )
     ) {
-      message.error("비밀번호를 형식에 맞춰 정확히 입력해주세요.");
+      messageError("비밀번호를 형식에 맞춰 정확히 입력해주세요.");
     } else if (!isCorrect) {
-      message.error("비밀번호 확인이 일치하지 않습니다");
+      messageError("비밀번호 확인이 일치하지 않습니다");
     } else if (!/^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9| |]+$/.test(issuerInfo.title)) {
-      message.error("기관명을 정확히 입력해주세요.");
+      messageError("기관명을 정확히 입력해주세요.");
     } else if (issuerInfo.registNumber === "") {
-      message.error("사업자 등록번호를 입력해주세요.");
+      messageError("사업자 등록번호를 입력해주세요.");
     } else if (issuerInfo.requiredVC.length < 1) {
-      message.error("1개 이상의 요구사항을 선택해주세요.");
-    } else if (myAddress === "") {
-      message.error("KLIP 지갑을 연동해주세요.");
+      messageError("1개 이상의 요구사항을 선택해주세요.");
+    // } else if (myAddress === "") {
+    //   message.error("KLIP 지갑을 연동해주세요.");
     } else {
       let res = await axios({
-        url: `${process.env.REACT_APP_AUTH}/aut/api/v1/register-issuer`,
+        url: `http://localhost:8080/user/join`,
         method: "POST",
         data: {
-          email: issuerInfo.email,
+          memberId: issuerInfo.email,
           password: issuerInfo.password,
-          title: issuerInfo.title,
-          requiredVC: [...issuerInfo.requiredVC],
+          status: "signUpTest",
+          // title: issuerInfo.title,
+          // requiredVC: [...issuerInfo.requiredVC],
           // desc: issuerInfo.desc,
         },
-        withCredentials: true,
+        // withCredentials: true,
       });
 
       if (res.status === 200) {
-        message.info(res.data);
-        navigate("/home");
+        messageInfo(JSON.stringify(res.data));
+        navigate("/");
       }
     }
+  };
+
+  const messageInfo = (msg) => {
+      message.success(msg);
+  };
+
+  const messageError = (msg) => {
+      message.error(msg);
   };
 
   const qrModalOpen = () => {

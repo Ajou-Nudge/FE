@@ -1,6 +1,5 @@
 import { connect } from "react-redux"
 import { useState, useEffect, useRef } from "react";
-import DummyVcList from "../../dummy/dummyVcList";
 import { Button, Table, Switch } from "antd";
 import { FilePdfOutlined } from "@ant-design/icons"
 import { useReactToPrint } from "react-to-print";
@@ -9,46 +8,47 @@ import Headline from "../../component/headline";
 import holderVL_headline from "../../img/headline/holderVL_headline.png";
 import logo1 from "../../img/상공회의소.png"
 import logo2 from "../../img/ajou_log.png"
-
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import { message } from "antd";
-
 import "./css/holderVcList.css"
+
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { message } from "antd";
+
+// import DummyVcList from "../../dummy/dummyVcList";
 
 function HolderVcList(userIdInStore) {
 
     
     const componentRef = useRef([])
-    //const navigate = useNavigate()
+    const navigate = useNavigate()
     const [ vcList, setVcList ] = useState([])
     const [ displayMod, setDisplayMod ] = useState("list")
     const [ cursor, setCursor ] = useState(1)
     //const [ checked, setChecked ] = useState([])
     
     // 더미데이터 주입
-    useEffect( () => {
-        setVcList(DummyVcList)
-    }, [] )
+    // useEffect( () => {
+    //     setVcList(DummyVcList)
+    // }, [] )
 
     // store.js에서 id 가져와 BE에 요청보내기
-    // useEffect(() => {
-    //     axios({
-    //         url: `/holder/vc-list/:${userIdInStore}`,
-    //         method: "GET",
-    //         withCredentials: true,
-    //     })
-    //     .then((res) => {
-    //         setVcList(res)
-    //     })
-    //     .catch(() => {
-    //         messageError("자격증 가져오기 실패");
-    //         navigate("/holder")
-    //     });
-    // })
-    // function messageError(msg) {
-    //     message.error(msg);
-    // };
+    useEffect(() => {
+        axios({
+            url: `http://localhost:8080/holder/vc-list/:sjh3922@naver.com`,
+            method: "GET",
+            // withCredentials: true,
+        })
+        .then((res) => {
+            setVcList(res)
+        })
+        .catch(() => {
+            messageError("자격증 가져오기 실패");
+            navigate("/holder")
+        });
+    })
+    function messageError(msg) {
+        message.error(msg);
+    };
 
 
     // 해당 hook은 반드시 onClick에 위치하며 선택대상의 id 따오는 것이 불가능 -> onMouse 이벤트리스너로 cursor에 선택대상 id 따오기

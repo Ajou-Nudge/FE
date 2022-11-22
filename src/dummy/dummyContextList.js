@@ -33,6 +33,17 @@ const DummyContextList = [
             "과정구분": "0",
             "재학학기": "0"
         }
+    },
+    {
+        "context" : "Graduate Certificate",
+        "credentialSubject": {
+            "holderId": "1",
+            "name": "1",
+            "major": "1",
+            "double major": "1",
+            "minor": "0",
+            "date": "0"
+        }
     }
 ]
 

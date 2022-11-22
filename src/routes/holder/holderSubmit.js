@@ -4,19 +4,23 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { message, Form, Input, Radio } from "antd";
+import { message, Form, Input, Radio, Modal } from "antd";
 import "./css/holderSubmit.css"
 import Headline from "../../component/headline"
+import makeVcListModal from "./component/makeVcListModal"
 import holderS_headline from "../../img/headline/holderS_headline.png"
 
 
 import DummyVcList from "../../dummy/dummyVcList";
 
 function HolderSubmit( userIdInStore ) {
+
     const location = useLocation()
     const posting = location.state
     const navigate = useNavigate()
     const [vcList, setVcList] = useState([])
+    const [modalOpen, setModalOpen] = useState(false)
+    const [vcIds, setVcIds] = useState([])
 
     // store.js에서 id 가져와 BE에 요청보내기
     // useEffect(() => {
@@ -45,7 +49,7 @@ function HolderSubmit( userIdInStore ) {
     // 사용자의 vcList에서 요구 vcId 추출
     function onClick(){
         let targetVc = []
-        const vcIds = []
+        const vcIdsBuffer = []
         // post에서 요구하는 vc만 추출
         targetVc = vcList.filter((vc) => {
             return vc.context === `${posting.requirement}`
@@ -53,11 +57,17 @@ function HolderSubmit( userIdInStore ) {
 
         // vc에서 id 추출
         targetVc.map((vc) => {
-            return vcIds.push(vc.id)
+            return vcIdsBuffer.push(vc.id)
         })
 
-        // if 구문으로 추출된 vc 있는지 확인, 이후 제출
-        if (targetVc.length !== 0) {
+        // set 데이터타입으로 중복선택 제거
+        const set = new Set(vcIdsBuffer)
+
+        // 버퍼에 추출된 id 넣기
+        setVcIds([...set])
+
+        // verifier가 하나이상의 증명서를 요구할 경우 ,if 구문으로 추출된 vc 있는지 확인, 이후 제출
+        if (targetVc.length !== 0 || posting.requirement.length === 0) {
             axios({
                 url: `/holder/submit`,
                 method: "POST",
@@ -77,6 +87,14 @@ function HolderSubmit( userIdInStore ) {
             })
         } else message.error("요구 증명서가 없습니다.")
         
+    }
+
+    function onCancle() {
+        setModalOpen(false)
+    }
+
+    function onModal() {
+        setModalOpen(true)
     }
 
     return (
@@ -151,14 +169,16 @@ function HolderSubmit( userIdInStore ) {
                             </dd>
                         </dl>
                         <dl className="holderS_formInputBox">
-                            <dt style={{width: "20%", fontWeight: "550", fontSize: "18px", margin:"auto 0"}}>자격자항</dt>
+                            <dt style={{width: "20%", fontWeight: "550", fontSize: "18px", margin:"auto 0"}}>요구자격증</dt>
                             <dd style={{width: "80%", display: "flex", justifyContent: "space-between", alignItems:"center"}}>
-                                <div>
-                                    <span style={{color: "red"}}>*</span>
-                                    {posting.requirement}
+                                <div style={{width: "70%"}}>
+                                    <div className="holderS_formInput" style={{marginBottom:"0"}}>
+                                        <div className="holderS_formInputTag"><span style={{color: "red"}}>*</span>{(posting.requirement !== undefined) ? posting.requirement : "자율"}</div>
+                                        <button className="holderS_fileInputBtn" onClick={onModal}>수동선택</button>
+                                    </div>
                                 </div>
                                 <div style={{maxWidth: "30%", color: "#818181"}}>
-                                    *보유한 자격증은 자동으로 검색되어 제출됩니다.
+                                    {(posting.requirement === undefined) ? "" : "*보유한 자격증은 자동으로 검색되어 제출됩니다."}
                                 </div>
                             </dd>
                         </dl>
@@ -171,6 +191,9 @@ function HolderSubmit( userIdInStore ) {
                 </Link>
                 <button className="holderS_submitBtn" onClick={onClick}>요구 증명서 제출</button>
             </div>
+            <Modal open={modalOpen} onCancel={onCancle} title={"자격증 수동선택"}>
+                {makeVcListModal(vcList, vcIds, setVcIds)}
+            </Modal>
         </div>
     )
 }

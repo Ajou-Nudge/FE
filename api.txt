@@ -5,9 +5,9 @@
 
 - request **
 1.context값과 credentialSubject안의 title값 곂친다. title로 통합하는것이 좋을것 같다.
-->
-2.value값은 8개 까지만 받을 수 있는 것인지?]\
--> 최대 8개
+-> 통합하기
+2.value값은 8개 까지만 받을 수 있는 것인지?
+-> 최대 8개 맞다
 [
     {
         "holderId" : String
@@ -30,6 +30,7 @@
     ...
 ]
 
+500 오류 발생, holderId, issuerId 문제아님
 
 2. /context
 새로운 context를 생성한다.
@@ -55,6 +56,7 @@
     }
 }
 
+200 작동함
 
 3-1. /context-list/{issuerId} 
 해당 이슈어가 생성한 context 목록 
@@ -70,6 +72,7 @@ issuerId : pathVariable
     ...
 ]
 
+failed 200, 200은 성공코드 아니었나?
 
 3-2. /context-list
 백엔드가 가지고있는 모든 context 목록
@@ -89,6 +92,8 @@ null
     ...
 ]
 
+failed 200
+The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*'
 
 4. /vc-list/{context} *
 1.기존에는 전체다 불러오고 그걸 프론트에서 거르는걸로 했었다.
@@ -115,6 +120,7 @@ context : pathVariable
     },
 ]
 
+스킵, 로그인 기능 완성 필요.
 --------------------------------------------
 
 /verifier
@@ -140,6 +146,7 @@ context : pathVariable
     "verifierId" : "String"
 }
 
+200 완료, required 여러개 받을 수 있어야한다.
 
 2. /post-list/{verifierId}
 해당 verifier가 등록한 채용공고 목록 불러오기
@@ -160,6 +167,7 @@ context : pathVariable
     ...
 ]
 
+200 공란, 데이터가 넘어오지를 않는다.
 
 3. /submitted-vc-list/{verifierId}/{postId}
 해당 공지가 제출받은 인증서 목록 불러오기
@@ -171,7 +179,7 @@ context : pathVariable
 1. status는 무얼 의미하는 것인가? -> null
 2. verifier는 무엇을 의미하는 가? -> id
 3. 하나의 이력서에 하나 이상의 vc가 들어있는 경우엔 어떻게 되는가.
-3. 여기도 나중엔 수정을 많이 하게될듯
+4. 여기도 나중엔 수정을 많이 하게될듯
 [
     {
         "vcId" : Int,
@@ -183,6 +191,8 @@ context : pathVariable
     },
     ...
 ]
+
+스킾
 
 
 4. /verify
@@ -201,6 +211,8 @@ context : pathVariable
 }
 - response
 "Success"
+
+스킾
 
 ----------------------------------------------------------
 
@@ -224,6 +236,7 @@ null
     ...
 ]
 
+200, 잘뜬다.
 
 2. /vc-list/{holderId}
 holder가 보유한 vc를 모두 불러옵니다.
@@ -247,6 +260,7 @@ holder가 보유한 vc를 모두 불러옵니다.
     ...
 ]
 
+vc 만들수 없어 공란 뜨는 것만 확인되었다.
 
 3. /submitted-vc
 인증서를 제출합니다.
@@ -266,6 +280,8 @@ holder가 보유한 vc를 모두 불러옵니다.
 - response
 "success"
 
+vc 만들어지지 않는다. -> 확인 불가능하다.
+
 4. /submitted-vc-list/{holderId}
 자기가 제출한 인증서 목록을 가져옵니다.
 
@@ -282,3 +298,5 @@ holder가 보유한 vc를 모두 불러옵니다.
         "status" : String
     }
 ]
+
+null 값 뜨는것 확인했다.

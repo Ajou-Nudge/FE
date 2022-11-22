@@ -1,44 +1,46 @@
 
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
-import DummySubmittedList from "../../dummy/dummySubmittedList";
 import { CheckCircleOutlined, ClockCircleOutlined, CloseCircleOutlined  } from '@ant-design/icons';
 import holderSVL_headLine from "../../img/headline/holderSVL_headline.png"
 import Headline from "../../component/headline";
 import "./css/holderSubmittedList.css"
 import useResize from "../../component/useResize";
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import { message } from "antd";
+
+// import DummySubmittedList from "../../dummy/dummySubmittedList";
+
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { message } from "antd";
 
 function HolderSubmittedList({userIdInStore}) {
 
     const [ vcList, setVcList ] = useState([])
     const [ width ] = useResize()
 
-    // const navigate = useNavigate()
-
-    // useEffect(() => {
-    //     // redux에 저장되어있는 issuer 아이디로 발행된 vc 요청
-    //     axios({
-    //         url: `/holder/submitted-vc-list/:${userIdInStore}`,
-    //         method: "GET",
-    //         withCredentials: true,
-    //     })
-    //     // setVcList에 저장
-    //     .then((res) => {
-    //         setVcList(res)
-    //     })
-    //     // 오류핸들링
-    //     .catch(() => {
-    //         message.error("제출 이력 가져오기 실패");
-    //         navigate("/issuer")
-    //     });
-    // }, [navigate, userIdInStore])
+    const navigate = useNavigate()
 
     useEffect(() => {
-        setVcList(DummySubmittedList)
-    }, [])
+        // redux에 저장되어있는 issuer 아이디로 발행된 vc 요청
+        axios({
+            url: `http://localhost:8080/holder/submitted-vc-list/:${userIdInStore}`,
+            method: "GET",
+            // withCredentials: true,
+        })
+        // setVcList에 저장
+        .then((res) => {
+            setVcList(res.data)
+        })
+        // 오류핸들링
+        .catch(() => {
+            message.error("제출 이력 가져오기 실패");
+            navigate("/holder")
+        });
+    }, [navigate, userIdInStore])
+
+    // useEffect(() => {
+    //     setVcList(DummySubmittedList)
+    // }, [])
     
     function makeVcList() {
 

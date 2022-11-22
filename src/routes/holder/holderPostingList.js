@@ -1,37 +1,41 @@
 import { Link } from "react-router-dom";
 import { Button, Table } from "antd";
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import { message } from "antd";
 import { useState, useEffect } from "react";
 import Headline from "../../component/headline";
-import DummyPostingList from "../../dummy/dummyPostingList";
 import holderPL_headline from "../../img/headline/holderPL_headline.png"
 import "./css/holderPostingList.css"
 
+// import { useNavigate } from "react-router-dom";
+// import { message } from "antd";
+// import axios from "axios";
+
+import DummyPostingList from "../../dummy/dummyPostingList";
 
 function HolderPostingList() {
-    //const navigate = useNavigate()
     const [postingList, setPostingList] = useState([])
+    
     useEffect(() => {
         setPostingList(DummyPostingList)
     },[])
-
-    // // BE에서 posting 가져오기
+    
+    
+    // const navigate = useNavigate()
+    // BE에서 posting 가져오기
     // useEffect(() => {
     //     axios({
-    //         url: `/holder/post-list`,
+    //         url: `http://localhost:8080/holder/post-list`,
     //         method: "GET",
-    //         withCredentials: true,
+    //         // withCredentials: true,
     //     })
     //     .then((res) => {
-    //         setPostingList(res)
+    //         setPostingList(res.data)
+    //         console.log(res)
     //     })
     //     .catch(() => {
     //         messageError("채용공고 목록 가져오기 실패");
     //         navigate("/holder")
     //     });
-    // })
+    // }, [navigate])
     // function messageError(msg) {
     //     message.error(msg);
     // };

@@ -67,8 +67,9 @@ function IssuerCreateContext() {
         for (let i=0; i < inputCount; i++){
             let buffer = rawContext
             let value = buffer[`value${i}`]
-            let isEssential = buffer[`isEssential${i}`] || "0"
-            const aCredentialSubject =   {[value] : isEssential}
+            // 필수 여부 핸들링 하는 부분
+            // let isEssential = buffer[`isEssential${i}`] || "0"
+            const aCredentialSubject =   {[`value${i + 1}`] : value}
             credentialSubject = {...credentialSubject, ...aCredentialSubject}
         }
         const Context = {
@@ -92,8 +93,8 @@ function IssuerCreateContext() {
             .then((res) => {
                 messageInfo("양식생성 성공");
             })
-            .catch(() => {
-                messageError("양식생성 실패");
+            .catch((err) => {
+                messageError(err + "양식생성 실패");
             });
     }
 
