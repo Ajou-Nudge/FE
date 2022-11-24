@@ -53,42 +53,24 @@ function SignIn ({userObjInStore, SignInToStore}) {
                 // withCredentials: true,
             })
             .then((data) => {
-                // axios({
-                //     url: `${process.env.REACT_APP_AUTH}/aut/api/v1/accesstoken`,
-                //     method: "GET",
-                //     withCredentials: true,
-                // })
-                // .then((userObj) => {
-                //     const userData = JSON.stringify({
-                //         _id: userObj.data.user._id,
-                //         email: userObj.data.user.email,
-                //         username: userObj.data.user.username,
-                //         walletAddress: userObj.data.user.walletAddress,
-                //         title: userObj.data.user.title,
-                //         desc: userObj.data.user.desc,
-                //         type: userObj.data.type,
-                //     });
-                //     SignInToStore(JSON.parse(userData));
-                //     NavigateToHome(userObj.data.type);
-                //     messageInfo("로그인 성공!");
-                // })
-                // .then(()=>{
-                //     console.log(userObjInStore)
-                // })
-                // .catch(() => {
-                //   messageError("로그인 실패!!");
-                // });
                 messageInfo("로그인 성공!");
                 setCookie("jwtCookie", data.data, [])
                 SignInToStore({userId: signinObj.email})
                 console.log(cookie)
+                axios({
+                    url: `http://localhost:8080/user/info`,
+                    method: "GET",
+                })
+                .then((data) => {
+                    console.log(data)
+                })
             })
             .catch(() => {
                 message.error("가입정보가 틀립니다.");
             });
         }
     }
-    console.log(userObjInStore.userId)
+    // console.log(userObjInStore.userId)
     
     return (
         <div className='logIn_bgGray'>

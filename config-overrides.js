@@ -9,12 +9,13 @@ module.exports = {
               ...config.resolve.fallback,
               fs: false,
               net: false,
+              buffer: require.resolve("buffer"),
               stream: require.resolve('stream-browserify'),
               crypto: require.resolve('crypto-browserify'),
               http: require.resolve('stream-http'),
               https: require.resolve('https-browserify'),
               os: require.resolve('os-browserify'),
-              url: require.resolve("url")
+              url: require.resolve("url"),
           }
         }
       }

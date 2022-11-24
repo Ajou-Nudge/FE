@@ -57,8 +57,8 @@ const HolderSignUp = () => {
     ) {
       message.error("비밀번호를 형식에 맞춰 정확히 입력해주세요.");
     } else if (!isCorrect) {
-      message.error("비밀번호 확인이 일치하지 않습니다");
-    } else if (!/^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/.test(userInfo.username)) {
+    //   message.error("비밀번호 확인이 일치하지 않습니다");
+    // } else if (!/^[ㄱ-ㅎ|가-힣|a-z|A-Z|]+$/.test(userInfo.username)) {
     //   message.error("이름을 정확히 입력해주세요.");
     // } else if (userInfo.birth === "" || userInfo.birth === null) {
     //   message.error("생년월일을 선택해주세요.");

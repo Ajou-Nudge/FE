@@ -47,12 +47,12 @@ const CompanySignUp = () => {
       messageError("비밀번호를 형식에 맞춰 정확히 입력해주세요.");
     } else if (!isCorrect) {
       messageError("비밀번호 확인이 일치하지 않습니다");
-    } else if (!/^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9| |]+$/.test(issuerInfo.title)) {
-      messageError("기관명을 정확히 입력해주세요.");
-    } else if (issuerInfo.registNumber === "") {
-      messageError("사업자 등록번호를 입력해주세요.");
-    } else if (issuerInfo.requiredVC.length < 1) {
-      messageError("1개 이상의 요구사항을 선택해주세요.");
+    // } else if (!/^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9| |]+$/.test(issuerInfo.title)) {
+    //   messageError("기관명을 정확히 입력해주세요.");
+    // } else if (issuerInfo.registNumber === "") {
+    //   messageError("사업자 등록번호를 입력해주세요.");
+    // } else if (issuerInfo.requiredVC.length < 1) {
+    //   messageError("1개 이상의 요구사항을 선택해주세요.");
     // } else if (myAddress === "") {
     //   message.error("KLIP 지갑을 연동해주세요.");
     } else {

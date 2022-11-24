@@ -5,12 +5,13 @@ import * as XLSX from "xlsx"
 import { Empty, Switch } from "antd";
 import Headline from "../../component/headline";
 import issuerI_headline from "../../img/headline/issuerI_headline.png"
+import Connectkaikas from "./component/kaikas";
 import DummyContextList from "../../dummy/dummyContextList";
 import "./css/issuerIssue.css"
 
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { message } from "antd"
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import { message } from "antd"
 
 
 function IssuerIssue(userIdInStore) {
@@ -30,7 +31,7 @@ function IssuerIssue(userIdInStore) {
         }
     }])
     
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     // 창 가로크기 측정 코드, inner 850px 기준, className으로 반응
     const[ widthHandle, setWidthHandle ] = useState("")
@@ -217,21 +218,30 @@ function IssuerIssue(userIdInStore) {
         setIssueVcs(issueVc)
     }
 
+    // const res = { vcId1: "hash1", vcId2: "hash2", ...}
+
     // BE 제출
     function submit() {
         console.log(issueVcs)
-        axios({
-            url: `http://localhost:8080/issuer/vc`,
-            method: "POST",
-            data: issueVcs,
-        })
-        .then((res) => {
-            message.success("양식생성 성공");
-            navigate("/issuer")
-        })
-        .catch(() => {
-            message.error("양식생성 실패");
-        });
+        Connectkaikas("kaikasVcId1", "kaikasHash1")
+
+        // axios({
+        //     url: `http://localhost:8080/issuer/vc`,
+        //     method: "POST",
+        //     data: issueVcs,
+        // })
+        // .then((res) => {
+        //     message.success("서버전송 성공, 블록체인 연결 시작");
+
+        //     KaikasCaver("caverText4", "caverTest4")
+        //     .then((state) => {
+        //         console.log(state)
+        //     })
+            
+        // })
+        // .catch(() => {
+        //     message.error("서버전송 실패");
+        // });
     }
 
     const subtitle = "발급 대상자에게 인증서를 발급할 수 있습니다."

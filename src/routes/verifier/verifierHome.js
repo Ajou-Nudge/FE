@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import connectCaver from "./component/connectCaver";
+import ConnectCaver from "./component/connectCaver";
+import abi from "./component/abi.json"
 
 function VerifierHome() {
 
@@ -13,9 +14,7 @@ function VerifierHome() {
     async function onKaikas() {
         try {
             const wallet = await window.klaytn.enable()
-            const version = await window.klaytn.networkVerson
             console.log(wallet)
-            console.log(version)
         } catch (error) {
             console.log(error)
         }
@@ -39,8 +38,28 @@ function VerifierHome() {
         );
     }
     function onCaver() {
-        return connectCaver()
+        return ConnectCaver(provider)
     }
+    function onKaikasCaver() {
+        
+        const did=`did:vone:${provider.selectedAddress.slice(2)}`
+        const vcId="caverTest1"
+        const hashed="caverTest1"
+        const contractAddress ="0x967FE285D361601FA7b8C6559d6FaC34b189E956";
+        
+        const myContract = new window.caver.klay.Contract(abi, contractAddress)
+        
+        myContract.methods
+        .issueVC(
+            did,vcId,hashed
+        )
+        .send({
+            from: provider.selectedAddress,
+            gas: "7500000",
+        });
+    
+    }
+
 
     return(
         <div>
@@ -54,6 +73,7 @@ function VerifierHome() {
             <button onClick={onKaikas}>카이카스 로그인</button>
             <button onClick={onSend}>1 클레이튼 코인 전송</button>
             <button onClick={onCaver}>caver</button>
+            <button onClick={onKaikasCaver}>kaikas.caver</button>
         </div>
     )
 }
