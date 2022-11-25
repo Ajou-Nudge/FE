@@ -37,7 +37,7 @@ function IssuerContextList({userIdInStore}) {
         })
         // setVcList에 저장
         .then((res) => {
-            setContextList(res)
+            setContextList(res.data)
         })
         // 오류핸들링
         .catch(() => {
@@ -55,14 +55,17 @@ function IssuerContextList({userIdInStore}) {
         const lengthCounter = contextList.length
         const CLdata = []
         for (let i=0; i < lengthCounter; i++) {
-            let obj = Object.keys(contextList[i].credentialSubject)
+            const values = Object.values(contextList[i].credentialSubject)
+            const certificateValues = values.filter((value) => {
+                return value !== null
+            })
             CLdata.push({
                 key: contextList[i].context,
                 num: i+1,
                 detail: 
                     <div>
-                        {obj.map((keys) => {
-                            return <div key={`map${keys}`}>{keys}: {(contextList[i].credentialSubject[keys] === "1") ? "필수기제" : "생략가능"}</div>
+                        {certificateValues.map((keys) => {
+                            return <div key={`map${keys}`}>{keys}: 필수기재</div>
                         })}
                     </div>,
                 link: 
@@ -158,7 +161,7 @@ function IssuerContextList({userIdInStore}) {
 }
 
 function mapStateToProps(state) {
-    return {userIdInStore: state._id}
+    return {userIdInStore: state.userType}
 }
 
 export default connect(mapStateToProps, null) (IssuerContextList)

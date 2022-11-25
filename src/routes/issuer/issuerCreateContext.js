@@ -89,6 +89,7 @@ function IssuerCreateContext() {
             data: {
               ...Context
             },
+            withCredentials: true,
         })
             .then((res) => {
                 messageInfo("양식생성 성공");

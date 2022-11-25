@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
 
 
-function NavigateToHome(userType) {
+function NavigateToHome(userObjInStore) {
+    const { userType } = userObjInStore
     const navigate = useNavigate()
     if (userType === "holder") {
         navigate("/holder");
@@ -14,4 +16,8 @@ function NavigateToHome(userType) {
     }
 }
 
-export default NavigateToHome
+function mapStateToProps(state) {
+    return {userObjInStore: state}
+}
+
+export default connect(mapStateToProps, null) (NavigateToHome)

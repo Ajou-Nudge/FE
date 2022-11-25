@@ -5,40 +5,40 @@ import Headline from "../../component/headline";
 import holderPL_headline from "../../img/headline/holderPL_headline.png"
 import "./css/holderPostingList.css"
 
-// import { useNavigate } from "react-router-dom";
-// import { message } from "antd";
-// import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { message } from "antd";
+import axios from "axios";
 
-import DummyPostingList from "../../dummy/dummyPostingList";
+// import DummyPostingList from "../../dummy/dummyPostingList";
 
 function HolderPostingList() {
     const [postingList, setPostingList] = useState([])
     
-    useEffect(() => {
-        setPostingList(DummyPostingList)
-    },[])
-    
-    
-    // const navigate = useNavigate()
-    // BE에서 posting 가져오기
     // useEffect(() => {
-    //     axios({
-    //         url: `http://localhost:8080/holder/post-list`,
-    //         method: "GET",
-    //         // withCredentials: true,
-    //     })
-    //     .then((res) => {
-    //         setPostingList(res.data)
-    //         console.log(res)
-    //     })
-    //     .catch(() => {
-    //         messageError("채용공고 목록 가져오기 실패");
-    //         navigate("/holder")
-    //     });
-    // }, [navigate])
-    // function messageError(msg) {
-    //     message.error(msg);
-    // };
+    //     setPostingList(DummyPostingList)
+    // },[])
+    
+    
+    const navigate = useNavigate()
+    // BE에서 posting 가져오기
+    useEffect(() => {
+        axios({
+            url: `http://localhost:8080/holder/post-list`,
+            method: "GET",
+            withCredentials: true,
+        })
+        .then((res) => {
+            setPostingList(res.data)
+            console.log(res)
+        })
+        .catch(() => {
+            messageError("채용공고 목록 가져오기 실패");
+            navigate("/holder")
+        });
+    }, [navigate])
+    function messageError(msg) {
+        message.error(msg);
+    };
 
 
     function makePostingList() {
@@ -60,7 +60,7 @@ function HolderPostingList() {
                 link: 
                     <Link 
                         key={i} 
-                        to={`/holder/submit/:${postingList[i].id}`}
+                        to={`/holder/submit/${postingList[i].id}`}
                         state={{
                             title: postingList[i].title,
                             id: postingList[i].id,

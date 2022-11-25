@@ -21,13 +21,12 @@ function IssuerPostingList({userIdInStore}) {
     useEffect(() => {
         // 채용공고 목록 불러오기
         axios({
-            url: `http://localhost:8080/verifier/post-list/:sjh2389@ajou.ac.kr`,
+            url: `http://localhost:8080/verifier/post-list/sjh3922@naver.com`,
             method: "GET",
-            // withCredentials: true,
+            withCredentials: true,
         })
         // setPostingList에 저장
         .then((res) => {
-            console.log(res)
             setPostingList(res.data)
         })
         // 오류핸들링
@@ -55,9 +54,9 @@ function IssuerPostingList({userIdInStore}) {
                 verifiy: 
                     <Link
                         key={i} 
-                        to={`/issuer/verifiy/:${postingList[i].postId}`}
+                        to={`/issuer/verifiy/${postingList[i].id}`}
                         state={{
-                            postId: postingList[i].postId,
+                            postId: postingList[i].id,
                             title: postingList[i].title,
                         }}
                     >
@@ -118,7 +117,7 @@ function IssuerPostingList({userIdInStore}) {
 }
 
 function mapStateToProps(state) {
-    return {userIdInStore: state._id}
+    return {userIdInStore: state.userType}
 }
 
 export default connect(mapStateToProps, null) (IssuerPostingList)

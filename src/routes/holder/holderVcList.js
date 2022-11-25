@@ -3,18 +3,18 @@ import { useState, useEffect, useRef } from "react";
 import { Button, Table, Switch } from "antd";
 import { FilePdfOutlined } from "@ant-design/icons"
 import { useReactToPrint } from "react-to-print";
-import Pdf from "./component/pdf";
+// import Pdf from "./component/pdf";
 import Headline from "../../component/headline";
 import holderVL_headline from "../../img/headline/holderVL_headline.png";
 import logo1 from "../../img/상공회의소.png"
 import logo2 from "../../img/ajou_log.png"
 import "./css/holderVcList.css"
 
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import { message } from "antd";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { message } from "antd";
 
-import DummyVcList from "../../dummy/dummyVcList";
+// import DummyVcList from "../../dummy/dummyVcList";
 
 function HolderVcList(userIdInStore) {
 
@@ -25,30 +25,30 @@ function HolderVcList(userIdInStore) {
     const [ cursor, setCursor ] = useState(1)
     //const [ checked, setChecked ] = useState([])
     
-    // 더미데이터 주입
-    useEffect( () => {
-        setVcList(DummyVcList)
-    }, [] )
+    // // 더미데이터 주입
+    // useEffect( () => {
+    //     setVcList(DummyVcList)
+    // }, [] )
     
-    // const navigate = useNavigate()
-    // // store.js에서 id 가져와 BE에 요청보내기
-    // useEffect(() => {
-    //     axios({
-    //         url: `http://localhost:8080/holder/vc-list/:sjh3922@naver.com`,
-    //         method: "GET",
-    //         // withCredentials: true,
-    //     })
-    //     .then((res) => {
-    //         setVcList(res)
-    //     })
-    //     .catch(() => {
-    //         messageError("자격증 가져오기 실패");
-    //         navigate("/holder")
-    //     });
-    // })
-    // function messageError(msg) {
-    //     message.error(msg);
-    // };
+    const navigate = useNavigate()
+    // store.js에서 id 가져와 BE에 요청보내기
+    useEffect(() => {
+        axios({
+            url: `http://localhost:8080/holder/vc-list/sjh2389@ajou.ac.kr`,
+            method: "GET",
+            withCredentials: true,
+        })
+        .then((res) => {
+            setVcList(res.data)
+        })
+        .catch(() => {
+            messageError("자격증 가져오기 실패");
+            navigate("/holder")
+        });
+    },[navigate])
+    function messageError(msg) {
+        message.error(msg);
+    };
 
 
     // 해당 hook은 반드시 onClick에 위치하며 선택대상의 id 따오는 것이 불가능 -> onMouse 이벤트리스너로 cursor에 선택대상 id 따오기
@@ -56,7 +56,6 @@ function HolderVcList(userIdInStore) {
         // content : pdf로 뿌려줄 대상의 위치를 ref로 요구
         content: () => componentRef.current[cursor]
     })
-    
     
     // 받아온 vc 개수만큼 화면에 뿌려주기
     function makeVcList() {
@@ -66,8 +65,8 @@ function HolderVcList(userIdInStore) {
             data.push({
                 key: i,
                 num: i+1,
-                title: vcList[i].credentialSubject.title,
-                date: vcList[i].credentialSubject.date,
+                title: vcList[i].credentialSubject.value1,
+                date: vcList[i].credentialSubject.value2,
                 issuer: vcList[i].issuer,
                 // pdf 인쇄버튼 란 추가, component로 분리하려했으나, useRef 훅 사용 제약으로 통합하여 진행함.
                 pdf: 
@@ -77,7 +76,7 @@ function HolderVcList(userIdInStore) {
                             <div ref={ rf => (componentRef.current[i] = rf)}>
                                 {/* // pdf 모듈이 반드시 onclick에 위치해야하는 hook 사용, event 사용 불가능함으로 마우스가 위치한 곳의 id 추출하는 로직 추가 */}
                                 <button id={i} onMouseEnter={(e) => {setCursor(e.target.id)}} onClick={handlePrint} />
-                                <Pdf
+                                {/* <Pdf
                                     title={vcList[i].context}
                                     content={"content"}
                                     type={"type"}
@@ -85,7 +84,7 @@ function HolderVcList(userIdInStore) {
                                     user={vcList[i].credentialSubject.name}
                                     organization={vcList[i].issuer}
                                     logo={(vcList[i].issuer === "대한상공회의소") ? logo1 : logo2}
-                                />
+                                /> */}
                             </div>
                         </div>
                     </div>,
@@ -144,7 +143,7 @@ function HolderVcList(userIdInStore) {
                             <p className="holderVL_vcBox_card_text">{vc.credentialSubject.title}</p>
                             <div style={{ display:"none" }}>
                                 <div ref={ rf => (componentRef.current[vcList.length + 1 + i]) = rf}>
-                                    <Pdf
+                                    {/* <Pdf
                                         title={vc.context}
                                         content={"content"}
                                         type={"type"}
@@ -152,7 +151,7 @@ function HolderVcList(userIdInStore) {
                                         user={vc.credentialSubject.name}
                                         organization={vc.issuer}
                                         logo={(vc.issuer === "대한상공회의소") ? logo1 : logo2}
-                                    />
+                                    /> */}
                                 </div>
                             </div>
                         </div>
@@ -205,6 +204,6 @@ function HolderVcList(userIdInStore) {
 }
 
 function mapStateToProps(state) {
-    return {userIdInStore: state._id}
+    return {userIdInStore: state.userType}
 }
 export default connect(mapStateToProps, null) (HolderVcList)

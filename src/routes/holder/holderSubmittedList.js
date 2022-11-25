@@ -23,9 +23,9 @@ function HolderSubmittedList({userIdInStore}) {
     useEffect(() => {
         // redux에 저장되어있는 issuer 아이디로 발행된 vc 요청
         axios({
-            url: `http://localhost:8080/holder/submitted-vc-list/:${userIdInStore}`,
+            url: `http://localhost:8080/holder/submitted-vc-list/sjh2389@ajou.ac.kr`,
             method: "GET",
-            // withCredentials: true,
+            withCredentials: true,
         })
         // setVcList에 저장
         .then((res) => {
@@ -134,7 +134,7 @@ function HolderSubmittedList({userIdInStore}) {
 }
 
 function mapStateToProps(state) {
-    return {userIdInStore: state._id}
+    return {userIdInStore: state.userType}
 }
 
 export default connect(mapStateToProps, null) (HolderSubmittedList)

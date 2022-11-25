@@ -2,11 +2,11 @@
 // eslint-disable-next-line
 import {HashRouter as Router, Routes, Route, BrowserRouter} from "react-router-dom"
 import { actionCreators } from "./component/store.js";
-// import { useEffect } from "react";
-// import { useCookies } from 'react-cookie'
-// import axios from "axios";
 import { connect } from "react-redux";
 import 'antd/dist/antd.min.css';
+
+// import { useEffect } from "react";
+// import axios from "axios";
 
 // Main
 import Home from "./routes/home/home";
@@ -50,36 +50,33 @@ import IssuerNav from "./component/navBar/issuerNav.js";
 import HolderNav from "./component/navBar/holderNav.js";
 import VerifierNav from "./component/navBar/verifierNav.js";
 import Footer from "./component/footer.js";
+// import Nav from "./component/navBar/nav.js";
 
 
-function App({SignInToStore}) {
+function App({userObjInStore, SignInToStore}) {
+
   // // jwt토큰쿠키로 로그인 관리
-  // const [cookie] = useCookies(["jwtCookie"])
   // useEffect(() => {
   //   axios({
-  //     url: `${process.env.REACT_APP_AUTH}/aut/api/v1/accesstoken`,
+  //     url: `http://localhost:8080/user/info`,
   //     method: "GET",
-  //     data: cookie.jwtCookie,
   //     withCredentials: true,
   //   })
   //   .then((userObj) => {
-  //     // 받아온 user정보 직렬화
-  //     const userData = JSON.stringify({
-  //         _id: userObj.data.user._id,
-  //         email: userObj.data.user.email,
-  //         username: userObj.data.user.username,
-  //         walletAddress: userObj.data.user.walletAddress,
-  //         title: userObj.data.user.title,
-  //         desc: userObj.data.user.desc,
-  //         type: userObj.data.type,
-  //     });
   //     // 리덕스기반으로 메모리에 저장
-  //     SignInToStore(JSON.parse(userData));
+  //     SignInToStore(userObj);
+
   //   })
   //     .catch(() => {
   //       console.log("로그인관리 에러");
   //     });
-  // },[cookie.jwtCookie, SignInToStore])
+  // },[SignInToStore])
+
+  // // 리덕스 더미데이터 주입
+  // useEffect(() => {
+  //   const userObj = {userType: "holder"}
+  //   SignInToStore(userObj)
+  // })
 
   // 라우터별로 분리, Main/Issuer/Holder/Verifier
   function Main() {
@@ -148,18 +145,19 @@ function App({SignInToStore}) {
       </div>
     )
   }
-  
+
   return (
-    <div> 
+    <div>
       <BrowserRouter>
+        {/* <Nav/> */}
         <Routes>
           <Route path="/*" element={<Main />}/>
           <Route path="/issuer/*" element={<Issuer />}/>
           <Route path="/holder/*" element={<Holder />}/>
           <Route path="/verifier/*" element={<Verifier />}/>
         </Routes>
+        <Footer />
       </BrowserRouter>
-      <Footer />
     </div>
   )
 }

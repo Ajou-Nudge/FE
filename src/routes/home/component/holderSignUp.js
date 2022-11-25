@@ -73,7 +73,7 @@ const HolderSignUp = () => {
         data: {
           memberId: userInfo.email,
           password: userInfo.password,
-          status: "signUpTest",
+          role: "HOLDER",
           // username: userInfo.username,
           // birthDay: userInfo.birth,
           // IssuerList: userInfo.IssuerList,

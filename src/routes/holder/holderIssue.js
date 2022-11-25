@@ -7,14 +7,14 @@ import Headline from "../../component/headline";
 import holderVL_headline from "../../img/headline/holderVL_headline.png"
 import "./css/holderIssue.css"
 
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import { message } from "antd"
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { message } from "antd"
 
 
 function HolderIssue(userIdInStore) {
     
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     // contextList는 받아온 formList에서 context만 추출한 것
     const [ uploadMod, setUploadMod ] = useState("handWrite")
     const [ fileName, setFileName ] = useState("")
@@ -205,18 +205,19 @@ function HolderIssue(userIdInStore) {
     // BE 제출
     function submit() {
         console.log(issueVcs)
-        // axios({
-        //     url: `http://localhost:8080/holder/vc`,
-        //     method: "POST",
-        //     data: issueVcs,
-        // })
-        // .then((res) => {
-        //     message.success("양식생성 성공");
-        //     navigate("/issuer")
-        // })
-        // .catch(() => {
-        //     message.error("양식생성 실패");
-        // });
+        axios({
+            url: `http://localhost:8080/holder/vc`,
+            method: "POST",
+            data: issueVcs,
+            withCredentials: true,
+        })
+        .then((res) => {
+            message.success("양식생성 성공");
+            navigate("/issuer")
+        })
+        .catch(() => {
+            message.error("양식생성 실패");
+        });
     }
 
     const subtitle = "자신의 인증서를 등록할 수 있습니다."
@@ -287,7 +288,7 @@ function HolderIssue(userIdInStore) {
     )
 }
 function mapStateToProps(state) {
-    return {userIdInStore: state._id}
+    return {userIdInStore: state.userType}
 }
 function mapDispatchToProps(dispatch) {
     return {

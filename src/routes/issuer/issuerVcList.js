@@ -5,14 +5,14 @@ import "./css/issuerVcList.css"
 import Headline from "../../component/headline";
 import issuerVL_headline from "../../img/headline/issuerVL_headline.png"
 
-// 더미
-import DummyVcList from "../../dummy/dummyVcList";
-import DummyContextList from "../../dummy/dummyContextList";
+// // 더미
+// import DummyVcList from "../../dummy/dummyVcList";
+// import DummyContextList from "../../dummy/dummyContextList";
 
-// // 백엔드
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import { message } from "antd";
+// 백엔드
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { message } from "antd";
 
 function IssuerVcList({userIdInStore}) {
 
@@ -21,53 +21,54 @@ function IssuerVcList({userIdInStore}) {
     const [ selectedContext, setSelectedContext ] = useState("인증서를 선택해주세요.")
 
 
-    // // 백엔드 연결
-    // const navigate = useNavigate()
-    // useEffect(() => {
-    //     // redux에 저장되어있는 issuer 아이디로 발행된 모든vc 요청
-    //     axios({
-    //         url: `http://localhost:8080/issuer/vc-list/:${userIdInStore}`,
-    //         method: "GET",
-    //         withCredentials: true,
-    //     })
-    //     // setVcList에 저장
-    //     .then((res) => {
-    //         setVcList(res)
-    //     })
-    //     // 오류핸들링
-    //     .catch(() => {
-    //         message.error("자격증 가져오기 실패");
-    //         navigate("/issuer")
-    //     });
-    // }, [navigate, userIdInStore])
-    
-    // // 서버에서 issuer의 context정보 불러오기
-    // useEffect(() => {
-    //     axios({
-    //         url: `http://localhost:8080/issuer/context-list/:${userIdInStore}`,
-    //         method: "GET",
-    //         withCredentials: true,
-    //     })
-    //     .then((res) => {
-    //         setContextList(res)
-    //     })
-    //     .catch(() => {
-    //         message.error("자격증 양식 가져오기 실패");
-    //         navigate("/issuer")
-    //     });
-    // }, [navigate, userIdInStore])
-
-    // 더미 연결
+    // 백엔드 연결
+    const navigate = useNavigate()
     useEffect(() => {
-        setVcList(DummyVcList)
-        setContextList([...DummyContextList])
-    }, [])
+        // redux에 저장되어있는 issuer 아이디로 발행된 모든vc 요청
+        axios({
+            url: `http://localhost:8080/issuer/vc-list`,
+            method: "GET",
+            withCredentials: true,
+        })
+        // setVcList에 저장
+        .then((res) => {
+            setVcList(res.data)
+        })
+        // 오류핸들링
+        .catch(() => {
+            message.error("자격증 가져오기 실패");
+            navigate("/issuer")
+        });
+    }, [navigate, userIdInStore])
+    
+    // 서버에서 issuer의 context정보 불러오기
+    useEffect(() => {
+        axios({
+            url: `http://localhost:8080/issuer/context-list`,
+            method: "GET",
+            withCredentials: true,
+        })
+        .then((res) => {
+            setContextList(res.data)
+        })
+        .catch(() => {
+            message.error("자격증 양식 가져오기 실패");
+            navigate("/issuer")
+        });
+    }, [navigate, userIdInStore])
+
+    // // 더미 연결
+    // useEffect(() => {
+    //     setVcList(DummyVcList)
+    //     setContextList([...DummyContextList])
+    // }, [])
 
     // 유저가 선택한 자격증 종류 핸들링
     function contextSelect (e) { 
         setSelectedContext(e.target.value)
     }
     
+    console.log(vcList)
     // vc 리스트 뿌려주기
     function makeVCList() {    
         const VLdata = []
@@ -78,9 +79,9 @@ function IssuerVcList({userIdInStore}) {
                 VLdata.push({
                     key: i,
                     num: i+1,
-                    date: vcList[i].credentialSubject["date"],
-                    title: vcList[i].credentialSubject["title"],
-                    name: vcList[i].credentialSubject["name"],
+                    date: vcList[i].vc.credentialSubject["value1"],
+                    title: vcList[i].vc.credentialSubject["value2"],
+                    name: vcList[i].vc.credentialSubject["value3"],
                 })
             }
         } else {
@@ -91,9 +92,9 @@ function IssuerVcList({userIdInStore}) {
                 VLdata.push({
                     key: i,
                     num: i+1,
-                    date: selectedList[i].credentialSubject["date"],
-                    title: selectedList[i].credentialSubject["title"],
-                    name: selectedList[i].credentialSubject["name"],
+                    date: selectedList[i].vc.credentialSubject["date"],
+                    title: selectedList[i].vc.credentialSubject["title"],
+                    name: selectedList[i].vc.credentialSubject["name"],
                 })
             }
         }
@@ -156,7 +157,7 @@ function IssuerVcList({userIdInStore}) {
 }
 
 function mapStateToProps(state) {
-    return {userIdInStore: state._id}
+    return {userIdInStore: state.userType}
 }
 
 export default connect(mapStateToProps, null) (IssuerVcList)

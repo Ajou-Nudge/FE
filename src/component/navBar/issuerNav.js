@@ -1,9 +1,18 @@
 import { Menu } from 'antd';
 import { NavLink } from "react-router-dom";
 import logo from '../../img/didnow.png'
+// import { useCookies } from "cookie"
 //import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 function IssuerNav() {
 
+  // eslint-disable-next-line
+  // const [cookies, setCookie, removeCookie] = useCookies([])
+  // const navigate = useNavigate()
+
+  // function onclick() {
+  //   removeCookie("Authorization", [])
+  //   navigate("/")
+  // }
 
   const items = [
     { label: <img src={logo} alt="icon" style={{ height: "75px" }} />, key: "icon"},
@@ -26,7 +35,8 @@ function IssuerNav() {
     { label: <NavLink style={{ fontSize: "large" }} to="/issuer/postingList">채용공고</NavLink>,
       key: "posting",
       style: { fontSize: "large" },
-    }
+    },
+    // { label: <button style={{ fontSize: "large" }} onClick={onclick}>로그아웃</button>, key: "logOut" },
   ]
 
   return(

@@ -62,7 +62,7 @@ const CompanySignUp = () => {
         data: {
           memberId: issuerInfo.email,
           password: issuerInfo.password,
-          status: "signUpTest",
+          role: "ISSUER",
           // title: issuerInfo.title,
           // requiredVC: [...issuerInfo.requiredVC],
           // desc: issuerInfo.desc,

@@ -312,6 +312,28 @@
 		"type": "function"
 	},
 	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "did",
+				"type": "string"
+			},
+			{
+				"name": "vcId",
+				"type": "string[]"
+			},
+			{
+				"name": "hashed",
+				"type": "string[]"
+			}
+		],
+		"name": "issueVCs",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"constant": true,
 		"inputs": [
 			{

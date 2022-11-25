@@ -23,10 +23,10 @@ function IssuerPost(userObjInStore) {
     useEffect( () => {
         setPosting(
             {
-                verifierId: "sjh2389@ajou.ac.kr",
+                verifierId: "sjh3922@naver.com",
                 title: "",
                 expired: "",
-                required: "",
+                required: [],
                 url: ""
             }
         )}
@@ -35,8 +35,12 @@ function IssuerPost(userObjInStore) {
     function onChange(e) {
         const modified = posting
         const key = e.target.id
-        modified[key] = e.target.value
-        setPosting(modified)
+        if (key === "required") {
+            modified[key] = [e.target.value]
+        } else {
+            modified[key] = e.target.value
+            return setPosting(modified)
+        }
     }
 
     function onChecked(e) {
@@ -77,7 +81,7 @@ function IssuerPost(userObjInStore) {
             url: "http://localhost:8080/verifier/post",
             method: "POST",
             data: posting,
-            // withCredentials: true,
+            withCredentials: true,
         })
         .then((res) => {
             message.success("공고 업로드 성공")
@@ -197,7 +201,7 @@ function IssuerPost(userObjInStore) {
 }
 
 function mapStateToProps(state) {
-    return {userObjInStore: state._id}
+    return {userObjInStore: state.userType}
 }
 
 export default connect(mapStateToProps, null) (IssuerPost)

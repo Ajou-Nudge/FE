@@ -3,9 +3,9 @@ import { useState } from "react";
 import { connect } from "react-redux";
 import { actionCreators } from "../../component/store";
 import axios from "axios";
-// import NavigateToHome from "./component/navigateToHome";
 import "./css/SignIn.css"
 import { useCookies } from 'react-cookie'
+// import navigateToHome from "./component/navigateToHome";
 
 function SignIn ({userObjInStore, SignInToStore}) {
 
@@ -36,7 +36,7 @@ function SignIn ({userObjInStore, SignInToStore}) {
     //     message.error(msg);
     // };
     
-    
+    // 입력값 확인후 BE에 로그인 요청보내기
     function signin() {
         if (signinObj.email === "") {
           message.error("아이디를 입력해주세요.");
@@ -50,27 +50,33 @@ function SignIn ({userObjInStore, SignInToStore}) {
                     memberId: signinObj.email,
                     password: signinObj.password,
                 },
-                // withCredentials: true,
+                withCredentials: true,
             })
             .then((data) => {
-                messageInfo("로그인 성공!");
-                setCookie("jwtCookie", data.data, [])
+                const cookieValue = data.data.grantType + " " + data.data.accessToken
+                setCookie("Authorization", cookieValue, [])
+                // 유저 타입 입력필요
                 SignInToStore({userId: signinObj.email})
-                console.log(cookie)
-                axios({
-                    url: `http://localhost:8080/user/info`,
-                    method: "GET",
-                })
-                .then((data) => {
-                    console.log(data)
-                })
+                messageInfo("로그인 성공!");
             })
-            .catch(() => {
+            .catch((err) => {
                 message.error("가입정보가 틀립니다.");
             });
         }
     }
     // console.log(userObjInStore.userId)
+    
+    function onInfo() {
+        console.log(cookie)
+        axios({
+            url: `http://localhost:8080/user/info`,
+            method: "GET",
+            withCredentials: true,
+        })
+        .then((data) => {
+            console.log(data)
+        })   
+    }
     
     return (
         <div className='logIn_bgGray'>
@@ -102,6 +108,9 @@ function SignIn ({userObjInStore, SignInToStore}) {
                 </dl>
                 <button className='logIn_button' onClick={signin}>
                     로그인
+                </button>
+                <button className='logIn_button' onClick={onInfo}>
+                    /info
                 </button>
             </div>
         </div>

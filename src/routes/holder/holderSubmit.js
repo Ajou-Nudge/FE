@@ -11,7 +11,7 @@ import makeVcListModal from "./component/makeVcListModal"
 import holderS_headline from "../../img/headline/holderS_headline.png"
 
 
-import DummyVcList from "../../dummy/dummyVcList";
+// import DummyVcList from "../../dummy/dummyVcList";
 
 function HolderSubmit( userIdInStore ) {
 
@@ -20,60 +20,68 @@ function HolderSubmit( userIdInStore ) {
     const navigate = useNavigate()
     const [vcList, setVcList] = useState([])
     const [modalOpen, setModalOpen] = useState(false)
-    const [vcIds, setVcIds] = useState([])
+    const [vcIds, setVcIds] = useState([1])
 
     // store.js에서 id 가져와 BE에 요청보내기
-    // useEffect(() => {
-    //     axios({
-    //         url: `/holder/vc-list/:${userIdInStore}`,
-    //         method: "GET",
-    //         withCredentials: true,
-    //     })
-    //     .then((res) => {
-    //         setVcList(res)
-    //     })
-    //     .catch(() => {
-    //         messageError("자격증 가져오기 실패");
-    //         navigate("/holder")
-    //     });
-    // })
+    useEffect(() => {
+        axios({
+            url: `http://localhost:8080/holder/vc-list/sjh2389@ajou.ac.kr`,
+            method: "GET",
+            withCredentials: true,
+        })
+        .then((res) => {
+            setVcList(res)
+        })
+        .catch(() => {
+            messageError("자격증 가져오기 실패");
+            navigate("/holder")
+        });
+    }, [navigate])
     function messageError(msg) {
         message.error(msg);
     };
 
-    // 더미 데이터 주입
-    useEffect( () => {
-        setVcList(DummyVcList)
-    }, [] )
+    // // 더미 데이터 주입
+    // useEffect( () => {
+    //     setVcList(DummyVcList)
+    // }, [] )
 
     // 사용자의 vcList에서 요구 vcId 추출
     function onClick(){
-        let targetVc = []
-        const vcIdsBuffer = []
-        // post에서 요구하는 vc만 추출
-        targetVc = vcList.filter((vc) => {
-            return vc.context === `${posting.requirement}`
-        })
+        let targetVc = [ "default" ]
+        // const vcIdsBuffer = []
+        // // post에서 요구하는 vc만 추출
+        // targetVc = vcList.filter((vc) => {
+        //     return vc.context === `${posting.requirement}`
+        // })
 
-        // vc에서 id 추출
-        targetVc.map((vc) => {
-            return vcIdsBuffer.push(vc.id)
-        })
+        // // vc에서 id 추출
+        // targetVc.map((vc) => {
+        //     return vcIdsBuffer.push(vc.id)
+        // })
 
-        // set 데이터타입으로 중복선택 제거
-        const set = new Set(vcIdsBuffer)
+        // // set 데이터타입으로 중복선택 제거
+        // const set = new Set(vcIdsBuffer)
 
-        // 버퍼에 추출된 id 넣기
-        setVcIds([...set])
+        // // 버퍼에 추출된 id 넣기
+        // setVcIds([...set])
+
 
         // verifier가 하나이상의 증명서를 요구할 경우 ,if 구문으로 추출된 vc 있는지 확인, 이후 제출
         if (targetVc.length !== 0 || posting.requirement.length === 0) {
+            console.log(
+                {
+                    postId: posting["id"],
+                    holder: `sjh2389@ajou.ac.kr`,
+                    vcIds: vcIds
+                }
+            )
             axios({
-                url: `/holder/submit`,
+                url: `http://localhost:8080/holder/submitted-vc`,
                 method: "POST",
                 data: {
-                    postId: posting["postId"],
-                    holder: `${userIdInStore}`,
+                    postId: posting["id"],
+                    holder: `sjh2389@ajou.ac.kr`,
                     vcIds: vcIds
                 },
                 withCredentials: true,
@@ -82,7 +90,8 @@ function HolderSubmit( userIdInStore ) {
                 message.success("자격증 제출 성공")
                 navigate("/holder/postingList")
             })
-            .catch(() => {
+            .catch((err) => {
+                console.log(err)
                 messageError("자격증 제출 실패"); 
             })
         } else message.error("요구 증명서가 없습니다.")
@@ -199,6 +208,6 @@ function HolderSubmit( userIdInStore ) {
 }
 
 function mapStateToProps(state) {
-    return {userIdInStore: state._id}
+    return {userIdInStore: state.userType}
 }
 export default connect(mapStateToProps, null) (HolderSubmit)

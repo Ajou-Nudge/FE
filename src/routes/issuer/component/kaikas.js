@@ -1,6 +1,9 @@
 import abi from "./abi.json"
 
-async function ConnectKaikas(vcId, hashed) {
+async function ConnectKaikas(res) {
+
+    const vcId = Object.keys(res)
+    const hashed = Object.values(res)
 
     const caver = window.caver
     let provider = null
@@ -12,17 +15,14 @@ async function ConnectKaikas(vcId, hashed) {
 
     try {
         const wallet = await window.klaytn.enable()
-        console.log(wallet)
-        const did=`did:vone:${provider.selectedAddress.slice(2)}`
+        const userAdress = await provider.selectedAddress
+        const did=`did:vone:${userAdress.slice(2)}`
         const contractAddress = "0x967FE285D361601FA7b8C6559d6FaC34b189E956";
-        // const vcId="caverTest4"
-        // const hashed="caverTest4"
     
         const myContract = new caver.klay.Contract(abi, contractAddress)
         
-    
         myContract.methods
-        .issueVC(
+        .issueVCs(
             did,vcId,hashed
         )
         .send({
@@ -30,7 +30,7 @@ async function ConnectKaikas(vcId, hashed) {
             gas: "7500000",
         })
         .then(() => {
-            return console.log("블록체인 등록 성공")
+            return console.log(`블록체인 등록 성공: ${wallet}`)
         })
         .catch((err) => {
             return console.log(`블록체인 등록 오류: ${err}` )

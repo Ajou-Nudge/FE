@@ -6,13 +6,13 @@ import { Empty, Switch } from "antd";
 import Headline from "../../component/headline";
 import issuerI_headline from "../../img/headline/issuerI_headline.png"
 import Connectkaikas from "./component/kaikas";
-import DummyContextList from "../../dummy/dummyContextList";
 import "./css/issuerIssue.css"
 
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import { message } from "antd"
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { message } from "antd"
 
+// import DummyContextList from "../../dummy/dummyContextList";
 
 function IssuerIssue(userIdInStore) {
     
@@ -23,7 +23,7 @@ function IssuerIssue(userIdInStore) {
     const [ contextList, setContextList ] = useState([])
     const [ theForm, setTheForm ] = useState(undefined)
     const [ issueVcs, setIssueVcs ] = useState([{
-        holderId: "1",
+        holderId: "",
         vc: {
             context: "",
             issuer: "",
@@ -31,7 +31,7 @@ function IssuerIssue(userIdInStore) {
         }
     }])
     
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
     // 창 가로크기 측정 코드, inner 850px 기준, className으로 반응
     const[ widthHandle, setWidthHandle ] = useState("")
@@ -47,25 +47,25 @@ function IssuerIssue(userIdInStore) {
     })
 
     // 서버에서 issuer의 context정보 불러오기
-    // useEffect(() => {
-    //     axios({
-    //         url: `http://localhost:8080/issuer/context-list/:sjh3922@naver.com`,
-    //         method: "GET",
-    //         // withCredentials: true,
-    //     })
-    //     .then((res) => {
-    //         setFormList(res.data)
-    //     })
-    //     .catch(() => {
-    //         message.error("자격증 양식 가져오기 실패");
-    //         navigate("/issuer")
-    //     });
-    // }, [navigate, userIdInStore])
-
     useEffect(() => {
-        const Dummy = DummyContextList
-        setFormList([...Dummy])
-    },[])
+        axios({
+            url: `http://localhost:8080/issuer/context-list`,
+            method: "GET",
+            withCredentials: true,
+        })
+        .then((res) => {
+            setFormList(res.data)
+        })
+        .catch(() => {
+            message.error("자격증 양식 가져오기 실패");
+            navigate("/issuer")
+        });
+    }, [navigate, userIdInStore])
+
+    // useEffect(() => {
+    //     const Dummy = DummyContextList
+    //     setFormList([...Dummy])
+    // },[])
 
     // 받아온 List 내부의 form에서 context만 추출
     useEffect(() => {
@@ -196,12 +196,17 @@ function IssuerIssue(userIdInStore) {
             return <Empty />
         } 
         // 디폴트값 아니면 input뿌려주기
-        const formSubject = theForm.credentialSubject
+
+        const values = Object.values(theForm.credentialSubject)
+        const certificateValues = values.filter((value) => {
+            return value !== null
+        })
+        console.log(certificateValues)
         const inputs = []
-        for (let i in formSubject){
+        for (let i in certificateValues){
             inputs.push(
                 <div className={`issuerI_row${widthHandle}`} key={i}>
-                    <div className={`issuerI_tag${widthHandle}`}>{i}{(formSubject[i] === "1") ? <span style={{color: "red"}}> *</span> : ""}</div>
+                    <div className={`issuerI_tag${widthHandle}`}>{certificateValues[i]}<span style={{color: "red"}}> *</span></div>
                     <input className={`issuerI_input${widthHandle}`} id={i} onChange={inPutChange}></input>
                 </div>
             )
@@ -209,8 +214,15 @@ function IssuerIssue(userIdInStore) {
         return inputs   
 
     }
+
+    // 발급대상 설정
+    function setHolder(e) {
+        const issueVc = issueVcs
+        issueVc[0].holderId = e.target.value
+        setIssueVcs(issueVc)
+    }
     
-    // 사용자 입력값따라 body 작성
+    // 사용자 입력값따라 credentialSubject 작성
     function inPutChange(e) {
         const issueVc = issueVcs
         const id = e.target.id
@@ -223,25 +235,28 @@ function IssuerIssue(userIdInStore) {
     // BE 제출
     function submit() {
         console.log(issueVcs)
-        Connectkaikas("kaikasVcId1", "kaikasHash1")
 
-        // axios({
-        //     url: `http://localhost:8080/issuer/vc`,
-        //     method: "POST",
-        //     data: issueVcs,
-        // })
-        // .then((res) => {
-        //     message.success("서버전송 성공, 블록체인 연결 시작");
+        const testObj = { 
+            kaikasVcId9: "kaikasHash9",
+            kaikasVcId8: "kaikasHash8",
+            kaikasVcId7: "kaikasHash7"
+        }
 
-        //     KaikasCaver("caverText4", "caverTest4")
-        //     .then((state) => {
-        //         console.log(state)
-        //     })
-            
-        // })
-        // .catch(() => {
-        //     message.error("서버전송 실패");
-        // });
+        // Connectkaikas(testObj)
+
+        axios({
+            url: `http://localhost:8080/issuer/vc`,
+            method: "POST",
+            data: issueVcs,
+            withCredentials: true,
+        })
+        .then((res) => {
+            message.success("서버전송 성공, 블록체인 연결 시작");
+            Connectkaikas(testObj)
+        })
+        .catch(() => {
+            message.error("서버전송 실패");
+        });
     }
 
     const subtitle = "발급 대상자에게 인증서를 발급할 수 있습니다."
@@ -273,6 +288,11 @@ function IssuerIssue(userIdInStore) {
                                 })}
                             </select>
                         </div>
+                        <div className={`issuerI_row${widthHandle}`}>
+                            <div className={`issuerI_tag${widthHandle}`}>발급대상ID<span style={{color: "red"}}> *</span></div>
+                            <input onChange={setHolder} className={`issuerI_input${widthHandle}`}
+                            />   
+                        </div>
                         <hr />
                         <div>{uploadMod === "handWrite" ? makeInput() : makeExcelInput() }</div>
                         <hr />
@@ -286,7 +306,7 @@ function IssuerIssue(userIdInStore) {
     )
 }
 function mapStateToProps(state) {
-    return {userIdInStore: state._id}
+    return {userIdInStore: state.userType}
 }
 function mapDispatchToProps(dispatch) {
     return {
