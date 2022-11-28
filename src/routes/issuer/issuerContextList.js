@@ -38,6 +38,7 @@ function IssuerContextList({userIdInStore}) {
         // setVcList에 저장
         .then((res) => {
             setContextList(res.data)
+            console.log(res.data)
         })
         // 오류핸들링
         .catch(() => {

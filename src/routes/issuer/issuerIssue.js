@@ -113,7 +113,6 @@ function IssuerIssue(userIdInStore) {
                     type="file"
                     accept=".xlsx, .xls"
                     onChange={(e) => {
-                        console.log(e)
                         readExcel(e)
                     }}>
                 </input>
@@ -201,13 +200,13 @@ function IssuerIssue(userIdInStore) {
         const certificateValues = values.filter((value) => {
             return value !== null
         })
-        console.log(certificateValues)
+
         const inputs = []
         for (let i in certificateValues){
             inputs.push(
                 <div className={`issuerI_row${widthHandle}`} key={i}>
                     <div className={`issuerI_tag${widthHandle}`}>{certificateValues[i]}<span style={{color: "red"}}> *</span></div>
-                    <input className={`issuerI_input${widthHandle}`} id={i} onChange={inPutChange}></input>
+                    <input className={`issuerI_input${widthHandle}`} id={certificateValues[i]} onChange={inPutChange}></input>
                 </div>
             )
         }

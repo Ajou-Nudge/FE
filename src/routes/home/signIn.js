@@ -53,8 +53,8 @@ function SignIn ({userObjInStore, SignInToStore}) {
                 withCredentials: true,
             })
             .then((data) => {
-                const cookieValue = data.data.grantType + " " + data.data.accessToken
-                setCookie("Authorization", cookieValue, [])
+                const cookieValue =`${data.data.accessToken}`
+                setCookie("Authorization", cookieValue)
                 // 유저 타입 입력필요
                 SignInToStore({userId: signinObj.email})
                 messageInfo("로그인 성공!");
@@ -65,13 +65,14 @@ function SignIn ({userObjInStore, SignInToStore}) {
         }
     }
     // console.log(userObjInStore.userId)
-    
+
     function onInfo() {
         console.log(cookie)
         axios({
             url: `http://localhost:8080/user/info`,
             method: "GET",
             withCredentials: true,
+            headers: `Bearer ${cookie.Authorization}`,
         })
         .then((data) => {
             console.log(data)

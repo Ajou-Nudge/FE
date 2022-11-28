@@ -10,7 +10,7 @@ import issuerVL_headline from "../../img/headline/issuerVL_headline.png"
 // import DummyContextList from "../../dummy/dummyContextList";
 
 // 백엔드
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { message } from "antd";
 
@@ -22,7 +22,6 @@ function IssuerVcList({userIdInStore}) {
 
 
     // 백엔드 연결
-    const navigate = useNavigate()
     useEffect(() => {
         // redux에 저장되어있는 issuer 아이디로 발행된 모든vc 요청
         axios({
@@ -37,9 +36,8 @@ function IssuerVcList({userIdInStore}) {
         // 오류핸들링
         .catch(() => {
             message.error("자격증 가져오기 실패");
-            navigate("/issuer")
         });
-    }, [navigate, userIdInStore])
+    }, [userIdInStore])
     
     // 서버에서 issuer의 context정보 불러오기
     useEffect(() => {
@@ -53,9 +51,8 @@ function IssuerVcList({userIdInStore}) {
         })
         .catch(() => {
             message.error("자격증 양식 가져오기 실패");
-            navigate("/issuer")
         });
-    }, [navigate, userIdInStore])
+    }, [userIdInStore])
 
     // // 더미 연결
     // useEffect(() => {
