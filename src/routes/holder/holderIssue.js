@@ -16,9 +16,9 @@ function HolderIssue(userIdInStore) {
     const navigate = useNavigate()
     // contextList는 받아온 formList에서 context만 추출한 것
     const [ fileName, setFileName ] = useState("")
+    const [ pdf, setPdf ] = useState()
     const [ issueVcs, setIssueVcs ] = useState([{
         holderId: "1",
-        file: null,
         vc: {
             context: "",
             issuer: "",
@@ -105,19 +105,20 @@ function HolderIssue(userIdInStore) {
 
     // 파일업로드
     function onUplode(e) {
-        const buffer = issueVcs[0]
-        buffer.file = e.target.files[0]
         setFileName(e.target.files[0].name)
-        setIssueVcs([buffer])
+        setPdf(e.target.files[0])
     }
 
     // BE 제출
     function submit() {
-        console.log(issueVcs)
+        let formData = new FormData();
+        formData.append("file", pdf)
+        formData.append("data", JSON.stringify(issueVcs))
+        console.log(formData)
         axios({
             url: `http://localhost:8080/holder/vc`,
             method: "POST",
-            data: issueVcs,
+            data: formData,
             withCredentials: true,
             headers: { "Content-Type": "multipart/form-data" }
         })
