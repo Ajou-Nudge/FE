@@ -203,10 +203,11 @@ function IssuerIssue(userIdInStore) {
 
         const inputs = []
         for (let i in certificateValues){
+            const valueTag = parseInt(i) + 1
             inputs.push(
                 <div className={`issuerI_row${widthHandle}`} key={i}>
                     <div className={`issuerI_tag${widthHandle}`}>{certificateValues[i]}<span style={{color: "red"}}> *</span></div>
-                    <input className={`issuerI_input${widthHandle}`} id={certificateValues[i]} onChange={inPutChange}></input>
+                    <input className={`issuerI_input${widthHandle}`} id={`value${valueTag}`} onChange={inPutChange}></input>
                 </div>
             )
         }
@@ -251,7 +252,7 @@ function IssuerIssue(userIdInStore) {
         })
         .then((res) => {
             message.success("서버전송 성공, 블록체인 연결 시작");
-            Connectkaikas(testObj)
+            // Connectkaikas(testObj)
         })
         .catch(() => {
             message.error("서버전송 실패");

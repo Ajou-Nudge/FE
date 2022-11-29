@@ -108,15 +108,8 @@
     padding: 7px 0 7px 0;
 }
 
-.holderI_inputs {
-    width: 65%;
-}
-.holderI_inputs_minmize {
-    width: 100%;
-}
-
 .holderI_submitBox {
-    padding-top: 30px;
+    padding-top: 60px;
     margin: 0 auto 0;
     max-width: 250px;
 }
@@ -129,4 +122,8 @@
     border-radius: 30px;
     font-weight: 700;
     font-size: medium;
+}
+
+.holderI_hr {
+    margin: 20px 0 20px;
 }

@@ -1,4 +1,4 @@
-import { message } from "antd";
+import { message, Input } from "antd";
 import { useState, useEffect } from "react"
 import axios from "axios";
 import React from "react";
@@ -8,9 +8,11 @@ import "./css/issuerCreateContext.css"
 
 function IssuerCreateContext() {
 
-    const [context, setContext] = useState("")
-    const [inputCount, setInputCount] = useState(3)
-    const [rawContext, setRawContext ] = useState({})
+    // 밑의 state는 context 이름 의미, credentialsubject와 분리되어있다.
+    const [ context, setContext ] = useState("")
+    const [ inputCount, setInputCount ] = useState(1)
+    const [ credentialSubject, setCredentialSubject ] = useState({value1: "name"})
+    const [ addInput, setAddInput ] = useState(false)
     
     // 창 가로크기 측정 코드, inner 850px 기준, className으로 반응
     const[ widthHandle, setWidthHandle ] = useState("")
@@ -32,13 +34,11 @@ function IssuerCreateContext() {
     function makeInput() {
         const inputs = []
         for (let i=0; i < inputCount; i++){
+            // context와 연결되는 valueId, 1-3은 체크박스로, 4-8을 input으로 받음으로 여기선 4에서부터 시작해야한다.
+            const valueId = parseInt(i) + 4
             inputs.push(
-                <div className={`issuerCC_row${widthHandle}`} key={i} id={i}>
-                    <input className={`issuerCC_input_minmize`} defaultValue={rawContext[`value${i}`]} onChange={handleValue} key={`value${i}`}></input>
-
-                    {/* 원래는 필수 여부도 선택 가능하게 갔으나 기능 뺌 */}
-                    {/* <div>필수여부</div>
-                    <input defaultValue={rawContext[`isEssential${i}`]} onChange={handleCheck} key={`isEssential${i}`} type="checkbox"></input> */}
+                <div className={`issuerCC_row${widthHandle}`} key={i} id={valueId}>
+                    <input className={`issuerCC_input_minmize`} value={credentialSubject[valueId]} onChange={handleValue} key={`value${i}`}></input>
                 </div>
             )
         }
@@ -46,32 +46,31 @@ function IssuerCreateContext() {
         
     }
 
-    // input에 받아온 값 각각 rawContext에 넣기, buffer는 state를 직접 다루는 걸 피하기 위해 현재 state를 가져와 잠시 담아두는 것
+    // 추가기재값 credentialSubject에 반영
     function handleValue(e) {
-        const buffer = rawContext
-        buffer[`value${e.target.parentElement.id}`] = e.target.value
-        setRawContext(buffer)
+        setCredentialSubject({
+            ...credentialSubject,
+            [`value${e.target.parentElement.id}`]: e.target.value
+        })
     }
 
-    // // 필수 여부 체크 핸들링하는 함수
-    // function handleCheck(e) {
-    //     let buffer = rawContext
-    //     const isEssentialNum = e.target.checked ? "1" : "0"
-    //     buffer[`isEssential${e.target.parentElement.id}`] = isEssentialNum
-    //     setRawContext(buffer)
-    // }
+    // 기재정보 선택 값 핸들링
+    function onChecked(e) {
+        // 부모id는 value{i}, id는 기입요소 영문명
+        const { parentElement, checked, id } = e.target
+        setCredentialSubject({
+        ...credentialSubject,
+        [ parentElement.id ]: (checked === true) ? id : undefined 
+        })
+    }
 
-    // rawContext가공하여 Context 생성
+    // 기재정보 추가 체크박스 핸들링
+    function onClick(e) {
+        setAddInput(e.target.checked)
+    }
+
+    // crdentialSubject와 context 병합
     function submit() {
-        let credentialSubject = {}
-        for (let i=0; i < inputCount; i++){
-            let buffer = rawContext
-            let value = buffer[`value${i}`]
-            // 필수 여부 핸들링 하는 부분
-            // let isEssential = buffer[`isEssential${i}`] || "0"
-            const aCredentialSubject =   {[`value${i + 1}`] : value}
-            credentialSubject = {...credentialSubject, ...aCredentialSubject}
-        }
         const Context = {
             context,
             credentialSubject
@@ -124,20 +123,54 @@ function IssuerCreateContext() {
                                 <div className={`issuerCC_tag${widthHandle}`}>자격증이름<span style={{color: "red"}}> *</span></div>
                                 <input className={`issuerCC_input${widthHandle}`} value={context} onChange={(event) => { setContext(event.target.value) }}></input>
                             </div>
-                            <div className={`issuerCC_row${widthHandle}`}>
-                                <div className={`issuerCC_tag${widthHandle}`}>자격증 기재 정보 개수<span style={{color: "red"}}> *</span></div>
-                                <input className={`issuerCC_input${widthHandle}`} type={"number"} min={1} value={inputCount} onChange={handleInputCount}></input>
-                            </div>
-                            <hr />
-                            <div className={`issuerCC_row${widthHandle}`}>
-                                <div className={`issuerCC_tag${widthHandle}`}>
-                                    기재정보
-                                    <p style={{color: "#666"}}>ex{")"} 발급대상 성명, 생년월일</p>
+                            <dl className={`issuerCC_row${widthHandle}`}>
+                                <dt className={`issuerCC_tag${widthHandle}`}>기재정보 선택<span style={{color: "red"}}> *</span></dt>
+                                <dd className={`issuerCC_select${widthHandle}`}>
+                                    <div style={{width: "100%"}}>
+                                        <p className="issuerCC_form_infoBold">증명서 기입요소를 선택할 수 있습니다.</p>
+                                        <div className="issuerCC_form_checkBoxList">
+                                            <div id="value1" className="issuerCC_form_checkBox_warp">
+                                                <Input onChange={onChecked} id="name" defaultChecked disabled className="issuerCC_form_checkBox" type="checkbox"></Input>
+                                                <label htmlFor="name" className="issuerCC_form_infoBold">성명</label>
+                                            </div>
+                                            <div className="issuerCC_form_checkBox_warp">
+                                                <Input onChange={onChecked} id="issuer" defaultChecked disabled className="issuerCC_form_checkBox" type="checkbox"></Input>
+                                                <label htmlFor="issuer" className="issuerCC_form_infoBold">발급기관</label>
+                                            </div>
+                                            <div id="value2" className="issuerCC_form_checkBox_warp">
+                                                <Input onChange={onChecked} id="issuedDate" className="issuerCC_form_checkBox" type="checkbox"></Input>
+                                                <label htmlFor="issuedDate" className="issuerCC_form_infoBold">발급일</label>
+                                            </div>
+                                            <div id="value3" className="issuerCC_form_checkBox_warp">
+                                                <Input onChange={onChecked} id="expiredDate" className="issuerCC_form_checkBox" type="checkbox"></Input>
+                                                <label htmlFor="만료일" className="issuerCC_form_infoBold">만료일</label>
+                                            </div>
+                                            <div className="issuerCC_form_checkBox_warp">
+                                                <Input onChange={onClick} id="detail" className="issuerCC_form_checkBox" type="checkbox"></Input>
+                                                <label htmlFor="detail" className="issuerCC_form_infoBold">기재정보 추가</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                            {(addInput === false) ? null : 
+                                <div>
+                                    <div className={`issuerCC_row${widthHandle}`}>
+                                        <div className={`issuerCC_tag${widthHandle}`}>추가갯수<span style={{color: "red"}}> *</span></div>
+                                        <input className={`issuerCC_input${widthHandle}`} type={"number"} min={1} max={5} value={inputCount} onChange={handleInputCount}></input>
+                                    </div>
+                                    <hr />
+                                    <div className={`issuerCC_row${widthHandle}`}>
+                                        <div className={`issuerCC_tag${widthHandle}`}>
+                                            추가기재
+                                            <p style={{color: "#666"}}>ex{")"} 발급대상 성명, 생년월일</p>
+                                        </div>
+                                        <div className={`issuerCC_inputs${widthHandle}`}>
+                                            {makeInput()}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className={`issuerCC_inputs${widthHandle}`}>
-                                    {makeInput()}
-                                </div>
-                            </div>
+                            }
                             <hr />
                             <div className="issuerCC_submitBox">
                                 <button className="issuerCC_submitBtn" onClick={submit}>양식 생성하기</button>

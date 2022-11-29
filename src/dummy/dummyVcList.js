@@ -5,12 +5,11 @@ const DummyVcList = [
     "context": "아주대학교 졸업증명서",
     "issuer": "아주대학교",
     "credentialSubject": {
-      "title": "아주대학교 졸업증명서",
-      "name": "김철수",
-      "date": "2021-01-11",
-      "major": "소프트웨어학1",
-      "doubleMajor": "1",
-      "minor": "1"
+      "value1": "김철수",
+      "value2": "소프트웨어학",
+      "value3": "응용화학생명공학과",
+      "value4": "건축공학",
+      "value5": "2021-01-11",
     }
   },
   {
@@ -18,128 +17,13 @@ const DummyVcList = [
     "context": "아주대학교 학점증명서",
     "issuer": "아주대학교",
     "credentialSubject": {
-      "title": "아주대학교 학점증명서",
-      "name": "이영희",
-      "date": "2022-02-12",
-      "major": "소프트웨어학2",
-      "doubleMajor": "2",
-      "minor": "2"
+      "value1": "서영주",
+      "value2": "1999-07-12",
+      "value3": "응용화학생명공학과",
+      "value4": "201904923",
+      "value5": "3",
     }
   },
-  {
-    "id": "003",
-    "context": "워드프로세서 2급",
-    "issuer": "대한상공회의소",
-    "credentialSubject": {
-      "title": "워드프로세서 2급",
-      "name": "홍길동",
-      "date": "2023-03-13",
-    }
-  },
-  {
-    "id": "004",
-    "context": "theOther-certificate",
-    "issuer": "0003",
-    "credentialSubject": {
-      "title": "아주대학원 재학증명서",
-      "name": "홍길동",
-      "date": "2023-03-13",
-      "major": "소프트웨어학3",
-      "doubleMajor": "3",
-      "minor": "3"
-    }
-  },
-  {
-    "id": "005",
-    "context": "theOther-certificate",
-    "issuer": "0003",
-    "credentialSubject": {
-      "title": "아주대학원 재학증명서",
-      "name": "홍길동",
-      "date": "2023-03-13",
-      "major": "소프트웨어학3",
-      "doubleMajor": "3",
-      "minor": "3"
-    }
-  },
-  {
-    "id": "006",
-    "context": "theOther-certificate",
-    "issuer": "0003",
-    "credentialSubject": {
-      "title": "아주대학원 재학증명서",
-      "name": "홍길동",
-      "date": "2023-03-13",
-      "major": "소프트웨어학3",
-      "doubleMajor": "3",
-      "minor": "3"
-    }
-  },
-  {
-    "id": "007",
-    "context": "theOther-certificate",
-    "issuer": "0003",
-    "credentialSubject": {
-      "title": "아주대학원 재학증명서",
-      "name": "홍길동",
-      "date": "2023-03-13",
-      "major": "소프트웨어학3",
-      "doubleMajor": "3",
-      "minor": "3"
-    }
-  },
-  {
-    "id": "008",
-    "context": "theOther-certificate",
-    "issuer": "0003",
-    "credentialSubject": {
-      "title": "아주대학원 재학증명서",
-      "name": "홍길동",
-      "date": "2023-03-13",
-      "major": "소프트웨어학3",
-      "doubleMajor": "3",
-      "minor": "3"
-    }
-  },
-  {
-    "id": "009",
-    "context": "theOther-certificate",
-    "issuer": "0003",
-    "credentialSubject": {
-      "title": "아주대학원 재학증명서",
-      "name": "홍길동",
-      "date": "2023-03-13",
-      "major": "소프트웨어학3",
-      "doubleMajor": "3",
-      "minor": "3"
-    }
-  },
-  {
-    "id": "010",
-    "context": "theOther-certificate",
-    "issuer": "0003",
-    "credentialSubject": {
-      "title": "아주대학원 재학증명서",
-      "name": "홍길동",
-      "date": "2023-03-13",
-      "major": "소프트웨어학3",
-      "doubleMajor": "3",
-      "minor": "3"
-    }
-  },
-  {
-    "id": "011",
-    "context": "theOther-certificate",
-    "issuer": "0003",
-    "credentialSubject": {
-      "title": "아주대학원 재학증명서",
-      "name": "홍길동",
-      "date": "2023-03-13",
-      "major": "소프트웨어학3",
-      "doubleMajor": "3",
-      "minor": "3"
-    }
-  }
 ]
 
 export default DummyVcList

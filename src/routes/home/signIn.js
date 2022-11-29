@@ -72,7 +72,7 @@ function SignIn ({userObjInStore, SignInToStore}) {
             url: `http://localhost:8080/user/info`,
             method: "GET",
             withCredentials: true,
-            headers: `Bearer ${cookie.Authorization}`,
+            headers: {authorization: `Bearer ${cookie.Authorization}`},
         })
         .then((data) => {
             console.log(data)

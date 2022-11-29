@@ -24,6 +24,41 @@
     border-bottom: 2px solid black;
 }
 
+.issuerCC_select {
+    width: 65%;
+    padding: 0 15px;
+    background-color: #ffff;
+    
+}
+.issuerCC_select_minmize {
+    width: 100%;
+    padding: 0 15px;
+    background-color: #ffff;
+    
+}
+
+.issuerCC_form_infoBold {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+}
+.issuerCC_form_checkBoxList {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.issuerCC_form_checkBox_warp {
+    display: flex;
+    margin: 0 20px 10px 0;
+    min-width: 20%;
+    align-items: center;
+}
+.issuerCC_form_checkBox {
+    height: 16px;
+    width: 16px;
+    margin-right: 5px;
+}
+
 .issuerCC_row {
     padding: 10px 0 10px 0;
     display: flex;
