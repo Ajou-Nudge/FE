@@ -17,20 +17,21 @@ function HolderIssue(userIdInStore) {
     // contextList는 받아온 formList에서 context만 추출한 것
     const [ fileName, setFileName ] = useState("")
     const [ pdf, setPdf ] = useState()
-    const [ issueVcs, setIssueVcs ] = useState([{
+    const [ issueVcs, setIssueVcs ] = useState({
         holderId: "1",
         vc: {
             context: "",
             issuer: "",
             credentialSubject:{}
         }
-    }])
+    })
+    // value1: 성명, 2: 발급기관, 3: 발급일, 4: 만료일, 5: 기타
     const [ category, setCategory ] = useState({
-        성명: true,
-        발급기관: false,
-        발급일: false,
-        만료일: false,
-        기타: false,
+        value1: true,
+        value2: false,
+        value3: false,
+        value4: false,
+        value5: false,
     })
 
     
@@ -51,15 +52,14 @@ function HolderIssue(userIdInStore) {
     
     // 유저가 작성한 자격증 종류 핸들링
     function onContext (e) { 
-        
         // context 이름 넣어주기
-        const currentVcs = issueVcs
-        const buffer = []
-        currentVcs.map((issueVc) => {
-            issueVc.vc.context = e.target.value
-            return buffer.push(issueVc)
+        setIssueVcs({
+            ...issueVcs,
+            vc: {
+                ...issueVcs.vc,
+                context: e.target.value
+            }
         })
-        setIssueVcs(buffer)
     }
     
     // 유저가 선택한 기입요소 핸들링
@@ -75,7 +75,7 @@ function HolderIssue(userIdInStore) {
     function makeInput() {
 
         // 선택된 값이 없으면 작동 정지, 빈값 반환
-        if (issueVcs[0].vc.context === "") {
+        if (issueVcs.vc.context === "") {
             return <Empty />
         } 
 
@@ -97,10 +97,16 @@ function HolderIssue(userIdInStore) {
     
     // 사용자 입력값따라 body 작성
     function inPutChange(e) {
-        const issueVc = issueVcs
-        const id = e.target.id
-        issueVc[0].vc.credentialSubject[`${id}`] = e.target.value
-        setIssueVcs(issueVc)
+        setIssueVcs({
+            ...issueVcs,
+            vc: {
+                ...issueVcs.vc,
+                credentialSubject: {
+                    ...issueVcs.vc.credentialSubject,
+                    [e.target.id]: e.target.value,
+                }
+            }
+        })
     }
 
     // 파일업로드
@@ -111,6 +117,7 @@ function HolderIssue(userIdInStore) {
 
     // BE 제출
     function submit() {
+        console.log(issueVcs)
         let formData = new FormData();
         formData.append("file", pdf)
         formData.append("data", JSON.stringify(issueVcs))
@@ -154,24 +161,24 @@ function HolderIssue(userIdInStore) {
                                     <p className="IssuerP_form_infoBold">증명서 기입요소를 선택할 수 있습니다.</p>
                                     <div className="IssuerP_form_checkBoxList">
                                         <div className="IssuerP_form_checkBox_warp">
-                                            <Input onChange={onChecked} id="성명" defaultChecked disabled className="IssuerP_form_checkBox" type="checkbox"></Input>
-                                            <label htmlFor="성명" className="IssuerP_form_infoBold">성명</label>
+                                            <Input onChange={onChecked} id="value1" defaultChecked disabled className="IssuerP_form_checkBox" type="checkbox"></Input>
+                                            <label htmlFor="value1" className="IssuerP_form_infoBold">성명</label>
                                         </div>
                                         <div className="IssuerP_form_checkBox_warp">
-                                            <Input onChange={onChecked} id="발급기관" className="IssuerP_form_checkBox" type="checkbox"></Input>
-                                            <label htmlFor="발급기관" className="IssuerP_form_infoBold">발급기관</label>
+                                            <Input onChange={onChecked} id="value2" className="IssuerP_form_checkBox" type="checkbox"></Input>
+                                            <label htmlFor="value2" className="IssuerP_form_infoBold">발급기관</label>
                                         </div>
                                         <div className="IssuerP_form_checkBox_warp">
-                                            <Input onChange={onChecked} id="발급일" className="IssuerP_form_checkBox" type="checkbox"></Input>
-                                            <label htmlFor="발급일" className="IssuerP_form_infoBold">발급일</label>
+                                            <Input onChange={onChecked} id="value3" className="IssuerP_form_checkBox" type="checkbox"></Input>
+                                            <label htmlFor="value3" className="IssuerP_form_infoBold">발급일</label>
                                         </div>
                                         <div className="IssuerP_form_checkBox_warp">
-                                            <Input onChange={onChecked} id="만료일" className="IssuerP_form_checkBox" type="checkbox"></Input>
-                                            <label htmlFor="만료일" className="IssuerP_form_infoBold">만료일</label>
+                                            <Input onChange={onChecked} id="value4" className="IssuerP_form_checkBox" type="checkbox"></Input>
+                                            <label htmlFor="value4" className="IssuerP_form_infoBold">만료일</label>
                                         </div>
                                         <div className="IssuerP_form_checkBox_warp">
-                                            <Input onChange={onChecked} id="기타" className="IssuerP_form_checkBox" type="checkbox"></Input>
-                                            <label htmlFor="기타" className="IssuerP_form_infoBold">기타</label>
+                                            <Input onChange={onChecked} id="value5" className="IssuerP_form_checkBox" type="checkbox"></Input>
+                                            <label htmlFor="value5" className="IssuerP_form_infoBold">기타</label>
                                         </div>
                                     </div>
                                 </div>
