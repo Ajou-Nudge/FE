@@ -11,28 +11,39 @@ import axios from "axios";
 import { message } from "antd"
 
 
-function HolderIssue(userIdInStore) {
+function HolderIssue(userObjInStore) {
     
     const navigate = useNavigate()
     // contextList는 받아온 formList에서 context만 추출한 것
     const [ fileName, setFileName ] = useState("")
     const [ pdf, setPdf ] = useState()
     const [ issueVcs, setIssueVcs ] = useState({
-        holderId: "1",
+        holderId: null,
         vc: {
-            context: "",
-            issuer: "",
+            context: null,
+            issuer: null,
             credentialSubject:{}
         }
     })
     // value1: 성명, 2: 발급기관, 3: 발급일, 4: 만료일, 5: 기타
     const [ category, setCategory ] = useState({
-        value1: true,
-        value2: false,
-        value3: false,
-        value4: false,
-        value5: false,
+        성명: true,
+        발급기관: false,
+        발급일: false,
+        만료일: false,
+        기타: false,
     })
+
+    useEffect(() => {
+        setIssueVcs({
+            holderId: userObjInStore.memberId,
+            vc: {
+                context: "",
+                issuer: userObjInStore.memberId,
+                credentialSubject:{}
+            }
+        })
+    },[userObjInStore.memberId])
 
     
     // 창 가로크기 측정 코드, inner 850px 기준, className으로 반응
@@ -51,13 +62,16 @@ function HolderIssue(userIdInStore) {
     
     
     // 유저가 작성한 자격증 종류 핸들링
-    function onContext (e) { 
+    function onTitle (e) { 
         // context 이름 넣어주기
         setIssueVcs({
             ...issueVcs,
             vc: {
                 ...issueVcs.vc,
-                context: e.target.value
+                credentialSubject: {
+                    ...issueVcs.vc.credentialSubject,
+                    value8: e.target.value
+                }
             }
         })
     }
@@ -81,12 +95,13 @@ function HolderIssue(userIdInStore) {
 
         // 디폴트값 아니면 input뿌려주기
         const inputs = []
-        for (let key in category) {
-            if (category[key] === true) {
+        const keys = Object.keys(category)
+        for (let i=0; i < keys.length; i++) {
+            if (category[keys[i]] === true) {
                 inputs.push(
-                    <div className={`holderI_row${widthHandle}`} key={key}>
-                        <div className={`holderI_tag${widthHandle}`}>{key}</div>
-                        <input className={`holderI_input${widthHandle}`} id={key} onChange={inPutChange}></input>
+                    <div className={`holderI_row${widthHandle}`} id={`value${parseInt(i) + 1}`} key={keys[i]}>
+                        <div className={`holderI_tag${widthHandle}`}>{keys[i]}</div>
+                        <input className={`holderI_input${widthHandle}`} id={keys[i]} onChange={inPutChange}></input>
                     </div>
                 )
             }
@@ -103,7 +118,7 @@ function HolderIssue(userIdInStore) {
                 ...issueVcs.vc,
                 credentialSubject: {
                     ...issueVcs.vc.credentialSubject,
-                    [e.target.id]: e.target.value,
+                    [e.target.parentElement.id]: e.target.value,
                 }
             }
         })
@@ -152,7 +167,7 @@ function HolderIssue(userIdInStore) {
                         </div>
                         <div className={`holderI_row${widthHandle}`}>
                             <div className={`holderI_tag${widthHandle}`}>자격증이름<span style={{color: "red"}}> *</span></div>
-                            <input onChange={onContext} className={`holderI_input${widthHandle}`} placeholder="먼저 자격증 이름을 작성하십시오" /> 
+                            <input onChange={onTitle} className={`holderI_input${widthHandle}`} placeholder="먼저 자격증 이름을 작성하십시오" /> 
                         </div>
                         <dl className={`holderI_row${widthHandle}`}>
                             <dt className={`holderI_tag${widthHandle}`}>기재정보 선택<span style={{color: "red"}}> *</span></dt>
@@ -160,25 +175,25 @@ function HolderIssue(userIdInStore) {
                                 <div style={{width: "100%"}}>
                                     <p className="IssuerP_form_infoBold">증명서 기입요소를 선택할 수 있습니다.</p>
                                     <div className="IssuerP_form_checkBoxList">
-                                        <div className="IssuerP_form_checkBox_warp">
-                                            <Input onChange={onChecked} id="value1" defaultChecked disabled className="IssuerP_form_checkBox" type="checkbox"></Input>
-                                            <label htmlFor="value1" className="IssuerP_form_infoBold">성명</label>
+                                        <div className="IssuerP_form_checkBox_warp" id="value1">
+                                            <Input onChange={onChecked} id="성명" defaultChecked disabled className="IssuerP_form_checkBox" type="checkbox"></Input>
+                                            <label htmlFor="성명" className="IssuerP_form_infoBold">성명</label>
                                         </div>
-                                        <div className="IssuerP_form_checkBox_warp">
-                                            <Input onChange={onChecked} id="value2" className="IssuerP_form_checkBox" type="checkbox"></Input>
-                                            <label htmlFor="value2" className="IssuerP_form_infoBold">발급기관</label>
+                                        <div className="IssuerP_form_checkBox_warp" id="value2">
+                                            <Input onChange={onChecked} id="발급기관" className="IssuerP_form_checkBox" type="checkbox"></Input>
+                                            <label htmlFor="발급기관" className="IssuerP_form_infoBold">발급기관</label>
                                         </div>
-                                        <div className="IssuerP_form_checkBox_warp">
-                                            <Input onChange={onChecked} id="value3" className="IssuerP_form_checkBox" type="checkbox"></Input>
-                                            <label htmlFor="value3" className="IssuerP_form_infoBold">발급일</label>
+                                        <div className="IssuerP_form_checkBox_warp" id="value3">
+                                            <Input onChange={onChecked} id="발급일" className="IssuerP_form_checkBox" type="checkbox"></Input>
+                                            <label htmlFor="발급일" className="IssuerP_form_infoBold">발급일</label>
                                         </div>
-                                        <div className="IssuerP_form_checkBox_warp">
-                                            <Input onChange={onChecked} id="value4" className="IssuerP_form_checkBox" type="checkbox"></Input>
-                                            <label htmlFor="value4" className="IssuerP_form_infoBold">만료일</label>
+                                        <div className="IssuerP_form_checkBox_warp" id="value4">
+                                            <Input onChange={onChecked} id="만료일" className="IssuerP_form_checkBox" type="checkbox"></Input>
+                                            <label htmlFor="만료일" className="IssuerP_form_infoBold">만료일</label>
                                         </div>
-                                        <div className="IssuerP_form_checkBox_warp">
-                                            <Input onChange={onChecked} id="value5" className="IssuerP_form_checkBox" type="checkbox"></Input>
-                                            <label htmlFor="value5" className="IssuerP_form_infoBold">기타</label>
+                                        <div className="IssuerP_form_checkBox_warp" id="value5">
+                                            <Input onChange={onChecked} id="기타" className="IssuerP_form_checkBox" type="checkbox"></Input>
+                                            <label htmlFor="기타" className="IssuerP_form_infoBold">기타</label>
                                         </div>
                                     </div>
                                 </div>
@@ -215,7 +230,7 @@ function HolderIssue(userIdInStore) {
     )
 }
 function mapStateToProps(state) {
-    return {userIdInStore: state.userType}
+    return {memberId: state.memberId}
 }
 function mapDispatchToProps(dispatch) {
     return {

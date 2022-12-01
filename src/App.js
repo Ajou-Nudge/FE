@@ -3,10 +3,11 @@
 import {HashRouter as Router, Routes, Route, BrowserRouter} from "react-router-dom"
 import { actionCreators } from "./component/store.js";
 import { connect } from "react-redux";
+import { useCookies } from "react-cookie";
 import 'antd/dist/antd.min.css';
 
-// import { useEffect } from "react";
-// import axios from "axios";
+import { useEffect } from "react";
+import axios from "axios";
 
 // Main
 import Home from "./routes/home/home";
@@ -45,32 +46,34 @@ import VerifierVerifiyDetail from "./routes/verifier/verifierVerifiyDetail";
 
 // component
 import NotFound from "./component/notFound";
+import Footer from "./component/footer.js";
+// import Nav from "./component/navBar/nav.js";
 import HomeNav from "./component/navBar/homeNav.js";
 import IssuerNav from "./component/navBar/issuerNav.js";
 import HolderNav from "./component/navBar/holderNav.js";
 import VerifierNav from "./component/navBar/verifierNav.js";
-import Footer from "./component/footer.js";
-// import Nav from "./component/navBar/nav.js";
 
 
 function App({userObjInStore, SignInToStore}) {
 
-  // // jwt토큰쿠키로 로그인 관리
-  // useEffect(() => {
-  //   axios({
-  //     url: `http://localhost:8080/user/info`,
-  //     method: "GET",
-  //     withCredentials: true,
-  //   })
-  //   .then((userObj) => {
-  //     // 리덕스기반으로 메모리에 저장
-  //     SignInToStore(userObj);
+  const [ cookie ] = useCookies()
 
-  //   })
-  //     .catch(() => {
-  //       console.log("로그인관리 에러");
-  //     });
-  // },[SignInToStore])
+  // jwt토큰쿠키로 로그인 관리
+  useEffect(() => {
+    axios({
+      url: `http://localhost:8080/user/info`,
+      method: "GET",
+      withCredentials: true,
+      headers: {authorization: `Bearer ${cookie.Authorization}`},
+    })
+    .then((userObj) => {
+      // 리덕스기반으로 메모리에 저장
+      SignInToStore(userObj.data);
+    })
+      .catch(() => {
+        console.log("로그인관리 에러");
+      });
+  },[SignInToStore, cookie])
 
   // // 리덕스 더미데이터 주입
   // useEffect(() => {
@@ -82,7 +85,7 @@ function App({userObjInStore, SignInToStore}) {
   function Main() {
     return(
       <div>
-        <HomeNav />
+        <HomeNav/>
         <Routes>
           <Route index element={<Home />}></Route>
           <Route path="signIn" element={<SignIn />}></Route>
@@ -98,7 +101,7 @@ function App({userObjInStore, SignInToStore}) {
   function Issuer(){
     return(
       <div>
-        <IssuerNav />
+        <IssuerNav/>
         <Routes>
           <Route index element={<IssuerIssue />}></Route>
           <Route path="createContext" element={<IssuerCreateContext />}></Route>
@@ -116,7 +119,7 @@ function App({userObjInStore, SignInToStore}) {
   function Holder(){
     return(
       <div>
-        <HolderNav />
+        <HolderNav/>
         <Routes>
           <Route index element={<HolderSubmittedList />}></Route>
           <Route path="vcList" element={<HolderVcList />}></Route>
@@ -133,7 +136,7 @@ function App({userObjInStore, SignInToStore}) {
   function Verifier(){
     return(
       <div>
-        <VerifierNav />
+        <VerifierNav/>
         <Routes>
           <Route index element={<VerifierHome />}></Route>
           <Route path="verifiy/:postId" element={<VerifierVerifiy />}></Route>
@@ -149,7 +152,6 @@ function App({userObjInStore, SignInToStore}) {
   return (
     <div>
       <BrowserRouter>
-        {/* <Nav/> */}
         <Routes>
           <Route path="/*" element={<Main />}/>
           <Route path="/issuer/*" element={<Issuer />}/>

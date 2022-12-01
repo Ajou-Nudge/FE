@@ -1,18 +1,18 @@
 import { Menu } from 'antd';
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from '../../img/didnow.png'
-// import { useCookies } from "cookie"
+import { useCookies } from 'react-cookie'
+import '../css/nav.css'
 //import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 function IssuerNav() {
 
-  // eslint-disable-next-line
-  // const [cookies, setCookie, removeCookie] = useCookies([])
-  // const navigate = useNavigate()
+  const [ , , removeCookie] = useCookies([])
+  const navigate = useNavigate()
 
-  // function onclick() {
-  //   removeCookie("Authorization", [])
-  //   navigate("/")
-  // }
+  function onclick() {
+    removeCookie("Authorization", [])
+    navigate("/")
+  }
 
   const items = [
     { label: <img src={logo} alt="icon" style={{ height: "75px" }} />, key: "icon"},
@@ -36,7 +36,7 @@ function IssuerNav() {
       key: "posting",
       style: { fontSize: "large" },
     },
-    // { label: <button style={{ fontSize: "large" }} onClick={onclick}>로그아웃</button>, key: "logOut" },
+    { label: <button className='logOut' onClick={onclick}>로그아웃</button>, key: "logOut" },
   ]
 
   return(

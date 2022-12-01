@@ -1,19 +1,25 @@
 import { Menu } from 'antd';
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useCookies } from 'react-cookie'
 import logo from '../../img/didnow.png'
+import '../css/nav.css'
 //import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 function VerifierNav() {
 
+  const [ , , removeCookie] = useCookies([])
+  const navigate = useNavigate()
+
+  function onclick() {
+    removeCookie("Authorization", [])
+    navigate("/")
+  }
 
   const items = [
     { label: <img src={logo} alt="icon" style={{ height: "75px" }} />, key: "icon"},
     { label: <NavLink style={{ fontSize: "large" }} to="/">홈</NavLink>, key: "home"},
     { label: <NavLink style={{ fontSize: "large" }} to="/signIn">로그인</NavLink>, key: "signIn" },
     { label: <NavLink style={{ fontSize: "large" }} to="/signUp">회원가입</NavLink>, key: "signUp" },
-    // { label: "공지사항",
-    //   key: "item3",
-    //   children: [{ label: "공지1", key: "item4" }, { label: "공지2", key: "item5" }]
-    // },
+    { label: <button className='logOut' onClick={onclick}>로그아웃</button>, key: "logOut" },
   ]
 
   return(

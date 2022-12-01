@@ -14,7 +14,7 @@ import issuerVL_headline from "../../img/headline/issuerVL_headline.png"
 import axios from "axios";
 import { message } from "antd";
 
-function IssuerVcList({userIdInStore}) {
+function IssuerVcList({userObjInStore}) {
 
     const [ vcList, setVcList ] = useState([])
     const [ contextList, setContextList ] = useState([])
@@ -37,7 +37,7 @@ function IssuerVcList({userIdInStore}) {
         .catch(() => {
             message.error("자격증 가져오기 실패");
         });
-    }, [userIdInStore])
+    }, [userObjInStore])
     
     // 서버에서 issuer의 context정보 불러오기
     useEffect(() => {
@@ -52,7 +52,7 @@ function IssuerVcList({userIdInStore}) {
         .catch(() => {
             message.error("자격증 양식 가져오기 실패");
         });
-    }, [userIdInStore])
+    }, [userObjInStore])
 
     // // 더미 연결
     // useEffect(() => {
@@ -65,7 +65,7 @@ function IssuerVcList({userIdInStore}) {
         setSelectedContext(e.target.value)
     }
     
-    console.log(vcList)
+
     // vc 리스트 뿌려주기
     function makeVCList() {    
         const VLdata = []
@@ -76,22 +76,22 @@ function IssuerVcList({userIdInStore}) {
                 VLdata.push({
                     key: i,
                     num: i+1,
-                    date: vcList[i].vc.credentialSubject["value1"],
-                    title: vcList[i].vc.credentialSubject["value2"],
-                    name: vcList[i].vc.credentialSubject["value3"],
+                    date: vcList[i].vc.credentialSubject["value2"],
+                    title: vcList[i].vc.context,
+                    name: vcList[i].vc.credentialSubject["value1"],
                 })
             }
         } else {
             const selectedList = vcList.filter((vc) => 
-                vc.credentialSubject.title === selectedContext
+                vc.vc.context === selectedContext
             )
             for (let i=0; i < selectedList.length; i++) {
                 VLdata.push({
                     key: i,
                     num: i+1,
-                    date: selectedList[i].vc.credentialSubject["date"],
-                    title: selectedList[i].vc.credentialSubject["title"],
-                    name: selectedList[i].vc.credentialSubject["name"],
+                    date: selectedList[i].vc.credentialSubject["value2"],
+                    title: selectedList[i].vc.context,
+                    name: selectedList[i].holderId,
                 })
             }
         }
@@ -131,7 +131,7 @@ function IssuerVcList({userIdInStore}) {
             <div className="issuerVL_vcCounter_bg">
                 <div className="issuerVL_vcCounter_Counter">
                     <p className="issuerVL_vcCounter_text">
-                        총 {vcList.length}건 {(selectedContext === "인증서를 선택해주세요.") ? "" : `중 ${vcList.filter(vc => vc.credentialSubject.title === selectedContext).length}건`}
+                        총 {vcList.length}건 {(selectedContext === "인증서를 선택해주세요.") ? "" : `중 ${vcList.filter(vc => vc.context === selectedContext).length}건`}
                     </p> 
                 </div>
                 <select
@@ -154,7 +154,7 @@ function IssuerVcList({userIdInStore}) {
 }
 
 function mapStateToProps(state) {
-    return {userIdInStore: state.userType}
+    return {memberId: state.memberId}
 }
 
 export default connect(mapStateToProps, null) (IssuerVcList)

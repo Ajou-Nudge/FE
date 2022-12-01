@@ -23,14 +23,14 @@ function IssuerPost(userObjInStore) {
     useEffect( () => {
         setPosting(
             {
-                verifierId: "sjh3922@naver.com",
+                verifierId: userObjInStore.memberId,
                 title: "",
                 expired: "",
                 required: [],
                 url: ""
             }
         )}
-    , [userObjInStore.userId])
+    , [userObjInStore.memberId])
 
     function onChange(e) {
         const modified = posting
@@ -201,7 +201,7 @@ function IssuerPost(userObjInStore) {
 }
 
 function mapStateToProps(state) {
-    return {userObjInStore: state.userType}
+    return {memberId: state.memberId}
 }
 
 export default connect(mapStateToProps, null) (IssuerPost)

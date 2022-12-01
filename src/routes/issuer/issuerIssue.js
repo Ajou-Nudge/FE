@@ -5,7 +5,7 @@ import * as XLSX from "xlsx"
 import { Empty, Switch } from "antd";
 import Headline from "../../component/headline";
 import issuerI_headline from "../../img/headline/issuerI_headline.png"
-import Connectkaikas from "./component/kaikas";
+// import Connectkaikas from "./component/kaikas";
 import "./css/issuerIssue.css"
 
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,18 @@ import { message } from "antd"
 
 // import DummyContextList from "../../dummy/dummyContextList";
 
-function IssuerIssue(userIdInStore) {
+function IssuerIssue(userObjInStore) {
+
+    function state() {
+        return [{
+            holderId: "",
+            vc: {
+                context: "",
+                issuer: userObjInStore.memberId,
+                credentialSubject:{}
+            }
+        }]
+    }
     
     // contextList는 받아온 formList에서 context만 추출한 것
     const [ uploadMod, setUploadMod ] = useState("handWrite")
@@ -22,15 +33,9 @@ function IssuerIssue(userIdInStore) {
     const [ formList, setFormList ] = useState([])
     const [ contextList, setContextList ] = useState([])
     const [ theForm, setTheForm ] = useState(undefined)
-    const [ issueVcs, setIssueVcs ] = useState([{
-        holderId: "",
-        vc: {
-            context: "",
-            issuer: "",
-            credentialSubject:{}
-        }
-    }])
-    
+    const [ issueVcs, setIssueVcs ] = useState(state)
+
+
     const navigate = useNavigate()
 
     // 창 가로크기 측정 코드, inner 850px 기준, className으로 반응
@@ -60,7 +65,7 @@ function IssuerIssue(userIdInStore) {
             message.error("자격증 양식 가져오기 실패");
             navigate("/issuer")
         });
-    }, [navigate, userIdInStore])
+    }, [navigate, userObjInStore])
 
     // useEffect(() => {
     //     const Dummy = DummyContextList
@@ -147,7 +152,7 @@ function IssuerIssue(userIdInStore) {
                             holderId: row.holderId,
                             vc: {
                                 context: currentContext,
-                                issuer: "",
+                                issuer: userObjInStore.memberId,
                                 credentialSubject: row,
                             }
                         }
@@ -182,6 +187,7 @@ function IssuerIssue(userIdInStore) {
         const buffer = []
         currentVcs.map((issueVc) => {
             issueVc.vc.context = e.target.value
+            issueVc.vc.credentialSubject["value8"] = e.target.value
             return buffer.push(issueVc)
         })
         setIssueVcs(buffer)
@@ -236,13 +242,6 @@ function IssuerIssue(userIdInStore) {
     function submit() {
         console.log(issueVcs)
 
-        const testObj = { 
-            kaikasVcId9: "kaikasHash9",
-            kaikasVcId8: "kaikasHash8",
-            kaikasVcId7: "kaikasHash7"
-        }
-
-        // Connectkaikas(testObj)
 
         axios({
             url: `http://localhost:8080/issuer/vc`,
@@ -282,7 +281,7 @@ function IssuerIssue(userIdInStore) {
                             onChange={contextSelect}
                             className={`issuerI_input${widthHandle}`}
                             >   
-                                <option>인증서를 선택해주세요.</option>
+                                <option>인증서 양식을 선택해주세요.</option>
                                 {contextList.map((context) => {
                                     return <option key={context}>{context}</option>;
                                 })}
@@ -306,7 +305,7 @@ function IssuerIssue(userIdInStore) {
     )
 }
 function mapStateToProps(state) {
-    return {userIdInStore: state.userType}
+    return {memberId: state.memberId}
 }
 function mapDispatchToProps(dispatch) {
     return {

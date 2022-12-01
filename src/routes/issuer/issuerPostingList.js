@@ -12,16 +12,15 @@ import { message } from "antd";
 
 // import DummyVerifierPostingList from "../../dummy/dummyVerifierPostingList";
 
-function IssuerPostingList({userIdInStore}) {
+function IssuerPostingList(userObjInStore) {
 
     const [ postingList, setPostingList ] = useState([])
     
     const navigate = useNavigate()
-
     useEffect(() => {
         // 채용공고 목록 불러오기
         axios({
-            url: `http://localhost:8080/verifier/post-list/sjh3922@naver.com`,
+            url: `http://localhost:8080/verifier/post-list/${userObjInStore.memberId}`,
             method: "GET",
             withCredentials: true,
         })
@@ -34,7 +33,7 @@ function IssuerPostingList({userIdInStore}) {
             message.error("채용공고 가져오기 실패");
             navigate("/issuer/issue")
         });
-    }, [navigate, userIdInStore])
+    }, [navigate, userObjInStore])
 
     // useEffect(() => {
     //     setPostingList(DummyVerifierPostingList)
@@ -117,7 +116,7 @@ function IssuerPostingList({userIdInStore}) {
 }
 
 function mapStateToProps(state) {
-    return {userIdInStore: state.userType}
+    return {memberId: state.memberId}
 }
 
 export default connect(mapStateToProps, null) (IssuerPostingList)

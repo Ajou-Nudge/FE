@@ -42,10 +42,12 @@
     margin-bottom: 20px;
 }
 .holderVL_vcBox_card_text {
-    align-items: baseline;
-    font-size: 18px;
+    margin: 0;
+    vertical-align: bottom;
+    height: 60px;
+    font-size: 14px;
     font-weight: 700;
-    width: 100px;
+    
 }
 
 .holderVL_btnBox {

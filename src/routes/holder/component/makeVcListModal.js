@@ -25,8 +25,8 @@ function MakeVcListModal(vcList, vcIds, setVcIds) {
         data.push({
             key: i,
             num: i+1,
-            title: vcList[i].credentialSubject.title,
-            date: vcList[i].credentialSubject.date,
+            title: vcList[i].context,
+            date: vcList[i].credentialSubject.value2,
             issuer: vcList[i].issuer,
             // pdf 인쇄버튼 란 추가, component로 분리하려했으나, useRef 훅 사용 제약으로 통합하여 진행함.
             check: <input onChange={onChange} type={"checkbox"} />

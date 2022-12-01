@@ -13,7 +13,7 @@ import DummyApplicantList from "../../dummy/dummyApplicantList";
 import { message } from "antd";
 import axios from "axios";
 
-function IssuerVerifiy(userIdInStore) {
+function IssuerVerifiy(userObjInStore) {
 
     const [ applicantList, setApplicantList ] = useState([])
 
@@ -24,7 +24,7 @@ function IssuerVerifiy(userIdInStore) {
     // // BE에서 제출된 vc 리스트 가져오기
     // useEffect(() => {
     //     axios({
-    //         url: `http://localhost:8080/verifier/submitted-vc-list/sjh3922@naver.com/${posting.postId}`,
+    //         url: `http://localhost:8080/verifier/submitted-vc-list/${userObjInStore.memberId}/${posting.postId}`,
     //         method: "GET",
     //         withCredentials: true,
     //     })
@@ -134,7 +134,7 @@ function IssuerVerifiy(userIdInStore) {
 }
 
 function mapStateToProps(state) {
-    return {userIdInStore: state.userType}
+    return {memberId: state.memberId}
 }
 
 export default connect(mapStateToProps, null) (IssuerVerifiy)

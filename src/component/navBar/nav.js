@@ -8,14 +8,14 @@ import VerifierNav from "./verifierNav";
 
 function Nav({userObjInStore, SignOutToStore}) {
 
-    const { userType } = userObjInStore
+    const { memberRole } = userObjInStore
 
-    switch (userType) {
-        case "holder":            
+    switch (memberRole) {
+        case "HOLDER":            
             return <HolderNav />
-        case "issuer":            
+        case "ISSUER":            
             return <IssuerNav />
-        case "verifier":            
+        case "VERIFIER":            
             return <VerifierNav />
         default:
             return <HomeNav />

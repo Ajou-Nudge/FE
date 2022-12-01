@@ -2,11 +2,11 @@ import { Menu } from 'antd';
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from '../../img/didnow.png'
 import { useCookies } from 'react-cookie'
+import '../css/nav.css'
 //import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 function HolderNav() {
 
-  // eslint-disable-next-line
-  const [cookies, setCookie, removeCookie] = useCookies([])
+  const [ , , removeCookie] = useCookies([])
   const navigate = useNavigate()
 
   const navStyle = {
@@ -31,7 +31,7 @@ function HolderNav() {
     },
     { label: <NavLink style={ navStyle }>커리어로드맵</NavLink>, key: "signIn" },
     { label: <NavLink style={ navStyle } to="/holder/postingList">입사지원</NavLink>, key: "signUp" },
-    { label: <button style={ navStyle } onClick={onclick}>로그아웃</button>, key: "logOut" },
+    { label: <button className='logOut' onClick={onclick}>로그아웃</button>, key: "logOut" },
   ]
 
   return(

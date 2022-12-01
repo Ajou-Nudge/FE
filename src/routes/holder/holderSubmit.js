@@ -13,7 +13,7 @@ import holderS_headline from "../../img/headline/holderS_headline.png"
 
 // import DummyVcList from "../../dummy/dummyVcList";
 
-function HolderSubmit( userIdInStore ) {
+function HolderSubmit( userObjInStore ) {
 
     const location = useLocation()
     const posting = location.state
@@ -25,7 +25,7 @@ function HolderSubmit( userIdInStore ) {
     // store.js에서 id 가져와 BE에 요청보내기
     useEffect(() => {
         axios({
-            url: `http://localhost:8080/holder/vc-list/sjh2389@ajou.ac.kr`,
+            url: `http://localhost:8080/holder/vc-list/${userObjInStore.memberId}`,
             method: "GET",
             withCredentials: true,
         })
@@ -36,7 +36,7 @@ function HolderSubmit( userIdInStore ) {
             messageError("자격증 가져오기 실패");
             navigate("/holder")
         });
-    }, [navigate])
+    }, [navigate, userObjInStore.memberId])
     function messageError(msg) {
         message.error(msg);
     };
@@ -69,19 +69,12 @@ function HolderSubmit( userIdInStore ) {
 
         // verifier가 하나이상의 증명서를 요구할 경우 ,if 구문으로 추출된 vc 있는지 확인, 이후 제출
         if (targetVc.length !== 0 || posting.requirement.length === 0) {
-            console.log(
-                {
-                    postId: posting["id"],
-                    holder: `sjh2389@ajou.ac.kr`,
-                    vcIds: vcIds
-                }
-            )
             axios({
                 url: `http://localhost:8080/holder/submitted-vc`,
                 method: "POST",
                 data: {
                     postId: posting["id"],
-                    holder: `sjh2389@ajou.ac.kr`,
+                    holder: userObjInStore.memberId,
                     vcIds: vcIds
                 },
                 withCredentials: true,
@@ -208,6 +201,6 @@ function HolderSubmit( userIdInStore ) {
 }
 
 function mapStateToProps(state) {
-    return {userIdInStore: state.userType}
+    return {memberId: state.memberId}
 }
 export default connect(mapStateToProps, null) (HolderSubmit)

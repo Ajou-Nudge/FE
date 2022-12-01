@@ -1,23 +1,19 @@
-import { useNavigate } from "react-router-dom";
-import { connect } from "react-redux";
 
+function NavigateToHome(userObjInStore, navigate) {
 
-function NavigateToHome(userObjInStore) {
-    const { userType } = userObjInStore
-    const navigate = useNavigate()
-    if (userType === "holder") {
-        navigate("/holder");
-    } else if (userType === "issuer") {
-        navigate("/issuer");
-    } else if (userType === "verifier") {
-        navigate("/verifier")
+    const { memberRole } = userObjInStore
+    console.log(memberRole)
+
+    if (memberRole === "HOLDER") {
+        return navigate("/holder");
+    } else if (memberRole === "ISSUER") {
+        return navigate("/issuer");
+    } else if (memberRole === "VERIFIER") {
+        return navigate("/verifier")
     } else {
-        navigate("/")
+        return navigate("/")
     }
 }
 
-function mapStateToProps(state) {
-    return {userObjInStore: state}
-}
 
-export default connect(mapStateToProps, null) (NavigateToHome)
+export default NavigateToHome

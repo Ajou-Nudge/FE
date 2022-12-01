@@ -1,6 +1,6 @@
 import "./css/pdf.css";
 
-const Pdf = ({ title, content, type, getDate, user, organization, logo }) => {
+const Pdf = ({ title, content, getDate, user, organization, logo }) => {
   const changeFormat = (date) => {
     try {
       const yyyy = date.slice(0, 4);
@@ -19,16 +19,15 @@ const Pdf = ({ title, content, type, getDate, user, organization, logo }) => {
           </div>
           <div className="pdf--title">{title.split("").join(" ")}</div>
           <div className="pdf--usernamebirth--container">
-            <div className="pdf--username">{`이\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0름 : ${user.username}`}</div>
+            <div className="pdf--username">{`이\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0름 : ${user}`}</div>
             <div className="pdf--userbirth">{`생년월일 : ${changeFormat(
               user.birthDay
             )}`}</div>
           </div>
           <div className="pdf--content">
             <div>{`내\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0용 : ${content}`}</div>
-            <div>{`타\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0입 : ${type}`}</div>
             <div>{`기\u00A0 관\u00A0 명 : ${organization}`}</div>
-            <div>{`인증일자 : ${changeFormat(getDate)}`}</div>
+            <div>{`취득일자 : ${changeFormat(getDate)}`}</div>
           </div>
           <div className="pdf--proof">위와 같은 사실을 증명합니다.</div>
           <div className="pdf--date">

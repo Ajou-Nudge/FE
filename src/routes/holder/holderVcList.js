@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { Button, Table, Switch } from "antd";
 import { FilePdfOutlined } from "@ant-design/icons"
 import { useReactToPrint } from "react-to-print";
-// import Pdf from "./component/pdf";
+import Pdf from "./component/pdf";
 import Headline from "../../component/headline";
 import holderVL_headline from "../../img/headline/holderVL_headline.png";
 import logo1 from "../../img/상공회의소.png"
@@ -16,7 +16,7 @@ import { message } from "antd";
 
 // import DummyVcList from "../../dummy/dummyVcList";
 
-function HolderVcList(userIdInStore) {
+function HolderVcList(userObjInStore) {
 
     
     const componentRef = useRef([])
@@ -29,12 +29,14 @@ function HolderVcList(userIdInStore) {
     // useEffect( () => {
     //     setVcList(DummyVcList)
     // }, [] )
-    
+
+    console.log(userObjInStore)
+
     const navigate = useNavigate()
     // store.js에서 id 가져와 BE에 요청보내기
     useEffect(() => {
         axios({
-            url: `http://localhost:8080/holder/vc-list/sjh2389@ajou.ac.kr`,
+            url: `http://localhost:8080/holder/vc-list/${userObjInStore.memberId}`,
             method: "GET",
             withCredentials: true,
         })
@@ -45,7 +47,7 @@ function HolderVcList(userIdInStore) {
             messageError("자격증 가져오기 실패");
             navigate("/holder")
         });
-    },[navigate])
+    },[navigate, userObjInStore.memberId])
     function messageError(msg) {
         message.error(msg);
     };
@@ -65,7 +67,7 @@ function HolderVcList(userIdInStore) {
             data.push({
                 key: i,
                 num: i+1,
-                title: vcList[i].credentialSubject.value1,
+                title: vcList[i].context,
                 date: vcList[i].credentialSubject.value2,
                 issuer: vcList[i].issuer,
                 // pdf 인쇄버튼 란 추가, component로 분리하려했으나, useRef 훅 사용 제약으로 통합하여 진행함.
@@ -76,19 +78,18 @@ function HolderVcList(userIdInStore) {
                             <div ref={ rf => (componentRef.current[i] = rf)}>
                                 {/* // pdf 모듈이 반드시 onclick에 위치해야하는 hook 사용, event 사용 불가능함으로 마우스가 위치한 곳의 id 추출하는 로직 추가 */}
                                 <button id={i} onMouseEnter={(e) => {setCursor(e.target.id)}} onClick={handlePrint} />
-                                {/* <Pdf
+                                <Pdf
                                     title={vcList[i].context}
-                                    content={"content"}
-                                    type={"type"}
-                                    getDate={vcList[i].credentialSubject.date}
-                                    user={vcList[i].credentialSubject.name}
+                                    content={vcList[i].context}
+                                    getDate={vcList[i].credentialSubject.value2}
+                                    user={vcList[i].credentialSubject.value1}
                                     organization={vcList[i].issuer}
                                     logo={(vcList[i].issuer === "대한상공회의소") ? logo1 : logo2}
-                                /> */}
+                                />
                             </div>
                         </div>
                     </div>,
-                check: <input disabled={(vcList[i].issuer === userIdInStore) ? false : true } type={"checkbox"} />
+                check: <input disabled={(vcList[i].issuer === userObjInStore) ? false : true } type={"checkbox"} />
             })
         }
 
@@ -138,20 +139,23 @@ function HolderVcList(userIdInStore) {
                 {vcList.map((vc, i) => {
                     return (
                         // pdf 모듈이 반드시 onclick에 위치해야하는 hook 사용, event 사용 불가능함으로 마우스가 위치한 곳의 id 추출하는 로직 추가
-                        <div onClick={handlePrint} onMouseEnter={(e) => {setCursor(e.target.id)}} id={vcList.length + 1 + i} key={vc.id} className="holderVL_vcBox_card">
+                        <div onClick={handlePrint} onMouseEnter={(e) => {setCursor(e.target.id)}} id={vcList.length + 1 + i} key={i} className="holderVL_vcBox_card">
                             <img className="holderVL_vcBox_card_img" alt="logo" src={(vc.issuer === "대한상공회의소") ? logo1 : logo2}></img>
-                            <p className="holderVL_vcBox_card_text">{vc.credentialSubject.title}</p>
+                            <div className="holderVL_vcBox_card_text">
+                                {`발급기관: ${vc.issuer}`}<br />
+                                {`직무분야: ${vc.context}`} <br />
+                                {`취득일자: ${vc.credentialSubject.value2}`}
+                            </div>
                             <div style={{ display:"none" }}>
                                 <div ref={ rf => (componentRef.current[vcList.length + 1 + i]) = rf}>
-                                    {/* <Pdf
-                                        title={vc.context}
-                                        content={"content"}
-                                        type={"type"}
-                                        getDate={vc.credentialSubject.date}
-                                        user={vc.credentialSubject.name}
-                                        organization={vc.issuer}
-                                        logo={(vc.issuer === "대한상공회의소") ? logo1 : logo2}
-                                    /> */}
+                                <Pdf
+                                    title={vcList[i].context}
+                                    content={vcList[i].context}
+                                    getDate={vcList[i].credentialSubject.value2}
+                                    user={vcList[i].credentialSubject.value1}
+                                    organization={vcList[i].issuer}
+                                    logo={(vcList[i].issuer === "대한상공회의소") ? logo1 : logo2}
+                                />
                                 </div>
                             </div>
                         </div>
@@ -204,6 +208,6 @@ function HolderVcList(userIdInStore) {
 }
 
 function mapStateToProps(state) {
-    return {userIdInStore: state.userType}
+    return {memberId: state.memberId}
 }
 export default connect(mapStateToProps, null) (HolderVcList)

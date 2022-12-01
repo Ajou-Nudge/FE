@@ -11,7 +11,7 @@ function IssuerCreateContext() {
     // 밑의 state는 context 이름 의미, credentialsubject와 분리되어있다.
     const [ context, setContext ] = useState("")
     const [ inputCount, setInputCount ] = useState(1)
-    const [ credentialSubject, setCredentialSubject ] = useState({value1: "name"})
+    const [ credentialSubject, setCredentialSubject ] = useState({value1: "name", value8: "title"})
     const [ addInput, setAddInput ] = useState(false)
     
     // 창 가로크기 측정 코드, inner 850px 기준, className으로 반응

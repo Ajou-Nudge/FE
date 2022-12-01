@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { message } from "antd";
 
-function HolderSubmittedList({userIdInStore}) {
+function HolderSubmittedList(userObjInStore) {
 
     const [ vcList, setVcList ] = useState([])
     const [ width ] = useResize()
@@ -23,7 +23,7 @@ function HolderSubmittedList({userIdInStore}) {
     useEffect(() => {
         // redux에 저장되어있는 issuer 아이디로 발행된 vc 요청
         axios({
-            url: `http://localhost:8080/holder/submitted-vc-list/sjh2389@ajou.ac.kr`,
+            url: `http://localhost:8080/holder/submitted-vc-list/${userObjInStore.memberId}`,
             method: "GET",
             withCredentials: true,
         })
@@ -36,7 +36,7 @@ function HolderSubmittedList({userIdInStore}) {
             message.error("제출 이력 가져오기 실패");
             navigate("/holder")
         });
-    }, [navigate, userIdInStore])
+    }, [navigate, userObjInStore])
 
     // useEffect(() => {
     //     setVcList(DummySubmittedList)
@@ -134,7 +134,7 @@ function HolderSubmittedList({userIdInStore}) {
 }
 
 function mapStateToProps(state) {
-    return {userIdInStore: state.userType}
+    return {memberId: state.memberId}
 }
 
 export default connect(mapStateToProps, null) (HolderSubmittedList)
