@@ -152,6 +152,7 @@ function App({userObjInStore, SignInToStore}) {
   return (
     <div>
       <BrowserRouter>
+        {/* <Nav /> */}
         <Routes>
           <Route path="/*" element={<Main />}/>
           <Route path="/issuer/*" element={<Issuer />}/>

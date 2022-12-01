@@ -76,9 +76,9 @@ function IssuerVcList({userObjInStore}) {
                 VLdata.push({
                     key: i,
                     num: i+1,
-                    date: vcList[i].vc.credentialSubject["value2"],
-                    title: vcList[i].vc.context,
-                    name: vcList[i].vc.credentialSubject["value1"],
+                    date: vcList[i].vc.credentialSubject["issuedDate"],
+                    title: vcList[i].vc.credentialSubject["title"],
+                    name: vcList[i].vc.credentialSubject["name"],
                 })
             }
         } else {
@@ -89,9 +89,9 @@ function IssuerVcList({userObjInStore}) {
                 VLdata.push({
                     key: i,
                     num: i+1,
-                    date: selectedList[i].vc.credentialSubject["value2"],
-                    title: selectedList[i].vc.context,
-                    name: selectedList[i].holderId,
+                    date: selectedList[i].vc.credentialSubject["issuedDate"],
+                    title: selectedList[i].vc.credentialSubject["title"],
+                    name: selectedList[i].credentialSubject["name"],
                 })
             }
         }

@@ -67,8 +67,8 @@ function HolderVcList(userObjInStore) {
             data.push({
                 key: i,
                 num: i+1,
-                title: vcList[i].context,
-                date: vcList[i].credentialSubject.value2,
+                title: vcList[i].credentialSubject.title,
+                date: vcList[i].credentialSubject.issuedDate,
                 issuer: vcList[i].issuer,
                 // pdf 인쇄버튼 란 추가, component로 분리하려했으나, useRef 훅 사용 제약으로 통합하여 진행함.
                 pdf: 
@@ -79,10 +79,10 @@ function HolderVcList(userObjInStore) {
                                 {/* // pdf 모듈이 반드시 onclick에 위치해야하는 hook 사용, event 사용 불가능함으로 마우스가 위치한 곳의 id 추출하는 로직 추가 */}
                                 <button id={i} onMouseEnter={(e) => {setCursor(e.target.id)}} onClick={handlePrint} />
                                 <Pdf
-                                    title={vcList[i].context}
+                                    title={vcList[i].credentialSubject.title}
                                     content={vcList[i].context}
-                                    getDate={vcList[i].credentialSubject.value2}
-                                    user={vcList[i].credentialSubject.value1}
+                                    getDate={vcList[i].credentialSubject.issuedDate}
+                                    user={vcList[i].credentialSubject.name}
                                     organization={vcList[i].issuer}
                                     logo={(vcList[i].issuer === "대한상공회의소") ? logo1 : logo2}
                                 />
@@ -143,16 +143,16 @@ function HolderVcList(userObjInStore) {
                             <img className="holderVL_vcBox_card_img" alt="logo" src={(vc.issuer === "대한상공회의소") ? logo1 : logo2}></img>
                             <div className="holderVL_vcBox_card_text">
                                 {`발급기관: ${vc.issuer}`}<br />
-                                {`직무분야: ${vc.context}`} <br />
-                                {`취득일자: ${vc.credentialSubject.value2}`}
+                                {`직무분야: ${vc.credentialSubject.title}`} <br />
+                                {`취득일자: ${vc.credentialSubject.issuedDate}`}
                             </div>
                             <div style={{ display:"none" }}>
                                 <div ref={ rf => (componentRef.current[vcList.length + 1 + i]) = rf}>
                                 <Pdf
-                                    title={vcList[i].context}
+                                    title={vcList[i].credentialSubject.title}
                                     content={vcList[i].context}
-                                    getDate={vcList[i].credentialSubject.value2}
-                                    user={vcList[i].credentialSubject.value1}
+                                    getDate={vcList[i].credentialSubject.issuedDate}
+                                    user={vcList[i].credentialSubject.name}
                                     organization={vcList[i].issuer}
                                     logo={(vcList[i].issuer === "대한상공회의소") ? logo1 : logo2}
                                 />
