@@ -1,0 +1,56 @@
+.issuerPL_bg {
+    min-height: 85vh;
+}
+
+.issuerPL_vcButtonBar_bg {
+    padding: 0 50px 0 50px;
+    margin: 0 auto 0;
+    max-width: 1540px;
+    display: flex;
+}
+.issuerPL_vcButtonBar_btn {
+    width: 110px;
+    height: 40px;
+    background-color: rgb(58, 173, 148);
+    color: #ffff;
+    font-size: 18px;
+    font-weight: 550;
+    border-radius: 30px;
+    text-align: center;
+    padding: 0px;
+}
+.issuerPL_vcButtonBar_text {
+    padding: 5px 0 5px 0;
+    margin: 0;
+}
+.issuerPL_vcButtonBar_post {
+    font-size: 20px;
+    font-weight: 900;
+    margin: 0;
+    padding-bottom: 5px;
+}
+
+.issuerPL_PLbg {
+    background-color: rgb(255, 255, 255);
+}
+.issuerPL_PLmargin {
+    padding: 40px;
+    max-width: 1540px;
+    margin: 0 auto 0;
+}
+
+.issuerPL_PLtext {
+    font-size: medium;
+    font-weight: 500;
+    border: 1px solid #ffff;
+    border-radius: 30px;
+    overflow: hidden;
+}
+.issuerPL_btn {
+    width: 110px;
+    height: 40px;
+    background-color: rgb(58, 173, 148);
+    color: #ffff;
+    font-weight: 550;
+    border-radius: 30px;
+}

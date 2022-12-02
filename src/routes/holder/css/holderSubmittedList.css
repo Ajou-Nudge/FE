@@ -1,0 +1,82 @@
+.holderSVL_bg {
+    min-height: 85vh;
+}
+
+.holderSVL_SVL_outerbox {
+    max-width: 1540px;
+    padding: 50px;
+    margin: 0 auto 0;
+}
+.holderSVL_SVL_innerbox {
+    padding: 40px;
+    margin: 0 auto 70px;
+    border-radius: 10px;
+    background-color: #ffff;
+    box-shadow: 2px 1px 10px 1px rgb(0 0 0 / 10%);
+    scroll-behavior: smooth;
+    overflow: auto;
+    scroll-snap-type: none;
+    
+}
+.holderSVL_SVlist {
+    margin: 50px 0 50px 0;
+    display: flex;
+}
+
+.holderSVL_icon1 {
+    font-size: 60px;
+    color: #0bb38e;
+}
+.holderSVL_icon2 {
+    font-size: 60px;
+    color: #b1b1b1;
+}
+.holderSVL_icon3 {
+    font-size: 60px;
+    color: #dd8484;
+}
+
+.holderSVL_spaceBetween {
+    justify-content: space-between;
+    display: flex;
+    width: 90%;
+}
+.holderSVL_spaceBetween_min {
+    justify-content: space-between;
+    display: block;
+    width: 90%;
+}
+.holderSVL_verifierAndDate {
+    margin: 0 20px 0 20px;
+    min-width: 90px;
+    
+}
+.holderSVL_titleAndState {
+    margin: 0 20px 0 20px;
+    text-align: right;
+}
+.holderSVL_titleAndState_min {
+    margin: 0 20px 0 0;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+}
+
+.holderSVL_verifierAndTitle {
+    font-size: x-large;
+    font-weight: 700;
+}
+.holderSVL_verifierAndTitle_min {
+    margin-bottom: 5px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: x-large;
+    font-weight: 700;
+}
+.holderSVL_dateAndState {
+    font-size: medium;
+    font-weight: 500;
+    color: rgb(146, 146, 146)
+}

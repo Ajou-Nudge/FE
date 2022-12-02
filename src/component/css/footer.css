@@ -1,0 +1,39 @@
+.footer {
+    background-color: #192950;
+}
+.footer_margin {
+    max-width: 1540px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 50px 25px 50px;
+}
+
+.footer_title {
+    margin: 0;
+    margin-right: 20px;
+    font-size: 35px;
+    font-weight: 700;
+    color: #ffff;
+    padding-bottom: 20px;
+}
+.footer_subtitle {
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffff;
+}
+.footer_info {
+    margin: 0;
+    font-size: 12px;
+    color: #949aa7;   
+}
+
+.footer_copyRight {
+    margin: 0;
+    font-size: 11px;
+    color: #ffff;
+    padding-top: 45px;
+}

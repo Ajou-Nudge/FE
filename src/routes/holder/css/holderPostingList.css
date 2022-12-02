@@ -1,0 +1,23 @@
+.holderPL_bg {
+    min-height: 85vh;
+}
+
+.holderPL_PLbox {
+    max-width: 1540px;
+    padding: 0 50px 0 50px;
+    margin: 0 auto 0;
+    margin-top: 50px;
+}
+.holderPL_PLtext {
+    font-size: medium;
+    font-weight: 500;
+}
+
+.holderPL_btn {
+    width: 110px;
+    height: 40px;
+    background-color: rgb(58, 173, 148);
+    color: #ffff;
+    font-weight: 550;
+    border-radius: 30px;
+}

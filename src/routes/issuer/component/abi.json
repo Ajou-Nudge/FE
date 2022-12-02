@@ -1,0 +1,693 @@
+[
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "did",
+				"type": "string"
+			}
+		],
+		"name": "getAllVC",
+		"outputs": [
+			{
+				"components": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "hashed",
+						"type": "string"
+					}
+				],
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "did",
+				"type": "string"
+			},
+			{
+				"name": "id",
+				"type": "string"
+			},
+			{
+				"name": "_type",
+				"type": "string"
+			}
+		],
+		"name": "VerifyVC",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "data",
+		"outputs": [
+			{
+				"name": "size",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "did",
+				"type": "string"
+			}
+		],
+		"name": "deactivateID",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "did",
+				"type": "string"
+			},
+			{
+				"name": "vcId",
+				"type": "string"
+			},
+			{
+				"name": "hashed",
+				"type": "string"
+			}
+		],
+		"name": "issueVC",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "did",
+				"type": "string"
+			},
+			{
+				"name": "singer",
+				"type": "bytes"
+			}
+		],
+		"name": "verifySignature",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "did",
+				"type": "string"
+			},
+			{
+				"name": "vcId",
+				"type": "string"
+			}
+		],
+		"name": "getVCById",
+		"outputs": [
+			{
+				"components": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "hashed",
+						"type": "string"
+					}
+				],
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "did",
+				"type": "string"
+			}
+		],
+		"name": "getContext",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "did",
+				"type": "string"
+			},
+			{
+				"name": "singer",
+				"type": "bytes"
+			}
+		],
+		"name": "verifyDIDSignature",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			},
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "did",
+				"type": "string"
+			},
+			{
+				"name": "contexts",
+				"type": "string[]"
+			}
+		],
+		"name": "removeContext",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "did",
+				"type": "string"
+			}
+		],
+		"name": "getDocument",
+		"outputs": [
+			{
+				"components": [
+					{
+						"name": "context",
+						"type": "string[]"
+					},
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"components": [
+							{
+								"name": "id",
+								"type": "string"
+							},
+							{
+								"name": "keyType",
+								"type": "string"
+							},
+							{
+								"name": "controller",
+								"type": "string[]"
+							},
+							{
+								"name": "pubKeyData",
+								"type": "bytes"
+							},
+							{
+								"name": "deactivated",
+								"type": "bool"
+							},
+							{
+								"name": "isPubKey",
+								"type": "bool"
+							},
+							{
+								"name": "authIndex",
+								"type": "uint256"
+							}
+						],
+						"name": "authentication",
+						"type": "tuple[]"
+					},
+					{
+						"components": [
+							{
+								"name": "id",
+								"type": "string"
+							},
+							{
+								"name": "hashed",
+								"type": "string"
+							}
+						],
+						"name": "vc",
+						"type": "tuple[]"
+					},
+					{
+						"name": "updated",
+						"type": "uint256"
+					}
+				],
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "did",
+				"type": "string"
+			},
+			{
+				"name": "vcId",
+				"type": "string[]"
+			},
+			{
+				"name": "hashed",
+				"type": "string[]"
+			}
+		],
+		"name": "issueVCs",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_value1",
+				"type": "string"
+			},
+			{
+				"name": "_value2",
+				"type": "string"
+			},
+			{
+				"name": "_value3",
+				"type": "string"
+			},
+			{
+				"name": "_value4",
+				"type": "string"
+			},
+			{
+				"name": "_value5",
+				"type": "string"
+			},
+			{
+				"name": "_value6",
+				"type": "string"
+			},
+			{
+				"name": "_value7",
+				"type": "string"
+			},
+			{
+				"name": "_value8",
+				"type": "string"
+			},
+			{
+				"name": "salt",
+				"type": "string"
+			}
+		],
+		"name": "hash",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "didStatus",
+		"outputs": [
+			{
+				"name": "deactivated",
+				"type": "bool"
+			},
+			{
+				"name": "authListLen",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "did",
+				"type": "string"
+			},
+			{
+				"name": "vcId",
+				"type": "string"
+			}
+		],
+		"name": "removeVC",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "did",
+				"type": "string"
+			}
+		],
+		"name": "getUpdatedTime",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "did",
+				"type": "string"
+			},
+			{
+				"name": "pubKey",
+				"type": "bytes"
+			},
+			{
+				"name": "controller",
+				"type": "string[]"
+			}
+		],
+		"name": "addNewAuthKey",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "did",
+				"type": "string"
+			},
+			{
+				"name": "contexts",
+				"type": "string[]"
+			}
+		],
+		"name": "addContext",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "did",
+				"type": "string"
+			}
+		],
+		"name": "getAllAuthKey",
+		"outputs": [
+			{
+				"components": [
+					{
+						"name": "id",
+						"type": "string"
+					},
+					{
+						"name": "keyType",
+						"type": "string"
+					},
+					{
+						"name": "controller",
+						"type": "string[]"
+					},
+					{
+						"name": "pubKeyData",
+						"type": "bytes"
+					},
+					{
+						"name": "deactivated",
+						"type": "bool"
+					},
+					{
+						"name": "isPubKey",
+						"type": "bool"
+					},
+					{
+						"name": "authIndex",
+						"type": "uint256"
+					}
+				],
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "did",
+				"type": "string"
+			},
+			{
+				"name": "vcId",
+				"type": "string"
+			},
+			{
+				"name": "publicKey",
+				"type": "string"
+			}
+		],
+		"name": "UpdateVC",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "did",
+				"type": "string"
+			}
+		],
+		"name": "Deactivate",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "did",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "pubKey",
+				"type": "bytes"
+			},
+			{
+				"indexed": false,
+				"name": "controller",
+				"type": "string[]"
+			}
+		],
+		"name": "AddNewAuthKey",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "did",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "context",
+				"type": "string"
+			}
+		],
+		"name": "AddContext",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "did",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "context",
+				"type": "string"
+			}
+		],
+		"name": "RemoveContext",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "did",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "vcId",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "hashed",
+				"type": "string"
+			}
+		],
+		"name": "IssueVC",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "did",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "vcId",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "value",
+				"type": "string"
+			}
+		],
+		"name": "updateVC",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "did",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "value",
+				"type": "string"
+			}
+		],
+		"name": "RemoveVC",
+		"type": "event"
+	}
+]
