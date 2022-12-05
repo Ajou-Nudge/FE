@@ -1,5 +1,9 @@
+/* body {
+    overflow: hidden;
+} */
+
 .contentStyle--a {
-    height: 90vh;
+    height: 93vh;
     background-color: #ebf5fb;
     background-image: url(../../../img/main/bg_main_person1.png);
     background-repeat: no-repeat;
@@ -7,7 +11,7 @@
     background-size: auto 65%;
 }
 .contentStyle--b {
-    height: 90vh;
+    height: 93vh;
     background: #eef8eb;
     background-image: url(../../../img/main/bg_main_person2.png);
     background-repeat: no-repeat;
@@ -15,7 +19,7 @@
     background-size: auto 65%;
 }
 .contentStyle--c {
-    height: 90vh;
+    height: 93vh;
     background: #f6f4f8;
     background-image: url(../../../img/main/bg_main_person3.png);
     background-repeat: no-repeat;
@@ -24,21 +28,21 @@
 }
 
 .contentStyle--d {
-    height: 90vh;
+    height: 93vh;
     background-color: #fafafa;
     background-image: url(../../../img/main/bg_main_business1.png);
     background-repeat: no-repeat;
     background-position: 75% 45%;
 }
 .contentStyle--e {
-    height: 90vh;
+    height: 93vh;
     background: #f8f8f8;
     background-image: url(../../../img/main/bg_main_business2.png);
     background-repeat: no-repeat;
     background-position: 80% center;
 }
 .contentStyle--f {
-    height: 90vh;
+    height: 93vh;
     background: #f6f4f8;
     background-image: url(../../../img/main/bg_main_business3.png);
     background-repeat: no-repeat;

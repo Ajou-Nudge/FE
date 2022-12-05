@@ -2,16 +2,11 @@ import { message, Select } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import QrCodeModal from "./qrCodeModal";
-import * as KlipAPI from "./UseKlip";
 import "./css/signUpForm.css"
 
 const { Option } = Select;
 
 const CompanySignUp = () => {
-  const [qrvalue, setQrvalue] = useState("DEFAULT");
-  const [myAddress, setMyAddress] = useState("");
-  const [modalOpen, setModalOpen] = useState(false);
   const requiredVCList = ["이름", "이메일", "생년월일", "전화번호", "주소"];
   const navigate = useNavigate();
   const [issuerInfo, setIssuerInfo] = useState({
@@ -53,8 +48,6 @@ const CompanySignUp = () => {
     //   messageError("사업자 등록번호를 입력해주세요.");
     // } else if (issuerInfo.requiredVC.length < 1) {
     //   messageError("1개 이상의 요구사항을 선택해주세요.");
-    // } else if (myAddress === "") {
-    //   message.error("KLIP 지갑을 연동해주세요.");
     } else {
       let res = await axios({
         url: `http://localhost:8080/user/join`,
@@ -85,13 +78,6 @@ const CompanySignUp = () => {
       message.error(msg);
   };
 
-  const qrModalOpen = () => {
-    setModalOpen(true);
-    KlipAPI.getAddress(setQrvalue, async (address) => {
-      setMyAddress(address);
-      setModalOpen(false);
-    });
-  };
 
   // requiredVC 변경
   const changeRequiredVC = (e) => {
@@ -183,41 +169,6 @@ const CompanySignUp = () => {
           onChange={onchange}
           id="desc"
         />
-      </div>
-      <div className="signUpForm_row">
-        <p className="signUpForm_tag">
-          <span>KLIP연결</span>
-        </p>
-        <button
-          className="signUpForm_klipBtn"
-          onClick={() => {
-            qrModalOpen();
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            KLIP
-          </div>
-        </button>
-        <QrCodeModal
-          modalOpen={modalOpen}
-          setModalOpen={setModalOpen}
-          qrvalue={qrvalue}
-          setQrvalue={setQrvalue}
-        />
-      </div>
-      <div className="signUpForm_row">
-        <p className="signUpForm_tag">
-          지갑주소
-        </p>
-        <div className="signUpForm_input">
-          {myAddress}
-        </div>
       </div>
       <div className="signUpForm_submitBox">
         <button 

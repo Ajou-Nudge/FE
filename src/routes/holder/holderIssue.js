@@ -18,14 +18,21 @@ function HolderIssue(userObjInStore) {
     const [ fileName, setFileName ] = useState("")
     const [ pdf, setPdf ] = useState()
     const [ issueVcs, setIssueVcs ] = useState({
-        holderId: null,
+        holderId: "",
         vc: {
-            context: null,
-            issuer: null,
-            credentialSubject:{}
+            context: "vcForSelfIssue",
+            issuer: "",
+            credentialSubject:{
+                value1: "",
+                value2: "",
+                value3: "",
+                value4: "",
+                value5: "",
+                value6: "",
+                value7: "",
+            }
         }
     })
-    // value1: 성명, 2: 발급기관, 3: 발급일, 4: 만료일, 5: 기타
     const [ category, setCategory ] = useState({
         성명: true,
         발급기관: false,
@@ -38,9 +45,17 @@ function HolderIssue(userObjInStore) {
         setIssueVcs({
             holderId: userObjInStore.memberId,
             vc: {
-                context: "",
+                context: "vcForSelfIssue",
                 issuer: userObjInStore.memberId,
-                credentialSubject:{}
+                credentialSubject:{
+                    value1: "",
+                    value2: "",
+                    value3: "",
+                    value4: "",
+                    value5: "",
+                    value6: "",
+                    value7: "",
+                }
             }
         })
     },[userObjInStore.memberId])
@@ -70,7 +85,7 @@ function HolderIssue(userObjInStore) {
                 ...issueVcs.vc,
                 credentialSubject: {
                     ...issueVcs.vc.credentialSubject,
-                    value8: e.target.value
+                    value1: e.target.value
                 }
             }
         })
@@ -148,8 +163,8 @@ function HolderIssue(userObjInStore) {
             message.success("양식생성 성공");
             navigate("/issuer")
         })
-        .catch(() => {
-            message.error("양식생성 실패");
+        .catch((err) => {
+            message.error("양식생성 실패"+err);
         });
     }
 

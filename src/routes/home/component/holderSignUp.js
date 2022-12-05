@@ -3,16 +3,12 @@ import { useState } from "react";
 // import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import QrCodeModal from "./qrCodeModal";
-import * as KlipAPI from "../component/UseKlip";
 const { Option } = Select;
 
 const HolderSignUp = () => {
   const [issuers] = useState([]);
-  const [qrvalue, setQrvalue] = useState("DEFAULT");
-  const [myAddress, setMyAddress] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+
 
   // useEffect(() => {
   //   axios({
@@ -64,8 +60,6 @@ const HolderSignUp = () => {
     //   message.error("생년월일을 선택해주세요.");
     // } else if (userInfo.IssuerList.length < 1) {
     //   message.error("1개 이상의 기관을 선택해주세요.");
-    // } else if (myAddress === "") {
-    //   message.error("KLIP 지갑을 연동해주세요.");
     } else {
       axios({
         url: `http://localhost:8080/user/join`,
@@ -115,14 +109,6 @@ const HolderSignUp = () => {
         ...prev,
         IssuerList: arr,
       };
-    });
-  };
-
-  const qrModalOpen = () => {
-    setModalOpen(true);
-    KlipAPI.getAddress(setQrvalue, async (address) => {
-      setMyAddress(address);
-      setModalOpen(false);
     });
   };
 
@@ -203,43 +189,6 @@ const HolderSignUp = () => {
             return <Option key={e.title}>{e.title}</Option>;
           })}
         </Select>
-      </div>
-
-      <div className="signUpForm_row">
-        <p className="signUpForm_tag">
-          KLIP연결
-        </p>
-        <button
-          className="signUpForm_klipBtn"
-          onClick={() => {
-            qrModalOpen();
-          }}
-        >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          KLIP
-        </div>
-        </button>
-        <QrCodeModal
-          modalOpen={modalOpen}
-          setModalOpen={setModalOpen}
-          qrvalue={qrvalue}
-          setQrvalue={setQrvalue}
-        />
-      </div>
-
-      <div className="signUpForm_row">
-        <p className="signUpForm_tag">
-          지갑주소
-        </p>
-        <div>
-          {myAddress}
-        </div>
       </div>
       <div className="signUpForm_submitBox">
         <button 

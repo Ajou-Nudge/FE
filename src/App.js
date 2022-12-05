@@ -46,7 +46,7 @@ import VerifierVerifiyDetail from "./routes/verifier/verifierVerifiyDetail";
 
 // component
 import NotFound from "./component/notFound";
-import Footer from "./component/footer.js";
+// import Footer from "./component/footer.js";
 // import Nav from "./component/navBar/nav.js";
 import HomeNav from "./component/navBar/homeNav.js";
 import IssuerNav from "./component/navBar/issuerNav.js";
@@ -158,7 +158,7 @@ function App({userObjInStore, SignInToStore}) {
           <Route path="/holder/*" element={<Holder />}/>
           <Route path="/verifier/*" element={<Verifier />}/>
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </BrowserRouter>
     </div>
   )

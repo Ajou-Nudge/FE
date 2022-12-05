@@ -1,27 +1,30 @@
 //import { Link } from "react-router-dom";
 import { Carousel } from 'antd';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import Footer from '../../component/footer';
 import FAQimg from '../../img/main/FAQ.png'
 import './css/Home.css'
 
 function Home() {
 
     const [ mod, setMod ] = useState("person")
-    const carousel = useRef()
+    const carousel = useRef("")
+    useEffect(() => {
+        window.addEventListener('wheel',onWheel)
+    }, [])
 
     function onClick(e) {
         setMod(e.target.id)
     }
 
-    window.addEventListener('wheel',onWheel)
     function onWheel(e) {
         // console.log(e)
         switch (e.deltaY){
             
             case 100 :
-                return carousel.current.next()
+                return carousel.current && carousel.current.next()
             case -100 :
-                return carousel.current.prev()
+                return carousel.current && carousel.current.prev()
             default :
                 return console.log("onWheel err")
             
@@ -42,7 +45,7 @@ function Home() {
                 </ul>
             </div>
             {(mod === "person") ? 
-                <Carousel ref={ref => {carousel.current = ref}} dotPosition='left'>
+                <Carousel ref={carousel} infinite={false} dotPosition='left' adaptiveHeight={true}>
                     <div>
                         <div className='contentStyle--a'>
                             <div className='text--a'>
@@ -71,7 +74,7 @@ function Home() {
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div style={{overflow:"scroll"}}>
                         <div className='contentStyle--c'>
                             <div className='text--c'>
                                 <h1 className='headline'>입사지원</h1>
@@ -85,6 +88,7 @@ function Home() {
                                 <a className='headline_Btn' href='/signIn'>바로가기</a>
                             </div>
                         </div>
+                        <Footer />
                     </div>
                 </Carousel>
             :   
