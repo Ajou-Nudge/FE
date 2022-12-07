@@ -161,7 +161,7 @@ function HolderIssue(userObjInStore) {
         })
         .then((res) => {
             message.success("양식생성 성공");
-            navigate("/issuer")
+            navigate("/holder")
         })
         .catch((err) => {
             message.error("양식생성 실패"+err);

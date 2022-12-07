@@ -13,7 +13,7 @@ holder
 -입사지원페이지 표 ui 수정
 -holerissue페이지, value1 api문제 확인/해결
 -vclist에서 자신이 발급한 인증서 구분해주는 기능
-
+-vc pdf다운로드
 
 company
 -백에서 인증서 로고 받아오기

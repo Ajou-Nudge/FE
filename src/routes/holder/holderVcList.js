@@ -30,7 +30,6 @@ function HolderVcList(userObjInStore) {
     //     setVcList(DummyVcList)
     // }, [] )
 
-    console.log(userObjInStore)
 
     const navigate = useNavigate()
     // store.js에서 id 가져와 BE에 요청보내기
@@ -48,16 +47,57 @@ function HolderVcList(userObjInStore) {
             navigate("/holder")
         });
     },[navigate, userObjInStore.memberId])
+
     function messageError(msg) {
         message.error(msg);
     };
+    function messageSuccess(msg) {
+        message.success(msg);
+    };
 
+    function onMouse(e) {
+        setCursor(e.target.id)
+    }
+
+    function onPrint(i) {
+        return(
+            (vcList[i].issuer === userObjInStore.memberId) ?
+            handleSelfVcPrint : handlePrint
+        )
+    }
 
     // 해당 hook은 반드시 onClick에 위치하며 선택대상의 id 따오는 것이 불가능 -> onMouse 이벤트리스너로 cursor에 선택대상 id 따오기
     const handlePrint = useReactToPrint({
         // content : pdf로 뿌려줄 대상의 위치를 ref로 요구
         content: () => componentRef.current[cursor]
     })
+
+    function handleSelfVcPrint() {
+        axios({
+            url: `http://localhost:8080/holder/file/3`,
+            method: "GET",
+            withCredentials: true,
+            responseType: "blob"
+        })
+        .then((res) => {
+            const name = res.headers["content-disposition"]
+            .split("filename=")[1]
+            .replace(/"/g, "");
+            console.log(name)
+            const url = window.URL.createObjectURL(new Blob([res.data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", name);
+            link.style.cssText = "display:none";
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            messageSuccess("자격증 가져오기 성공")
+        })
+        .catch(() => {
+            messageError("자격증 가져오기 실패");
+        });
+    }
     
     // 받아온 vc 개수만큼 화면에 뿌려주기
     function makeVcList() {
@@ -72,12 +112,12 @@ function HolderVcList(userObjInStore) {
                 issuer: vcList[i].issuer,
                 // pdf 인쇄버튼 란 추가, component로 분리하려했으나, useRef 훅 사용 제약으로 통합하여 진행함.
                 pdf: 
-                    <div className="holderVL_vcBox_print">
-                        <label htmlFor={`${i}`}><FilePdfOutlined /></label>
+                    <div className="holderVL_vcBox_print" id={i} onMouseEnter={onMouse}>
+                        <label htmlFor={`button${i}`}><FilePdfOutlined /></label>
                         <div style={{ display:"none" }}>
                             <div ref={ rf => (componentRef.current[i] = rf)}>
                                 {/* // pdf 모듈이 반드시 onclick에 위치해야하는 hook 사용, event 사용 불가능함으로 마우스가 위치한 곳의 id 추출하는 로직 추가 */}
-                                <button id={i} onMouseEnter={(e) => {setCursor(e.target.id)}} onClick={handlePrint} />
+                                <button id={`button${i}`} onClick={onPrint(i)} />
                                 <Pdf
                                     title={vcList[i].context}
                                     content={vcList[i].context}

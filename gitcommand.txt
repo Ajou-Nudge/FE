@@ -9,3 +9,8 @@ git push -u origin main
 git remote add origin https://github.com/Ajou-Nudge/FE.git
 git branch -M main
 git push -u origin main
+
+git add .
+git branch -M main
+git commit -m "FE 12/07 commit"
+git push -u origin main
