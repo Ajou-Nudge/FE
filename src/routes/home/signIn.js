@@ -51,7 +51,6 @@ function SignIn ({userObjInStore, SignInToStore}) {
             .then((data) => {
                 const cookieValue =`${data.data.accessToken}`
                 setCookie("Authorization", cookieValue, [])
-                messageInfo("로그인 성공!");
                 axios({
                     url: `http://localhost:8080/user/info`,
                     method: "GET",
@@ -61,6 +60,7 @@ function SignIn ({userObjInStore, SignInToStore}) {
                 .then((data) => {
                     SignInToStore(data.data)
                     NavigateToHome(data.data, navigate)
+                    messageInfo("로그인 성공!");
                 })   
             })
             .catch((err) => {

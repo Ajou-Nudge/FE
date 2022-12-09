@@ -7,40 +7,40 @@ import Headline from "../../component/headline";
 import "./css/holderSubmittedList.css"
 import useResize from "../../component/useResize";
 
-// import DummySubmittedList from "../../dummy/dummySubmittedList";
+import DummySubmittedList from "../../dummy/dummySubmittedList";
 
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { message } from "antd";
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import { message } from "antd";
 
 function HolderSubmittedList(userObjInStore) {
 
     const [ vcList, setVcList ] = useState([])
     const [ width ] = useResize()
 
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        // redux에 저장되어있는 issuer 아이디로 발행된 vc 요청
-        axios({
-            url: `http://localhost:8080/holder/submitted-vc-list/${userObjInStore.memberId}`,
-            method: "GET",
-            withCredentials: true,
-        })
-        // setVcList에 저장
-        .then((res) => {
-            setVcList(res.data)
-        })
-        // 오류핸들링
-        .catch(() => {
-            message.error("제출 이력 가져오기 실패");
-            navigate("/holder")
-        });
-    }, [navigate, userObjInStore])
+    // const navigate = useNavigate()
 
     // useEffect(() => {
-    //     setVcList(DummySubmittedList)
-    // }, [])
+    //     // redux에 저장되어있는 issuer 아이디로 발행된 vc 요청
+    //     axios({
+    //         url: `http://localhost:8080/holder/submitted-vc-list/${userObjInStore.memberId}`,
+    //         method: "GET",
+    //         withCredentials: true,
+    //     })
+    //     // setVcList에 저장
+    //     .then((res) => {
+    //         setVcList(res.data)
+    //     })
+    //     // 오류핸들링
+    //     .catch(() => {
+    //         message.error("제출 이력 가져오기 실패");
+    //         navigate("/holder")
+    //     });
+    // }, [navigate, userObjInStore])
+
+    useEffect(() => {
+        setVcList(DummySubmittedList)
+    }, [])
     
     function makeVcList() {
 
@@ -129,6 +129,7 @@ function HolderSubmittedList(userObjInStore) {
                     </div>
                 </div>
             </div>
+            <div>{width}</div>
         </div>
     )
 }

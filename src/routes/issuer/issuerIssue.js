@@ -5,14 +5,14 @@ import * as XLSX from "xlsx"
 import { Empty, Switch } from "antd";
 import Headline from "../../component/headline";
 import issuerI_headline from "../../img/headline/issuerI_headline.png"
-// import Connectkaikas from "./component/kaikas";
+import Connectkaikas from "./component/kaikas";
 import "./css/issuerIssue.css"
 
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { message } from "antd"
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+// import { message } from "antd"
 
-// import DummyContextList from "../../dummy/dummyContextList";
+import DummyContextList from "../../dummy/dummyContextList";
 
 function IssuerIssue(userObjInStore) {
 
@@ -36,7 +36,7 @@ function IssuerIssue(userObjInStore) {
     const [ issueVcs, setIssueVcs ] = useState(state)
 
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     // 창 가로크기 측정 코드, inner 850px 기준, className으로 반응
     const[ widthHandle, setWidthHandle ] = useState("")
@@ -52,25 +52,25 @@ function IssuerIssue(userObjInStore) {
     })
 
     // 서버에서 issuer의 context정보 불러오기
-    useEffect(() => {
-        axios({
-            url: `http://localhost:8080/issuer/context-list`,
-            method: "GET",
-            withCredentials: true,
-        })
-        .then((res) => {
-            setFormList(res.data)
-        })
-        .catch(() => {
-            message.error("자격증 양식 가져오기 실패");
-            navigate("/issuer")
-        });
-    }, [navigate, userObjInStore])
-
     // useEffect(() => {
-    //     const Dummy = DummyContextList
-    //     setFormList([...Dummy])
-    // },[])
+    //     axios({
+    //         url: `http://localhost:8080/issuer/context-list`,
+    //         method: "GET",
+    //         withCredentials: true,
+    //     })
+    //     .then((res) => {
+    //         setFormList(res.data)
+    //     })
+    //     .catch(() => {
+    //         message.error("자격증 양식 가져오기 실패");
+    //         navigate("/issuer")
+    //     });
+    // }, [navigate, userObjInStore])
+
+    useEffect(() => {
+        const Dummy = DummyContextList
+        setFormList([...Dummy])
+    },[])
 
     // 받아온 List 내부의 form에서 context만 추출
     useEffect(() => {
@@ -242,20 +242,24 @@ function IssuerIssue(userObjInStore) {
     function submit() {
         console.log(issueVcs)
 
+        const testObj = { testVc13: "testVc13"}
 
-        axios({
-            url: `http://localhost:8080/issuer/vc`,
-            method: "POST",
-            data: issueVcs,
-            withCredentials: true,
-        })
-        .then((res) => {
-            message.success("서버전송 성공, 블록체인 연결 시작");
-            // Connectkaikas(testObj)
-        })
-        .catch(() => {
-            message.error("서버전송 실패");
-        });
+        Connectkaikas(testObj)
+
+
+        // axios({
+        //     url: `http://localhost:8080/issuer/vc`,
+        //     method: "POST",
+        //     data: issueVcs,
+        //     withCredentials: true,
+        // })
+        // .then((res) => {
+        //     message.success("서버전송 성공, 블록체인 연결 시작");
+        //     // Connectkaikas(testObj)
+        // })
+        // .catch(() => {
+        //     message.error("서버전송 실패");
+        // });
     }
 
     const subtitle = "발급 대상자에게 인증서를 발급할 수 있습니다."
