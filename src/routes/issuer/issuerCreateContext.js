@@ -5,14 +5,20 @@ import React from "react";
 import headline from "../../component/headline"
 import issuerCC_headline from "../../img/headline/issuerCC_headline.png"
 import "./css/issuerCreateContext.css"
+import { useNavigate } from "react-router-dom";
 
 function IssuerCreateContext() {
 
+    const navigate = useNavigate()
+
     // 밑의 state는 context 이름 의미, credentialsubject와 분리되어있다.
     const [ context, setContext ] = useState("")
-    const [ inputCount, setInputCount ] = useState(1)
-    const [ credentialSubject, setCredentialSubject ] = useState({value1: "name", value8: "title"})
+    // 기재정보 추가 여부, 추가 갯수, 추가 정보
     const [ addInput, setAddInput ] = useState(false)
+    const [ inputCount, setInputCount ] = useState(1)
+    const [ inputValue, setInputValue ] = useState([])
+    // 이 context로 생성할 vc에 기재될 정보들
+    const [ checkboxValue, setCheckboxValue ] = useState(["name", "title"])
     
     // 창 가로크기 측정 코드, inner 850px 기준, className으로 반응
     const[ widthHandle, setWidthHandle ] = useState("")
@@ -28,17 +34,18 @@ function IssuerCreateContext() {
     })
     function handleInputCount(e) {
         setInputCount(e.target.value)
+        setInputValue(
+            inputValue.slice(0, parseInt(e.target.value))
+        )
     }
 
     // 받아온 inputCount만큼 input 생성
     function makeInput() {
         const inputs = []
         for (let i=0; i < inputCount; i++){
-            // context와 연결되는 valueId, 1-3은 체크박스로, 4-8을 input으로 받음으로 여기선 4에서부터 시작해야한다.
-            const valueId = parseInt(i) + 4
             inputs.push(
-                <div className={`issuerCC_row${widthHandle}`} key={i} id={valueId}>
-                    <input className={`issuerCC_input_minmize`} value={credentialSubject[valueId]} onChange={handleValue} key={`value${i}`}></input>
+                <div className={`issuerCC_row${widthHandle}`} key={i}>
+                    <input className={`issuerCC_input_minmize`} id={i} value={inputValue[`value${i}`]} onChange={handleValue} key={`value${i}`}></input>
                 </div>
             )
         }
@@ -48,20 +55,27 @@ function IssuerCreateContext() {
 
     // 추가기재값 credentialSubject에 반영
     function handleValue(e) {
-        setCredentialSubject({
-            ...credentialSubject,
-            [`value${e.target.parentElement.id}`]: e.target.value
-        })
+        let buffer = inputValue
+        buffer[e.target.id] = e.target.value
+        setInputValue([...buffer])
     }
 
     // 기재정보 선택 값 핸들링
     function onChecked(e) {
-        // 부모id는 value{i}, id는 기입요소 영문명
-        const { parentElement, checked, id } = e.target
-        setCredentialSubject({
-        ...credentialSubject,
-        [ parentElement.id ]: (checked === true) ? id : undefined 
-        })
+        // checked는 체크여부 boolean , id는 기입요소 한글명
+        const { checked, id } = e.target
+        if (checked === true) {
+            setCheckboxValue([
+                ...checkboxValue,
+                id
+            ])
+        } else if (checked === false) {
+            setCheckboxValue([
+                ...checkboxValue.filter(subject => id !== subject)
+            ])
+        } else {
+            console.log("체크박스 에러:" + checked)
+        }
     }
 
     // 기재정보 추가 체크박스 핸들링
@@ -69,11 +83,14 @@ function IssuerCreateContext() {
         setAddInput(e.target.checked)
     }
 
-    // crdentialSubject와 context 병합
+    // crdentialSubject에 inputValue 병합, context명 추가
     function submit() {
         const Context = {
             context,
-            credentialSubject
+            credentialSubject: [
+                ...checkboxValue,
+                ...inputValue
+            ]
         }
         
         return sendingRequest(Context)
@@ -92,6 +109,7 @@ function IssuerCreateContext() {
         })
             .then((res) => {
                 messageInfo("양식생성 성공");
+                navigate("/issuer/contextList")
             })
             .catch((err) => {
                 messageError(err + "양식생성 실패");
@@ -129,7 +147,7 @@ function IssuerCreateContext() {
                                     <div style={{width: "100%"}}>
                                         <p className="issuerCC_form_infoBold">증명서 기입요소를 선택할 수 있습니다.</p>
                                         <div className="issuerCC_form_checkBoxList">
-                                            <div id="value1" className="issuerCC_form_checkBox_warp">
+                                            <div className="issuerCC_form_checkBox_warp">
                                                 <Input onChange={onChecked} id="name" defaultChecked disabled className="issuerCC_form_checkBox" type="checkbox"></Input>
                                                 <label htmlFor="name" className="issuerCC_form_infoBold">성명</label>
                                             </div>
@@ -137,13 +155,13 @@ function IssuerCreateContext() {
                                                 <Input onChange={onChecked} id="issuer" defaultChecked disabled className="issuerCC_form_checkBox" type="checkbox"></Input>
                                                 <label htmlFor="issuer" className="issuerCC_form_infoBold">발급기관</label>
                                             </div>
-                                            <div id="value2" className="issuerCC_form_checkBox_warp">
-                                                <Input onChange={onChecked} id="issuedDate" className="issuerCC_form_checkBox" type="checkbox"></Input>
-                                                <label htmlFor="issuedDate" className="issuerCC_form_infoBold">발급일</label>
+                                            <div className="issuerCC_form_checkBox_warp">
+                                                <Input onChange={onChecked} id="issueDate" className="issuerCC_form_checkBox" type="checkbox"></Input>
+                                                <label htmlFor="issueDate" className="issuerCC_form_infoBold">발급일</label>
                                             </div>
-                                            <div id="value3" className="issuerCC_form_checkBox_warp">
+                                            <div className="issuerCC_form_checkBox_warp">
                                                 <Input onChange={onChecked} id="expiredDate" className="issuerCC_form_checkBox" type="checkbox"></Input>
-                                                <label htmlFor="만료일" className="issuerCC_form_infoBold">만료일</label>
+                                                <label htmlFor="expiredDate" className="issuerCC_form_infoBold">만료일</label>
                                             </div>
                                             <div className="issuerCC_form_checkBox_warp">
                                                 <Input onChange={onClick} id="detail" className="issuerCC_form_checkBox" type="checkbox"></Input>

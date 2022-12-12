@@ -10,7 +10,7 @@ import { message } from "antd";
 
 // import DummyContextList from "../../dummy/dummyContextList";
 
-function IssuerContextList({userIdInStore}) {
+function IssuerContextList(userObjInStore) {
 
     const [ contextList, setContextList ] = useState([])
     // 창 가로크기 측정 코드, inner 850px 기준, className으로 반응
@@ -45,7 +45,7 @@ function IssuerContextList({userIdInStore}) {
             message.error("양식 가져오기 실패");
             navigate("/issuer")
         });
-    }, [navigate, userIdInStore])
+    }, [navigate, userObjInStore.memberId])
 
     // useEffect(() => {
     //     setContextList(DummyContextList)
@@ -162,7 +162,7 @@ function IssuerContextList({userIdInStore}) {
 }
 
 function mapStateToProps(state) {
-    return {userIdInStore: state.userType}
+    return {memberId: state.memberId}
 }
 
 export default connect(mapStateToProps, null) (IssuerContextList)

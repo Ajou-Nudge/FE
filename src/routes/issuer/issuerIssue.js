@@ -8,11 +8,11 @@ import issuerI_headline from "../../img/headline/issuerI_headline.png"
 import Connectkaikas from "./component/kaikas";
 import "./css/issuerIssue.css"
 
-// import { useNavigate } from "react-router-dom";
-// import axios from "axios";
-// import { message } from "antd"
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { message } from "antd"
 
-import DummyContextList from "../../dummy/dummyContextList";
+// import DummyContextList from "../../dummy/dummyContextList";
 
 function IssuerIssue(userObjInStore) {
 
@@ -36,7 +36,7 @@ function IssuerIssue(userObjInStore) {
     const [ issueVcs, setIssueVcs ] = useState(state)
 
 
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
     // 창 가로크기 측정 코드, inner 850px 기준, className으로 반응
     const[ widthHandle, setWidthHandle ] = useState("")
@@ -52,25 +52,25 @@ function IssuerIssue(userObjInStore) {
     })
 
     // 서버에서 issuer의 context정보 불러오기
-    // useEffect(() => {
-    //     axios({
-    //         url: `http://localhost:8080/issuer/context-list`,
-    //         method: "GET",
-    //         withCredentials: true,
-    //     })
-    //     .then((res) => {
-    //         setFormList(res.data)
-    //     })
-    //     .catch(() => {
-    //         message.error("자격증 양식 가져오기 실패");
-    //         navigate("/issuer")
-    //     });
-    // }, [navigate, userObjInStore])
-
     useEffect(() => {
-        const Dummy = DummyContextList
-        setFormList([...Dummy])
-    },[])
+        axios({
+            url: `http://localhost:8080/issuer/context-list`,
+            method: "GET",
+            withCredentials: true,
+        })
+        .then((res) => {
+            setFormList(res.data)
+        })
+        .catch(() => {
+            message.error("자격증 양식 가져오기 실패");
+            navigate("/issuer")
+        });
+    }, [navigate, userObjInStore])
+
+    // useEffect(() => {
+    //     const Dummy = DummyContextList
+    //     setFormList([...Dummy])
+    // },[])
 
     // 받아온 List 내부의 form에서 context만 추출
     useEffect(() => {
