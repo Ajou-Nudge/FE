@@ -2,6 +2,7 @@
     overflow: hidden;
 } */
 
+
 .contentStyle--a {
     height: 93vh;
     background-color: #ebf5fb;
@@ -57,15 +58,20 @@
     line-height: 1;
 }
 .headline_Btn {
-    padding: 7px 61px 7px 21px;
+    padding: 3px 61px 3px 21px;
     font-weight: 700;
     font-size: 16px;
     color: #ffff;
     background-color: #1fdcb2;
+    border: none;
     border-radius: 30px;
     background-image: url(../../../img/main/arrow.png);
     background-repeat: no-repeat;
     background-position: 85% center;
+    cursor: pointer;
+}
+.headline_Btn:hover {
+    color: #ffff;
 }
 
 .text--a {
@@ -105,6 +111,7 @@
     border: 1px none ;
     border-radius: 50px;
     text-align: center;
+    cursor: pointer;
 }
 
 .mod_warp {
@@ -115,19 +122,35 @@
 }
 .mod_person_btn {
     padding: 4px 21px 4px 42px;
-    border: 3px solid #fff;
+    border: 2px solid #fff;
     border-radius: 30px;
     background-color: #fff;
     font-size: 18px;
     font-weight: 500;
+    transition : all 300ms ease-in;
+    cursor: pointer;
+}
+.mod_person_btn:hover {
+    border: 2px solid rgb(150, 204, 253);
+}
+.mod_person_btn:focus {
+    border: 2px solid rgb(150, 204, 253);
 }
 .mod_company_btn {
     padding: 4px 21px 4px 42px;
-    border: 3px solid #fff;
+    border: 2px solid #fff;
     border-radius: 30px;
     background-color: #fff;
     font-size: 18px;
     font-weight: 500;
+    transition : all 300ms ease-in;
+    cursor: pointer;
+}
+.mod_company_btn:hover {
+    border: 2px solid rgb(150, 204, 253);
+}
+.mod_company_btn:focus {
+    border: 2px solid rgb(150, 204, 253);
 }
 
 .mod_warp ul button.mod_person_btn:before {
